@@ -1,0 +1,18 @@
+﻿---------------------------------------------------------------------------------------------------------------------- 
+CB20 - Projeto Semestral - EC6
+---------------------------------------------------------------------------------------------------------------------- 
+GitHub --------------------------------> https://github.com/felipescsilva/ProjetoSemestralEC6.git
+Trello --------------------------------> https://trello.com/b/eR1hxrzI
+Modulos Software (Excel)---------------> https://docs.google.com/spreadsheets/d/1kR2VtvkGHfkbcceStz0ZgDbxK3mYGr_sL0vibC1-pPU/edit#gid=0
+Diagrama UML Aplicação ----------------> https://drive.google.com/file/d/1Or11ITacDgOLStFy4lqi_O46yQIVJ0QO/view?usp=sharing
+Diagrama UML BD -----------------------> https://drive.google.com/file/d/1qpXa8cp0Sy_eyzZ7rU4MjvH6Li1gIQH0/view?usp=sharing
+Banco de Horas ------------------------> https://docs.google.com/spreadsheets/d/14nxVzXLon1eHcHg7uxZ4rPlqrLzIicXdjgSvj0psjj4/edit?usp=sharing
+----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+30 de Agosto de 2020
+---------------------------------------------------------------------------------------------------------------------- 
+30 de Agosto de 2020
+Autor: Felipe Soares
+Descrição:
+
+	- Organização de projeto	
