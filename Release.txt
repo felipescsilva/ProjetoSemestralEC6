@@ -9,6 +9,16 @@ Diagrama UML BD -----------------------> https://drive.google.com/file/d/1qpXa8c
 Banco de Horas ------------------------> https://docs.google.com/spreadsheets/d/14nxVzXLon1eHcHg7uxZ4rPlqrLzIicXdjgSvj0psjj4/edit?usp=sharing
 ----------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
+18 de Setembro de 2020
+----------------------------------------------------------------------------------------------------------------------
+Autor: Felipe Soares
+Modulo: Banco de dados
+
+Alteração
+	*Exclusao de campo CPF na tabela cartoes
+	*Adicao de campos LimiteTotal, LimiteUsado, MotivoBloqueio, CVV na tabela cartoes
+	*Alteraçao de procedure sp_InsertCartao de acordo com as alterações sofridas na tabela cartoes
+----------------------------------------------------------------------------------------------------------------------
 30 de Agosto de 2020
 ---------------------------------------------------------------------------------------------------------------------- 
 30 de Agosto de 2020
