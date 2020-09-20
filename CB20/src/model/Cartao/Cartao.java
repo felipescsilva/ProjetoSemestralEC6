@@ -2,6 +2,8 @@ package model.Cartao;
 
 import java.time.LocalDate;
 
+import DAO.CartaoDAO;
+
 public class Cartao {
 	
 	public Cartao() {
@@ -109,10 +111,21 @@ public class Cartao {
 	}
 	
 	public boolean verificaValidade () {
-		if (this.dataValidade.isBefore(LocalDate.now()))
+		try {
+			CartaoDAO dao = new CartaoDAO();
+			Cartao cartao = dao.Consultar(numeroCartao).get(0);
+			if (cartao.dataValidade.isBefore(LocalDate.now())) {
+				if (cartao.bloqueado == Bloqueado.DESBLOQUEADO) {
+					cartao.bloqueado = Bloqueado.BLOQUEADO;
+					cartao.motivoBloqueio = Motivo.VALIDADE_EXPIROU;
+				}
+				dao.Atualizar(cartao);
+				return false;
+			}
+			return true;
+		}
+		catch (Exception e) {
 			return false;
-		return true;
+		}
 	}
-	
-	
 }

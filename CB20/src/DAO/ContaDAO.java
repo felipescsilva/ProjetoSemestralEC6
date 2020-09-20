@@ -13,13 +13,14 @@ public class ContaDAO {
 	public boolean Inserir(Conta contaObjeto) throws Exception {
 		String dataAbertura = contaObjeto.getDataAbertura().getDayOfMonth() + "/" + contaObjeto.getDataAbertura().getMonthValue() + "/" + contaObjeto.getDataAbertura().getYear();
 		con = new ConexaoDAO();
-		String SQL = "exec dbo.sp_InsertConta ?, ?, ?, ?, ?";
+		String SQL = "exec dbo.sp_InsertConta ?, ?, ?, ?, ?, ?";
 		PreparedStatement ps = con.getConexao().prepareStatement(SQL);
 		ps.setString(1, contaObjeto.getNumeroConta());
 		ps.setString(2, contaObjeto.getCPF());
 		ps.setDouble(3, contaObjeto.getSaldo());
 		ps.setString(4, dataAbertura);
-		ps.setString(5, contaObjeto.getSenha());
+		ps.setString(5, contaObjeto.getSenhaConta());
+		ps.setString(6, contaObjeto.getSenhaApp());
 		
 		if (ps.executeUpdate() > 0)
 			return true;
@@ -28,11 +29,12 @@ public class ContaDAO {
 	
 	public boolean Atualizar(Conta contaObjeto) throws Exception {
 		con = new ConexaoDAO();
-		String SQL = "exec dbo.sp_UpdateConta ?, ?, ?";
+		String SQL = "exec dbo.sp_UpdateConta ?, ?, ?, ?";
 		PreparedStatement ps = con.getConexao().prepareStatement(SQL);
 		ps.setString(1, contaObjeto.getNumeroConta());
 		ps.setDouble(2, contaObjeto.getSaldo());
-		ps.setString(3, contaObjeto.getSenha());
+		ps.setString(3, contaObjeto.getSenhaConta());
+		ps.setString(4, contaObjeto.getSenhaApp());
 		
 		if (ps.executeUpdate() > 0)
 			return true;
@@ -50,12 +52,13 @@ public class ContaDAO {
 		return false;
 	}
 	
-	public List<Conta> Consultar() throws Exception {
+	public List<Conta> Consultar(String numConta) throws Exception {
 		List<Conta> lista = new ArrayList<Conta>();
 		
 		con = new ConexaoDAO();
-		String SQL = "select * from  dbo.tblConta";
+		String SQL = "select * from  dbo.tblConta where NumConta = ?";
 		PreparedStatement ps = con.getConexao().prepareStatement(SQL);
+		ps.setString(1, numConta);
 		ResultSet rs = ps.executeQuery();
 		
 		while (rs.next()) {
@@ -65,7 +68,8 @@ public class ContaDAO {
 			conta.setDataAbertura(LocalDate.parse(rs.getDate("DataAbertura").toString()));
 			conta.setNumeroConta(rs.getString("NumConta"));
 			conta.setSaldo(rs.getDouble("Saldo"));
-			conta.setSenha(rs.getString("Senha"));
+			conta.setSenhaConta(rs.getString("SenhaConta"));
+			conta.setSenhaApp(rs.getString("SenhaApp"));
 			
 			lista.add(conta);
 		}

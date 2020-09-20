@@ -8,20 +8,38 @@ public class Conta {
 	private String numeroConta;
 	private String CPF;
 	private double saldo;
+	public String getSenhaConta() {
+		return senhaConta;
+	}
+
+	public void setSenhaConta(String senhaConta) {
+		this.senhaConta = senhaConta;
+	}
+
+	public String getSenhaApp() {
+		return senhaApp;
+	}
+
+	public void setSenhaApp(String senhaApp) {
+		this.senhaApp = senhaApp;
+	}
+
 	private LocalDate dataAbertura;
-	private String senha;
+	private String senhaConta;
+	private String senhaApp;
 	
 	public Conta() {
 		super();
 	}
 
-	public Conta(String numeroConta, String cPF, String senha) {
+	public Conta(String numeroConta, String cPF, String senhaConta, String senhaApp) {
 		super();
 		this.numeroConta = numeroConta;
 		CPF = cPF;
 		this.saldo = 0;
 		this.dataAbertura = LocalDate.now();
-		this.senha = senha;
+		this.senhaConta = senhaConta;
+		this.senhaApp = senhaApp;
 	}
 
 	public String getNumeroConta() {
@@ -56,14 +74,6 @@ public class Conta {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 	public boolean DesbloquearCartao(String numeroCartao, String senha){
 		return true;
 	}
@@ -73,6 +83,10 @@ public class Conta {
 	}
 	
 	public boolean PedirNovoCartao(boolean creditoHabilitado, String senha) {
+		return true;
+	}
+	
+	public boolean pagarFatura(String numCartao) {
 		return true;
 	}
 }
