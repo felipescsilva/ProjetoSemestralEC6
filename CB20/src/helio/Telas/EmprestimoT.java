@@ -44,6 +44,7 @@ public class EmprestimoT extends JFrame {
 	 * Create the frame.
 	 */
 	public EmprestimoT() {
+		setTitle("Empr\u00E9stimo");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 560, 420);
 		contentPane = new JPanel();

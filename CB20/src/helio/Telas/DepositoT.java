@@ -36,6 +36,7 @@ public class DepositoT extends JFrame {
 	 * Create the frame.
 	 */
 	public DepositoT() {
+		setTitle("Dep\u00F3sito");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 560, 420);
 		contentPane = new JPanel();

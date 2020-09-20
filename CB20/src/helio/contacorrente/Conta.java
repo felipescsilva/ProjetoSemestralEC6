@@ -1,6 +1,6 @@
 package helio.contacorrente;
+import helio.Cliente.Cliente;
 import helio.metodos.Metodos;
-import helio.contacorrente.Cliente;
 
 public class Conta {
 	

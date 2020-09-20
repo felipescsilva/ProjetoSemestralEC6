@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import helio.Cliente.Cliente.Formacao;
+import helio.Cliente.Cliente.Profissao;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.GroupLayout;
@@ -15,9 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.DefaultComboBoxModel;
-import helio.contacorrente.Cliente.Profissao;
 import javax.swing.JButton;
-import helio.contacorrente.Cliente.Formacao;
 
 public class CriarContaT extends JFrame {
 
@@ -51,6 +53,7 @@ public class CriarContaT extends JFrame {
 	 * Create the frame.
 	 */
 	public CriarContaT() {
+		setTitle("Nova Conta");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 560, 420);
 		contentPane = new JPanel();

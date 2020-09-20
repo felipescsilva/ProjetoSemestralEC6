@@ -1,5 +1,7 @@
 package helio.contacorrente;
 
+import helio.Cliente.Cliente;
+
 public class Login {
 	
 	boolean logado = false;

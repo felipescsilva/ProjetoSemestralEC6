@@ -29,9 +29,11 @@ public class LoginT extends JFrame {
 	private JLabel lblPassword;
 	private JTextField txtBankAccount;
 	private JLabel lblBankAgency;
-	private JPasswordField passwordField;
+	private JPasswordField senhaConta;
 	private JButton btnCriarConta;
 	private JPanel panel;
+	private JTextField txtCarto;
+	private JPasswordField senhaCartao;
 
 	/**
 	 * Launch the application.
@@ -53,16 +55,17 @@ public class LoginT extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginT() {
+		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 420);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBounds(166, 58, 219, 266);
+		panel.setBounds(10, 59, 219, 266);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -86,19 +89,19 @@ public class LoginT extends JFrame {
 		panel.add(txtBankAccount);
 		txtBankAccount.setColumns(10);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(70, 70, 48, 20);
-		panel.add(passwordField);
-		passwordField.setText("111111");
+		senhaConta = new JPasswordField();
+		senhaConta.setBounds(70, 70, 48, 20);
+		panel.add(senhaConta);
+		senhaConta.setText("111111");
 		
 		lblPassword = new JLabel("Senha");
 		lblPassword.setBounds(22, 73, 38, 16);
 		panel.add(lblPassword);
 		lblPassword.setFont(new Font("Sitka Small", Font.BOLD, 12));
 		
-		JButton btnSignIn = new JButton("Sign In");
-		btnSignIn.setBounds(70, 101, 73, 23);
-		panel.add(btnSignIn);
+		JButton btnSignInConta = new JButton("Sign In");
+		btnSignInConta.setBounds(70, 101, 73, 23);
+		panel.add(btnSignInConta);
 		
 		JLabel lblPrimeiraVezAqui = new JLabel("Primeira vez aqui?");
 		lblPrimeiraVezAqui.setBounds(52, 173, 119, 16);
@@ -108,6 +111,45 @@ public class LoginT extends JFrame {
 		btnCriarConta = new JButton("Criar Conta");
 		btnCriarConta.setBounds(54, 198, 102, 23);
 		panel.add(btnCriarConta);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(315, 59, 219, 266);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblCarto = new JLabel("Cart\u00E3o");
+		lblCarto.setFont(new Font("Sitka Small", Font.BOLD, 12));
+		lblCarto.setBounds(10, 11, 46, 14);
+		panel_1.add(lblCarto);
+		
+		JLabel lblSenha = new JLabel("Senha");
+		lblSenha.setFont(new Font("Sitka Small", Font.BOLD, 12));
+		lblSenha.setBounds(10, 36, 46, 14);
+		panel_1.add(lblSenha);
+		
+		txtCarto = new JTextField();
+		txtCarto.setText("Cart\u00E3o");
+		txtCarto.setBounds(66, 8, 86, 20);
+		panel_1.add(txtCarto);
+		txtCarto.setColumns(10);
+		
+		senhaCartao = new JPasswordField();
+		senhaCartao.setText("111111");
+		senhaCartao.setBounds(66, 33, 86, 20);
+		panel_1.add(senhaCartao);
+		
+		JButton btnSignInCartao = new JButton("Sign In");
+		btnSignInCartao.setBounds(66, 64, 89, 23);
+		panel_1.add(btnSignInCartao);
+		
+		JLabel lblDesejaSolicitarO = new JLabel("Deseja solicitar o seu cart\u00E3o?");
+		lblDesejaSolicitarO.setFont(new Font("Sitka Small", Font.BOLD, 12));
+		lblDesejaSolicitarO.setBounds(10, 169, 199, 14);
+		panel_1.add(lblDesejaSolicitarO);
+		
+		JButton btnSolicitarCarto = new JButton("Solicitar Cart\u00E3o");
+		btnSolicitarCarto.setBounds(44, 194, 135, 23);
+		panel_1.add(btnSolicitarCarto);
 		btnCriarConta.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
@@ -115,11 +157,19 @@ public class LoginT extends JFrame {
 				novaConta.show();
 			}
 		});
-		btnSignIn.addActionListener(new ActionListener() {
+		btnSignInConta.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				MenuPrincipalT menu = new MenuPrincipalT();
-				menu.show();
+				if(txtBankAgency.getText().equals("001"))
+						{
+							MenuBancoT menuBanco = new MenuBancoT();
+							menuBanco.show();
+						}
+				else {
+					MenuPrincipalT menu = new MenuPrincipalT();
+					menu.show();
+				}
+				
 			}
 		});
 	}

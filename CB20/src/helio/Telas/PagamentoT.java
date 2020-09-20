@@ -45,6 +45,7 @@ public class PagamentoT extends JFrame {
 	 * Create the frame.
 	 */
 	public PagamentoT() {
+		setTitle("Pagamentos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 560, 420);
 		contentPane = new JPanel();

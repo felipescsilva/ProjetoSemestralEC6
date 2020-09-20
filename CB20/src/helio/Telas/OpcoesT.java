@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import helio.Cliente.Cliente.Formacao;
+import helio.Cliente.Cliente.Profissao;
+
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -13,8 +17,6 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import helio.contacorrente.Cliente.Formacao;
-import helio.contacorrente.Cliente.Profissao;
 
 public class OpcoesT extends JFrame {
 
@@ -48,6 +50,7 @@ public class OpcoesT extends JFrame {
 	 * Create the frame.
 	 */
 	public OpcoesT() {
+		setTitle("Op\u00E7\u00F5es");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 560, 420);
 		contentPane = new JPanel();
