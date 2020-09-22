@@ -87,8 +87,8 @@ public class Cliente {
 			ContaDAO contaDAO = new ContaDAO();
 			Conta conta = new Conta();
 			Cartao cartao = new Cartao();
-			cartao = cartaoDAO.Consultar(numCartao).get(0);
-			conta = contaDAO.Consultar(cartao.getNumeroConta()).get(0);
+			cartao = cartaoDAO.Consultar("NumCartao", numCartao).get(0);
+			conta = contaDAO.Consultar("NumConta", cartao.getNumeroConta()).get(0);
 			if (cartao.getBloqueado() == Bloqueado.DESBLOQUEADO) {
 				if (cartao.verificaValidade()) {
 					if (valor <= conta.getSaldo()) {
@@ -113,8 +113,8 @@ public class Cliente {
 			ContaDAO contaDAO = new ContaDAO();
 			Conta conta = new Conta();
 			Cartao cartao = new Cartao();
-			cartao = cartaoDAO.Consultar(numCartao).get(0);
-			conta = contaDAO.Consultar(cartao.getNumeroConta()).get(0);
+			cartao = cartaoDAO.Consultar("NumCartao", numCartao).get(0);
+			conta = contaDAO.Consultar("NumConta", cartao.getNumeroConta()).get(0);
 			if (cartao.getBloqueado() == Bloqueado.DESBLOQUEADO) {
 				if (cartao.verificaValidade()) {
 					if (valor <= (cartao.getLimiteTotal() - cartao.getLimiteUsado())) {
@@ -134,13 +134,37 @@ public class Cliente {
 		}
 	}
 	
-	public boolean compraOnline(Cartao cartao) {
-		return true;
+	public boolean compraOnline(String numCartao, int diaValidade, int mesValidade, int anoValidade, String cvv, double valor) {
+		try {
+			CartaoDAO cartaoDAO = new CartaoDAO();
+			ContaDAO contaDAO = new ContaDAO();
+			Conta conta = new Conta();
+			Cartao cartao = new Cartao();
+			cartao = cartaoDAO.Consultar("NumCartao", numCartao).get(0);
+			conta = contaDAO.Consultar("NumConta", cartao.getNumeroConta()).get(0);
+			if (cartao.getBloqueado() == Bloqueado.DESBLOQUEADO) {
+				if (cartao.verificaValidade()) {
+					if (valor <= conta.getSaldo()) {
+						if (LocalDate.of(anoValidade, mesValidade, diaValidade).equals(cartao.getDataValidade())) {
+							if (cvv.equals(cartao.getCvv())) {
+								conta.setSaldo(conta.getSaldo() - valor);
+								contaDAO.Atualizar(conta);
+								return true;
+							}
+						}
+					}
+				}
+			}
+			return false;
+		} catch (Exception e){
+			System.out.println(e.toString());
+			return false;
+		}
 	}
 	public boolean recarregarPrePago(String numCartao, double valor) {
 		try {
 			CartaoDAO cartaoDAO = new CartaoDAO();
-			Cartao cartao = cartaoDAO.Consultar(numCartao).get(0);
+			Cartao cartao = cartaoDAO.Consultar("NumCartao", numCartao).get(0);
 			switch (cartao.getTipo()) {
 				case DEBITO:
 				case CREDITO:
@@ -155,7 +179,32 @@ public class Cliente {
 		}
 	}
 	
-	public boolean ComprarNoPrePago(String senha, double valor) {
+	public boolean ComprarNoPrePago(String numCartao, String senhaConta, double valor) {
+		try {
+			CartaoDAO cartaoDAO = new CartaoDAO();
+			ContaDAO contaDAO = new ContaDAO();
+			Conta conta = new Conta();
+			Cartao cartao = new Cartao();
+			cartao = cartaoDAO.Consultar("NumCartao", numCartao).get(0);
+			conta = contaDAO.Consultar("NumConta", cartao.getNumeroConta()).get(0);
+			if (cartao.getBloqueado() == Bloqueado.DESBLOQUEADO) {
+				if (cartao.verificaValidade()) {
+					if (valor <= cartao.getSaldo()) {
+						if (senhaConta.equals(conta.getSenhaConta())) {
+							cartao.setSaldo(conta.getSaldo() - valor);
+							cartaoDAO.Atualizar(cartao);
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		
 		return true;
 	}
 }

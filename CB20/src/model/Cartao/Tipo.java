@@ -3,7 +3,7 @@ package model.Cartao;
 public enum Tipo {
 	DEBITO("debito"),
 	CREDITO("credito"),
-	PRE_PAGO("prePago");
+	PRE_PAGO("pre_pago");
 	
 	private String descricao;
 	

@@ -52,13 +52,14 @@ public class ContaDAO {
 		return false;
 	}
 	
-	public List<Conta> Consultar(String numConta) throws Exception {
+	public List<Conta> Consultar(String campo, String valor) throws Exception {
 		List<Conta> lista = new ArrayList<Conta>();
 		
 		con = new ConexaoDAO();
-		String SQL = "select * from  dbo.tblConta where NumConta = ?";
+		String SQL = "exec dbo.sp_consulta tblConta, ?, ?";
 		PreparedStatement ps = con.getConexao().prepareStatement(SQL);
-		ps.setString(1, numConta);
+		ps.setString(1, campo);
+		ps.setString(2, valor);
 		ResultSet rs = ps.executeQuery();
 		
 		while (rs.next()) {

@@ -1,8 +1,13 @@
 package model.Cartao;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import DAO.CartaoDAO;
+import DAO.ComprasDAO;
+import model.Compras.Compras;
 
 public class Cartao {
 	
@@ -10,12 +15,12 @@ public class Cartao {
 		
 	}
 	
-	public Cartao(String numeroCartao, String numeroConta, Tipo tipo, LocalDate dataValidade, Moeda moeda, double limiteTotal, String cvv) {
+	public Cartao(String numeroConta, Tipo tipo, Moeda moeda, double limiteTotal) {
 		super();
-		this.numeroCartao = numeroCartao;
+		this.numeroCartao = geraNumCartao();
 		this.numeroConta = numeroConta;
 		this.tipo = tipo;
-		this.dataValidade = dataValidade;
+		this.dataValidade = LocalDate.now().plusYears(4);
 		this.moeda = moeda;
 		this.saldo = 0;
 		switch (tipo) {
@@ -29,7 +34,7 @@ public class Cartao {
 		this.limiteUsado = 0;
 		this.bloqueado = Bloqueado.DESBLOQUEADO;
 		this.motivoBloqueio = Motivo.DESBLOQUEADO;
-		this.cvv = cvv;
+		this.cvv = geraCvv();
 	}
 	private String numeroCartao;
 	private String numeroConta;
@@ -113,7 +118,7 @@ public class Cartao {
 	public boolean verificaValidade () {
 		try {
 			CartaoDAO dao = new CartaoDAO();
-			Cartao cartao = dao.Consultar(numeroCartao).get(0);
+			Cartao cartao = dao.Consultar("NumCartao", numeroCartao).get(0);
 			if (cartao.dataValidade.isBefore(LocalDate.now())) {
 				if (cartao.bloqueado == Bloqueado.DESBLOQUEADO) {
 					cartao.bloqueado = Bloqueado.BLOQUEADO;
@@ -123,9 +128,53 @@ public class Cartao {
 				return false;
 			}
 			return true;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return false;
 		}
 	}
+	
+	private String geraNumCartao() {
+		boolean jaExiste = false;
+		String num = "";
+		do {
+			num = "";
+			Random rand = new Random();
+			for (int i = 0; i < 4; i++) {
+				int sequencia = rand.nextInt(9999);
+				num += String.format("%04d", sequencia) + " ";
+			}
+			try {
+				CartaoDAO dao = new CartaoDAO();
+				List<Cartao> lista = dao.Consultar("NumCartao", num);
+				if (lista.size() != 0)
+					jaExiste = true;
+				else
+					jaExiste = false;
+				
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+		} while(jaExiste);
+		
+		return num;
+	}
+	
+	private String geraCvv() {
+		Random rand = new Random();
+		String num = String.format("%03d", rand.nextInt(999));
+		
+		return num;
+	}
+	
+	public List<Compras> ListaTodasAsCompras() {
+		List<Compras> compras = new ArrayList<Compras>();
+		try {
+			ComprasDAO comprasDAO = new ComprasDAO();
+			compras = comprasDAO.Consultar("NumCartao", this.numeroCartao);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return compras;
+	}
+	
 }

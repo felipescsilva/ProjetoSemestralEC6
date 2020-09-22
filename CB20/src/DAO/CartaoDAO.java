@@ -68,13 +68,15 @@ public class CartaoDAO {
 		return false;
 	}
 	
-	public List<Cartao> Consultar(String num) throws Exception {
+	public List<Cartao> Consultar(String campo, String valor) throws Exception {
 		List<Cartao> cartoes = new ArrayList<Cartao>();
 		
 		con = new ConexaoDAO();
-		String SQL = "select * from  dbo.tblCartao where NumCartao = ?";
+		String SQL = "exec dbo.sp_consulta tblCartao, ?, ?";
 		PreparedStatement ps = con.getConexao().prepareStatement(SQL);
-		ps.setString(1, num);
+		ps.setString(1, campo);
+		ps.setString(2, valor);
+		
 		ResultSet rs = ps.executeQuery();
 		
 		while (rs.next()) {

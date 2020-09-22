@@ -59,13 +59,14 @@ public class ClienteDAO {
 		return false;
 	}
 	
-	public List<Cliente> Consultar(String CPF) throws Exception {
+	public List<Cliente> Consultar(String campo, String valor) throws Exception {
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		
 		con = new ConexaoDAO();
-		String SQL = "select * from  dbo.tblCliente where CPF = ?";
+		String SQL = "exec dbo.sp_consulta tblCliente, ?, ?";
 		PreparedStatement ps = con.getConexao().prepareStatement(SQL);
-		ps.setString(1, CPF);
+		ps.setString(1, campo);
+		ps.setString(2, valor);
 		ResultSet rs = ps.executeQuery();
 		
 		while (rs.next()) {

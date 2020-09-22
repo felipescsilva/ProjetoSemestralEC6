@@ -3,7 +3,7 @@ package model.Cartao;
 public enum Bloqueado {
 	DESBLOQUEADO("desbloqueado"),
 	BLOQUEADO("bloqueado"),
-	BLOQUEADO_PERMANENTEMENTE("bloquedoPermanentemente");
+	BLOQUEADO_PERMANENTEMENTE("bloqueado_permanentemente");
 	
 	private String descricao;
 	
