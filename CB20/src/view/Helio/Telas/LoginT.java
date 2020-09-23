@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import view.Cartao.CartaoT;
-import view.Cartao.PagarT;
+import view.Cartao.PagarComprasT;
 import view.Cartao.RealizarCompraT;
 
 import javax.swing.JTextField;

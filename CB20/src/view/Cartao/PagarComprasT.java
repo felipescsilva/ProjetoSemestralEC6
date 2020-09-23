@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 
-public class PagarT extends JFrame {
+public class PagarComprasT extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -41,8 +41,8 @@ public class PagarT extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PagarT() {
-		setTitle("Pagar");
+	public PagarComprasT() {
+		setTitle("Pagar Compras");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 360, 236);

@@ -52,7 +52,7 @@ public class RealizarCompraT extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							PagarT frame = new PagarT();
+							PagarComprasT frame = new PagarComprasT();
 							frame.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -71,7 +71,7 @@ public class RealizarCompraT extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							PagarT frame = new PagarT();
+							PagarComprasT frame = new PagarComprasT();
 							frame.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -90,7 +90,7 @@ public class RealizarCompraT extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							PagarT frame = new PagarT();
+							PagarComprasT frame = new PagarComprasT();
 							frame.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
