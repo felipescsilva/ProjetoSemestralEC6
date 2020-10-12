@@ -14,13 +14,13 @@ public class Cliente {
 	private String telefone;
 	private String email;
 	private LocalDate DataNascimento;
-	public Cliente(String nome, String cPF, String telefone, String email, LocalDate dataNascimento,
+	public Cliente(String nome, String cPF, LocalDate dataNascimento,
 			Formacao formacao, Profissao profissao, Double renda) {
 		super();
 		this.nome = nome;
 		CPF = cPF;
-		this.telefone = telefone;
-		this.email = email;
+		//this.telefone = telefone;
+		//this.email = email;
 		DataNascimento = dataNascimento;
 		this.formacao = formacao;
 		this.profissao = profissao;
@@ -207,4 +207,67 @@ public class Cliente {
 		
 		return true;
 	}
+	
+	//Verifica se o CPF informado é o do cliente
+		/*
+		public boolean checkCPF(String CPF) {
+			if(this.CPF.equals(CPF.replace("^0-9", "").trim())) {
+				return true;
+			}		
+			return false;
+		}
+		
+
+		//Define o CPF caso ele seja válido
+		private void setCPF(String CPF) throws Exception {
+			CPF = CPF.replace("^0-9", "").trim();
+			if(CPF.length() == 11) {
+				this.CPF = CPF;
+			}
+			else {
+				throw new Exception("Número de CPF inválido!");
+			}
+			
+		}
+
+		//Retorna o primeiro nome do cliente
+		public String getNomeCliente() {
+			String[] aux = nomeCliente.split(" ");
+			return aux[0];
+		}
+		
+		//Verifica se o nome informado é o do cliente
+		public boolean checkNomeCliente(String nomeCliente)
+		{
+			if(this.nomeCliente.trim().equals(nomeCliente.trim())) {
+				return true;
+			}
+			return false;
+		}
+
+		//Define o nome do cliente caso ele seja válido
+		private void setNomeCliente(String nomeCliente) throws Exception {
+			if(nomeCliente.isEmpty())
+			{
+				throw new Exception("Nome inválido!");
+			}
+			this.nomeCliente = nomeCliente;
+		}
+		
+
+		//Retorna a renda
+		protected int getRenda(int senha) {		
+			return renda;
+		}
+
+		//Define a renda caso ela seja positiva
+		private void setRenda(int renda) throws Exception {
+			if(renda < 0)
+			{
+				throw new Exception("A renda não pode ser negativa!");
+			}
+			this.renda = renda;
+		}
+		*/
+		////////////////////////////////////////////////////////////////////////////////////
 }

@@ -1,4 +1,4 @@
-package view.Helio.Telas;
+package view.Menu;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

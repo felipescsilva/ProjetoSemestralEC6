@@ -1,6 +1,6 @@
-package view.Helio.main;
+package view.Main;
 
-import view.Helio.Telas.LoginT;
+import view.Login.LoginT;
 
 public class Main {
 
@@ -9,6 +9,5 @@ public class Main {
 		@SuppressWarnings("deprecation")
 		public static void main(String[] argv) {
 			login.show();
-			
 		}
 }

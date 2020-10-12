@@ -1,4 +1,4 @@
-package view.Helio.Telas;
+package view.Opcoes;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import model.Helio.Cliente.Cliente.Formacao;
-import model.Helio.Cliente.Cliente.Profissao;
+import model.Cliente.Formacao;
+import model.Cliente.Profissao;
 
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;

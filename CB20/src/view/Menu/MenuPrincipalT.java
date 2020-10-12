@@ -1,4 +1,4 @@
-package view.Helio.Telas;
+package view.Menu;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -8,6 +8,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import view.Cartao.CartaoT;
+import view.Opcoes.OpcoesT;
+import view.Operacao.CambioT;
+import view.Operacao.DepositoT;
+import view.Operacao.EmprestimoT;
+import view.Operacao.PagamentoT;
+import view.Operacao.SaldoT;
+import view.Operacao.TransferenciaT;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;

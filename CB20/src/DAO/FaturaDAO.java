@@ -10,6 +10,7 @@ import model.Fatura.Fatura;
 import model.Fatura.Situacao;
 
 public class FaturaDAO {
+	/*
 	ConexaoDAO con;
 	public boolean Inserir(Fatura faturaObjeto) throws Exception {
 		con = new ConexaoDAO();
@@ -77,4 +78,5 @@ public class FaturaDAO {
 		}
 		return faturas;
 	}
+	*/
 }

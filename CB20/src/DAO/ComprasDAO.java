@@ -9,6 +9,7 @@ import java.util.List;
 import model.Compras.Compras;
 
 public class ComprasDAO {
+	/*
 	ConexaoDAO con;
 	public boolean Inserir(Compras comprasObjeto) throws Exception {
 		con = new ConexaoDAO();
@@ -48,4 +49,5 @@ public class ComprasDAO {
 		}
 		return listaCompras;
 	}
+	*/
 }

@@ -3,14 +3,20 @@ package model.Conta;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import DAO.CartaoDAO;
+import DAO.ContaDAO;
 import model.Cartao.*;
 
 public class Conta {
 	private String numeroConta;
 	private String CPF;
 	private double saldo;
+	private LocalDate dataAbertura;
+	private String senhaConta;
+	private String senhaApp;
+	
 	public String getSenhaConta() {
 		return senhaConta;
 	}
@@ -26,27 +32,24 @@ public class Conta {
 	public void setSenhaApp(String senhaApp) {
 		this.senhaApp = senhaApp;
 	}
-
-	private LocalDate dataAbertura;
-	private String senhaConta;
-	private String senhaApp;
 	
 	public Conta() {
 		super();
 	}
 
-	public Conta(String numeroConta, String cPF, String senhaConta, String senhaApp) {
+	public String getNumeroConta() {
+		return numeroConta;
+	}
+
+	public Conta(String numeroConta, String cPF, double saldo, LocalDate dataAbertura, String senhaConta,
+			String senhaApp) {
 		super();
 		this.numeroConta = numeroConta;
 		CPF = cPF;
-		this.saldo = 0;
-		this.dataAbertura = LocalDate.now();
+		this.saldo = saldo;
+		this.dataAbertura = dataAbertura;
 		this.senhaConta = senhaConta;
 		this.senhaApp = senhaApp;
-	}
-
-	public String getNumeroConta() {
-		return numeroConta;
 	}
 
 	public void setNumeroConta(String numeroConta) {
@@ -76,6 +79,7 @@ public class Conta {
 	public void setDataAbertura(LocalDate dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
+	
 	
 	public boolean DesbloquearCartao(String numeroCartao, String senha){
 		try {
@@ -185,5 +189,28 @@ public class Conta {
 	
 	public boolean pagarFatura(String numCartao) {
 		return true;
+	}
+	
+	public void geraNumConta() {
+		boolean jaExiste = false;
+		String num = "";
+		do {
+			Random rand = new Random();
+			int sequencia = rand.nextInt(9999);
+			num += String.format("%04d", sequencia);
+			try {
+				ContaDAO dao = new ContaDAO();
+				List<Conta> lista = dao.Consultar("NumConta", num);
+				if (lista.size() != 0)
+					jaExiste = true;
+				else
+					jaExiste = false;
+				
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+		} while(jaExiste);
+		
+		this.numeroConta = num;
 	}
 }

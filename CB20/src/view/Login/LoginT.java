@@ -1,4 +1,4 @@
-package view.Helio.Telas;
+package view.Login;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,9 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.Login.Login;
 import view.Cartao.CartaoT;
 import view.Cartao.PagarComprasT;
 import view.Cartao.RealizarCompraT;
+import view.Menu.MenuPrincipalT;
 
 import javax.swing.JTextField;
 import java.awt.Color;
@@ -21,6 +23,8 @@ import javax.swing.DropMode;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
@@ -30,11 +34,9 @@ import java.awt.event.ActionEvent;
 public class LoginT extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtBankAgency;
 	private JLabel lblPassword;
 	private JTextField txtBankAccount;
-	private JLabel lblBankAgency;
-	private JPasswordField senhaConta;
+	private JPasswordField txtSenhaConta;
 	private JButton btnCriarConta;
 	private JPanel panel;
 	private JTextField txtCarto;
@@ -62,7 +64,7 @@ public class LoginT extends JFrame {
 	public LoginT() {
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 560, 420);
+		setBounds(100, 100, 252, 326);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,19 +72,9 @@ public class LoginT extends JFrame {
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBounds(10, 59, 219, 266);
+		panel.setBounds(10, 11, 219, 266);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
-		lblBankAgency = new JLabel("Ag\u00EAncia");
-		lblBankAgency.setBounds(10, 11, 50, 16);
-		panel.add(lblBankAgency);
-		lblBankAgency.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		
-		txtBankAgency = new JTextField();
-		txtBankAgency.setBounds(70, 8, 86, 20);
-		panel.add(txtBankAgency);
-		txtBankAgency.setColumns(10);
 		
 		JLabel lblBankAccount = new JLabel("Conta");
 		lblBankAccount.setBounds(24, 42, 36, 16);
@@ -94,10 +86,9 @@ public class LoginT extends JFrame {
 		panel.add(txtBankAccount);
 		txtBankAccount.setColumns(10);
 		
-		senhaConta = new JPasswordField();
-		senhaConta.setBounds(70, 70, 48, 20);
-		panel.add(senhaConta);
-		senhaConta.setText("111111");
+		txtSenhaConta = new JPasswordField();
+		txtSenhaConta.setBounds(70, 70, 86, 20);
+		panel.add(txtSenhaConta);
 		
 		lblPassword = new JLabel("Senha");
 		lblPassword.setBounds(22, 73, 38, 16);
@@ -170,14 +161,13 @@ public class LoginT extends JFrame {
 		btnSignInConta.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				if(txtBankAgency.getText().equals("001"))
-						{
-							MenuBancoT menuBanco = new MenuBancoT();
-							menuBanco.show();
-						}
-				else {
+				Login login = new Login();
+				if (login.checkLogin(txtBankAccount.getText(), txtSenhaConta.getText())) {
 					MenuPrincipalT menu = new MenuPrincipalT();
 					menu.show();
+				} else {
+					JFrame f = new JFrame();
+					JOptionPane.showMessageDialog(f, "O Número da conta ou a senha estão incorretos.", "Erro", JOptionPane.WARNING_MESSAGE);
 				}
 				
 			}
