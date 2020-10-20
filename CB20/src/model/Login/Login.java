@@ -2,6 +2,7 @@ package model.Login;
 
 import java.util.List;
 
+import Audit.Audit;
 import DAO.ContaDAO;
 import model.Cliente.Cliente;
 import model.Conta.Conta;
@@ -32,8 +33,10 @@ public class Login {
 	
 	public boolean checkLogin(String numeroConta, String senha) {
 		ContaDAO contaDAO = new ContaDAO();
+		Audit auditoria = new Audit();
 		try {
 			List<Conta> listaConta = contaDAO.Consultar("NumConta", numeroConta);
+			auditoria.getInstancia().gerarRelatorio("mensagem");
 			if (listaConta.size() == 0)
 				return false;
 			else {

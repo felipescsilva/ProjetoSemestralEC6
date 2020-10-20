@@ -9,6 +9,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import Audit.Audit;
 import DAO.ClienteDAO;
 import DAO.ContaDAO;
 import model.Cliente.*;
@@ -258,7 +259,9 @@ public class CriarContaT extends JFrame {
 				Profissao.valueOf("Administração");
 				
 				try {
+					Audit auditoria = new Audit();
 					if (clienteDAO.Consultar("CPF", txtCpf.getText()).size() != 0) {
+						auditoria.getInstancia().gerarRelatorio("mensagem");
 						dadosCorretos = false;
 						mensagemDeErro += "Já existe uma conta vinculada a esse CPF.\n";
 					}
@@ -282,8 +285,10 @@ public class CriarContaT extends JFrame {
 					conta.setSenhaConta(txtSenhaConta.getText());
 					
 					try {
+						Audit auditoria = new Audit();
 						clienteDAO.Inserir(cliente);
 						contaDAO.Inserir(conta);
+						auditoria.getInstancia().gerarRelatorio("mensagem");
 						JOptionPane.showMessageDialog(f, "Sua conta foi criada com sucesso!\nO número da sua conta é" + conta.getNumeroConta());
 					} catch (Exception e) {
 						// TODO Auto-generated catch block

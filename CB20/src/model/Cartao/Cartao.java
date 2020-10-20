@@ -168,12 +168,12 @@ public class Cartao {
 	
 	public List<Compras> ListaTodasAsCompras() {
 		List<Compras> compras = new ArrayList<Compras>();
-		try {
-			ComprasDAO comprasDAO = new ComprasDAO();
-			compras = comprasDAO.Consultar("NumCartao", this.numeroCartao);
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
+		//try {
+		//	ComprasDAO comprasDAO = new ComprasDAO();
+		//	compras = comprasDAO.Consultar("NumCartao", this.numeroCartao);
+		//} catch (Exception e) {
+		//	System.out.println(e.toString());
+		//}
 		return compras;
 	}
 	
