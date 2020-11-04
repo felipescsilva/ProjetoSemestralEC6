@@ -8,6 +8,7 @@ public class Compras {
 	private String descricao;
 	private double valor;
 	private LocalDate Data;
+	
 	public int getIdCompras() {
 		return idCompras;
 	}

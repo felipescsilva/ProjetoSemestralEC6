@@ -55,7 +55,7 @@ public class MenuPrincipalT extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JButton btnNome = new JButton("Ol\u00E1, {Nome}!");
+		JButton btnNome = new JButton("Op\u00E7\u00F5es");
 		btnNome.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {

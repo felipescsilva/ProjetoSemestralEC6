@@ -15,9 +15,14 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+
+import DAO.CartaoDAO;
+import model.Cartao.Cartao;
+
 import javax.swing.JScrollPane;
 import javax.swing.AbstractListModel;
 import java.awt.Font;
+import java.util.*;
 
 public class VerCartoesAtivosT extends JFrame {
 
@@ -90,5 +95,8 @@ public class VerCartoesAtivosT extends JFrame {
 		table_4.getColumnModel().getColumn(2).setPreferredWidth(129);
 		table_4.getColumnModel().getColumn(3).setPreferredWidth(129);
 		
+		CartaoDAO cartaoDAO = new CartaoDAO();
+		String numeroConta = "";
+		List<Cartao> cartoes = cartaoDAO.Consultar("NumConta", numeroConta);
 	}
 }

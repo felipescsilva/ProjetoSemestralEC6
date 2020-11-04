@@ -119,25 +119,6 @@ public class CartaoT extends JFrame {
 		btnNewButton_1_2.setBounds(10, 170, 524, 42);
 		panel.add(btnNewButton_1_2);
 		
-		JButton btnNewButton_1_2_1 = new JButton("Realizar Compra");
-		btnNewButton_1_2_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							RealizarCompraT frame = new RealizarCompraT();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		btnNewButton_1_2_1.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnNewButton_1_2_1.setBounds(10, 328, 524, 42);
-		panel.add(btnNewButton_1_2_1);
-		
 		JButton btnNewButton_1_2_1_1 = new JButton("Solicitar Desbloqueio do Cart\u00E3o");
 		btnNewButton_1_2_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -176,6 +157,6 @@ public class CartaoT extends JFrame {
 		btnNewButton_1_2_1_2.setBounds(10, 276, 524, 42);
 		panel.add(btnNewButton_1_2_1_2);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 560, 420);
+		setBounds(100, 100, 549, 359);
 	}
 }

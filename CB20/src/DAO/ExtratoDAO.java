@@ -6,22 +6,21 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Compras.Compras;
+import model.Extrato.Extrato;
 
-public class ComprasDAO {
+public class ExtratoDAO {
 	ConexaoDAO con;
-	public boolean Inserir(Compras comprasObjeto) {
+	public boolean Inserir(Extrato extratoObjeto) {
 		PreparedStatement ps = null;
 		try {
 			
-			String data = comprasObjeto.getData().getDayOfMonth() + "/" + comprasObjeto.getData().getMonthValue() + "/" + comprasObjeto.getData().getYear();
+			String dataTransacao = extratoObjeto.getDataTransacao().getDayOfMonth() + "/" + extratoObjeto.getDataTransacao().getMonthValue() + "/" + extratoObjeto.getDataTransacao().getYear();
 			con = new ConexaoDAO();
-			String SQL = "exec dbo.sp_InsertCompras ?, ?, ?, ?";
+			String SQL = "exec dbo.sp_InsertExtrato ?, ?, ?";
 			ps = con.getConexao().prepareStatement(SQL);
-			ps.setString(1, comprasObjeto.getNumCartao());
-			ps.setString(2, comprasObjeto.getDescricao());
-			ps.setDouble(3, comprasObjeto.getValor());
-			ps.setString(4, data);
+			ps.setString(1, extratoObjeto.getNumConta());
+			ps.setDouble(2, extratoObjeto.getValor());
+			ps.setString(3, dataTransacao);
 			
 			if (ps.executeUpdate() > 0)
 				return true;
@@ -39,18 +38,17 @@ public class ComprasDAO {
 		return false;
 	}
 	
-	public boolean Atualizar(Compras comprasObjeto) {
+	public boolean Atualizar(Extrato extratoObjeto) {
 		PreparedStatement ps = null;
 		try {
 			
-			String data = comprasObjeto.getData().getDayOfMonth() + "/" + comprasObjeto.getData().getMonthValue() + "/" + comprasObjeto.getData().getYear();
+			String dataTransacao = extratoObjeto.getDataTransacao().getDayOfMonth() + "/" + extratoObjeto.getDataTransacao().getMonthValue() + "/" + extratoObjeto.getDataTransacao().getYear();
 			con = new ConexaoDAO();
-			String SQL = "exec dbo.sp_UpdateCompras ?, ?, ?, ?";
+			String SQL = "exec dbo.sp_UpdateExtrato ?, ?, ?";
 			ps = con.getConexao().prepareStatement(SQL);
-			ps.setString(1, comprasObjeto.getNumCartao());
-			ps.setString(2, comprasObjeto.getDescricao());
-			ps.setDouble(3, comprasObjeto.getValor());
-			ps.setString(4, data);
+			ps.setString(1, extratoObjeto.getNumConta());
+			ps.setDouble(2, extratoObjeto.getValor());
+			ps.setString(3, dataTransacao);
 			
 			if (ps.executeUpdate() > 0)
 				return true;
@@ -69,13 +67,13 @@ public class ComprasDAO {
 		return false;
 	}
 	
-	public boolean Remover(String idCompras) {
+	public boolean Remover(String idExtrato) {
 		PreparedStatement ps = null;
 		try {
 		con = new ConexaoDAO();
-		String SQL = "delete from dbo.tblCompras where idCompras = ?";
+		String SQL = "delete from dbo.tblExtrato where idExtrato = ?";
 		ps = con.getConexao().prepareStatement(SQL);
-		ps.setString(1, idCompras);
+		ps.setString(1, idExtrato);
 		
 		if (ps.executeUpdate() > 0)
 			return true;
@@ -93,13 +91,13 @@ public class ComprasDAO {
 		return false;
 	}
 	
-	public List<Compras> Consultar(String campo, String valor) throws Exception {
-		List<Compras> lista = new ArrayList<Compras>();
+	public List<Extrato> Consultar(String campo, String valor) throws Exception {
+		List<Extrato> lista = new ArrayList<Extrato>();
 		ResultSet rs = null;
 		PreparedStatement ps = null;
 		try {
 			con = new ConexaoDAO();
-			String SQL = "exec dbo.sp_consulta tblCompras, ?, ?";
+			String SQL = "exec dbo.sp_consulta tblExtrato, ?, ?";
 			ps = con.getConexao().prepareStatement(SQL);
 			ps.setString(1, campo);
 			ps.setString(2, valor);
@@ -107,15 +105,14 @@ public class ComprasDAO {
 			
 			while (rs.next()) {
 				
-				Compras compras = new Compras();
+				Extrato extrato = new Extrato();
 				
-				compras.setData(LocalDate.parse(rs.getDate("Data").toString()));
-				compras.setDescricao(rs.getString("Descricao"));
-				compras.setIdCompras(rs.getInt("idCompras"));
-				compras.setNumCartao(rs.getString("NumCartao"));
-				compras.setValor(rs.getDouble("Valor"));
+				extrato.setDataTransacao(LocalDate.parse(rs.getDate("DataTransacao").toString()));
+				extrato.setIdExtrato(rs.getInt("idExtrato"));
+				extrato.setNumConta(rs.getString("NumConta"));
+				extrato.setValor(rs.getDouble("Valor"));
 				
-				lista.add(compras);
+				lista.add(extrato);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
