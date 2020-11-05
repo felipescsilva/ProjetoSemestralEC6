@@ -6,10 +6,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import view.Main.Main;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class TransferenciaT extends JFrame {
 
@@ -41,6 +46,13 @@ public class TransferenciaT extends JFrame {
 	 * Create the frame.
 	 */
 	public TransferenciaT() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				Main.menuPrincipal.show();
+				dispose();
+			}
+		});
 		setTitle("Transfer\u00EAncia");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 560, 420);

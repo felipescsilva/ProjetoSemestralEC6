@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import model.Cliente.Formacao;
 import model.Cliente.Profissao;
+import view.Main.Main;
 
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -17,6 +18,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class OpcoesT extends JFrame {
 
@@ -50,6 +53,13 @@ public class OpcoesT extends JFrame {
 	 * Create the frame.
 	 */
 	public OpcoesT() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				Main.menuPrincipal.show();
+				dispose();
+			}
+		});
 		setTitle("Op\u00E7\u00F5es");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 560, 420);

@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import view.Main.Main;
+
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -14,6 +17,8 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JList;
 import javax.swing.JPasswordField;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class CambioT extends JFrame {
 
@@ -42,6 +47,13 @@ public class CambioT extends JFrame {
 	 * Create the frame.
 	 */
 	public CambioT() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				Main.menuPrincipal.show();
+				dispose();
+			}
+		});
 		setTitle("C\u00E2mbio");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 560, 420);

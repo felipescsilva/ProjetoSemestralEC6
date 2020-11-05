@@ -11,6 +11,7 @@ import model.Login.Login;
 import view.Cartao.CartaoT;
 import view.Cartao.PagarComprasT;
 import view.Cartao.RealizarCompraT;
+import view.Main.Main;
 import view.Menu.MenuPrincipalT;
 
 import javax.swing.JTextField;
@@ -153,23 +154,25 @@ public class LoginT extends JFrame {
 		panel_1.add(btnSignInCartao);
 		btnCriarConta.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent arg0) {
-				CriarContaT novaConta = new CriarContaT();
-				novaConta.show();
+			public void actionPerformed(ActionEvent arg0) {				
+				Main.criarConta.show();
+				hide();
 			}
 		});
 		btnSignInConta.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				Login login = new Login();
-				if (login.checkLogin(txtBankAccount.getText(), txtSenhaConta.getText())) {
-					MenuPrincipalT menu = new MenuPrincipalT();
-					menu.show();
+				Main.menuPrincipal.show();
+				hide();
+				/*
+				if (Main.login.signIn(txtBankAccount.getText(), txtSenhaConta.getText())) {					
+					Main.menuPrincipal.show();
+					hide();
 				} else {
 					JFrame f = new JFrame();
 					JOptionPane.showMessageDialog(f, "O Número da conta ou a senha estão incorretos.", "Erro", JOptionPane.WARNING_MESSAGE);
 				}
-				
+				*/
 			}
 		});
 	}

@@ -3,9 +3,11 @@ package model.Login;
 import java.util.List;
 
 import Audit.Audit;
+import DAO.ClienteDAO;
 import DAO.ContaDAO;
 import model.Cliente.Cliente;
 import model.Conta.Conta;
+import view.Main.Main;
 
 public class Login {
 	
@@ -23,24 +25,23 @@ public class Login {
 	
 	public boolean signIn(String numeroConta, String senha) {
 		if(checkLogin(numeroConta, senha) == true) {
-			//pegar os dados do BD
-			logado = true;
-			//conta = new Conta(numeroConta, numeroAgencia, saldo, senhaApp, senhaConta);
+			ClienteDAO clienteDAO = new ClienteDAO();
+			List<Cliente> listaCliente = clienteDAO.Consultar("NumConta", numeroConta);
+			Main.cliente = listaCliente.get(0);			
 			return true;
 		}
 		return false;
 	}
 	
 	public boolean checkLogin(String numeroConta, String senha) {
-		ContaDAO contaDAO = new ContaDAO();
-		Audit auditoria = new Audit();
+		ContaDAO contaDAO = new ContaDAO();		
 		try {
 			List<Conta> listaConta = contaDAO.Consultar("NumConta", numeroConta);
-			auditoria.getInstancia().gerarRelatorio("mensagem");
+			Main.auditoria.getInstancia().gerarRelatorio("conta localizada com sucesso");
 			if (listaConta.size() == 0)
 				return false;
 			else {
-				Conta conta = listaConta.get(0);
+				Main.conta = listaConta.get(0);
 				if (conta.getSenhaApp().equals(senha))
 					return true;
 				else
@@ -55,11 +56,7 @@ public class Login {
 		
 	}
 	
-	public void criaCliente() {
-		
-		//return cliente;
-	}
-	
+
 	
 	
 

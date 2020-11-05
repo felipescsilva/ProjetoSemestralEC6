@@ -14,6 +14,7 @@ import DAO.ClienteDAO;
 import DAO.ContaDAO;
 import model.Cliente.*;
 import model.Conta.Conta;
+import view.Main.Main;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -33,6 +34,8 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class CriarContaT extends JFrame {
 
@@ -68,6 +71,13 @@ public class CriarContaT extends JFrame {
 	 * Create the frame.
 	 */
 	public CriarContaT() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				Main.telaLogin.show();
+				dispose();
+			}
+		});
 		setTitle("Nova Conta");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 560, 420);

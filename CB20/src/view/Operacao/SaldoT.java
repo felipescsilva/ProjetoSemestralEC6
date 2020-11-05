@@ -6,11 +6,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import view.Main.Main;
+
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
 import javax.swing.JList;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class SaldoT extends JFrame {
 
@@ -36,6 +41,13 @@ public class SaldoT extends JFrame {
 	 * Create the frame.
 	 */
 	public SaldoT() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				Main.menuPrincipal.show();
+				dispose();
+			}
+		});
 		setTitle("Saldo");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 560, 420);
