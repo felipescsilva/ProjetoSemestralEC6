@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.Random;
 
 import DAO.CartaoDAO;
+import DAO.ContaDAO;
+import DAO.FaturaDAO;
 import model.Compras.Compras;
+import model.Fatura.Fatura;
+import model.Fatura.Situacao;
 
 public class Cartao {
 	
@@ -31,7 +35,7 @@ public class Cartao {
 				this.limiteTotal = limiteTotal;
 		}
 		this.limiteUsado = 0;
-		this.bloqueado = Bloqueado.DESBLOQUEADO;
+		this.status = Status.DESBLOQUEADO;
 		this.motivoBloqueio = Motivo.DESBLOQUEADO;
 		this.cvv = geraCvv();
 	}
@@ -43,7 +47,7 @@ public class Cartao {
 	private double saldo;
 	private double limiteTotal;
 	private double limiteUsado;
-	private Bloqueado bloqueado;
+	private Status status;
 	private Motivo motivoBloqueio;
 	private String cvv;
 	
@@ -95,11 +99,11 @@ public class Cartao {
 	public void setLimiteUsado(double limiteUsado) {
 		this.limiteUsado = limiteUsado;
 	}
-	public Bloqueado getBloqueado() {
-		return bloqueado;
+	public Status getStatus() {
+		return status;
 	}
-	public void setBloqueado(Bloqueado bloqueado) {
-		this.bloqueado = bloqueado;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 	public Motivo getMotivoBloqueio() {
 		return motivoBloqueio;
@@ -119,8 +123,8 @@ public class Cartao {
 			CartaoDAO dao = new CartaoDAO();
 			Cartao cartao = dao.Consultar("NumCartao", numeroCartao).get(0);
 			if (cartao.dataValidade.isBefore(LocalDate.now())) {
-				if (cartao.bloqueado == Bloqueado.DESBLOQUEADO) {
-					cartao.bloqueado = Bloqueado.BLOQUEADO;
+				if (cartao.status == Status.DESBLOQUEADO) {
+					cartao.status = Status.BLOQUEADO;
 					cartao.motivoBloqueio = Motivo.VALIDADE_EXPIROU;
 				}
 				dao.Atualizar(cartao);
@@ -174,6 +178,24 @@ public class Cartao {
 		//	System.out.println(e.toString());
 		//}
 		return compras;
+	}
+	
+	public List<Fatura> getFaturasNaoPagas() {
+		List<Fatura> faturas = new ArrayList();
+		try {
+			FaturaDAO dao = new FaturaDAO();
+			faturas =  dao.Consultar("NumCartao", this.numeroCartao);
+			for (int i = 0; i < faturas.size(); i++) {
+				if (faturas.get(i).getSituacao() == Situacao.PAGO) {
+					faturas.remove(i);
+				}
+			}
+			return faturas;
+		
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			return faturas;
+		}
 	}
 	
 }

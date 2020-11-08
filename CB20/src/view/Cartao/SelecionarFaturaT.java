@@ -13,11 +13,14 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.table.DefaultTableModel;
 
+import model.Cartao.Status;
+import model.Cartao.Tipo;
 import view.Main.Main;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -27,6 +30,8 @@ import java.awt.event.ActionEvent;
 public class SelecionarFaturaT extends JFrame {
 
 	private JPanel contentPane;
+	private JFrame f = new JFrame();
+	public JComboBox cbFaturas = new JComboBox();
 
 	/**
 	 * Launch the application.
@@ -55,8 +60,19 @@ public class SelecionarFaturaT extends JFrame {
 		JButton btnNewButton = new JButton("Ver Fatura");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.verFatura.show();
-				hide();
+				if (cbFaturas.getSelectedIndex() == 0)
+					JOptionPane.showMessageDialog(f, "Selecione uma opção válida!", "Erro", JOptionPane.WARNING_MESSAGE);
+				else {
+					Main.verCartao.show();
+					int indexSelecionado = cbFaturas.getSelectedIndex();
+					Main.fatura = Main.faturas.get(indexSelecionado - 1);
+					Main.verFatura.txtIdFatura.setText(Integer.toString(Main.fatura.getIdFatura()));
+					Main.verFatura.txtJuros.setText(Double.toString(Main.fatura.getTaxaJuros()));
+					Main.verFatura.txtVencimento.setText(Main.fatura.getDataVencimento().toString());
+					Main.verFatura.txtValor.setText(Double.toString(Main.fatura.getValor()));
+					
+					hide();
+				}
 			}
 		});
 		btnNewButton.setFont(new Font("Sitka Small", Font.BOLD, 12));
@@ -68,10 +84,9 @@ public class SelecionarFaturaT extends JFrame {
 		lblSelecioneAFatura.setBounds(7, 7, 429, 14);
 		contentPane.add(lblSelecioneAFatura);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Selecione..."}));
-		comboBox.setBounds(10, 32, 424, 20);
-		contentPane.add(comboBox);
+		cbFaturas.setModel(new DefaultComboBoxModel(new String[] {"Selecione..."}));
+		cbFaturas.setBounds(10, 32, 424, 20);
+		contentPane.add(cbFaturas);
 	}
 
 }

@@ -80,18 +80,21 @@ public class Conta {
 		this.dataAbertura = dataAbertura;
 	}
 	
+	public List<Cartao> getCartoes(){
+		CartaoDAO dao = new CartaoDAO();
+		List<Cartao> cartoes = dao.Consultar("NumConta", this.numeroConta);
+		return cartoes;
+	}
 	
-	public boolean DesbloquearCartao(String numeroCartao, String senha){
+	
+	public boolean PedirDesbloqueioCartao(Cartao cartao){
 		try {
 			CartaoDAO cartaoDAO = new CartaoDAO();
-			Cartao cartao = cartaoDAO.Consultar("NumCartao", numeroCartao).get(0);
-			if (cartao.getBloqueado() != Bloqueado.BLOQUEADO_PERMANENTEMENTE) {
-				if (senha.equals(this.senhaConta)) {
-					cartao.setBloqueado(Bloqueado.DESBLOQUEADO);
-					cartao.setMotivoBloqueio(Motivo.DESBLOQUEADO);
-					cartaoDAO.Atualizar(cartao);
-					return true;
-				}
+			if (cartao.getStatus() == Status.BLOQUEADO || cartao.getStatus() == Status.BLOQUEADO_POR_ERRO_DE_SENHA) {
+				cartao.setStatus(Status.DESBLOQUEADO);
+				cartao.setMotivoBloqueio(Motivo.DESBLOQUEADO);
+				cartaoDAO.Atualizar(cartao);
+				return true;
 			}
 				
 			return true;
@@ -101,23 +104,28 @@ public class Conta {
 		}
 	}
 	
-	public boolean PedirBloqueioCartao(String numeroCartao, String senha, Motivo motivoBloqueio) {
+	public boolean PedirBloqueioCartao(Cartao cartao) {
 		try {
-		CartaoDAO cartaoDAO = new CartaoDAO();
-		Cartao cartao = cartaoDAO.Consultar("NumCartao", numeroCartao).get(0);
-		if (cartao.getBloqueado().equals(Bloqueado.DESBLOQUEADO)) {
-			if (senha.equals(this.senhaConta)) {
-				if (motivoBloqueio.equals(Motivo.PERDA) || motivoBloqueio.equals(Motivo.ROUBO)) {
-					cartao.setBloqueado(Bloqueado.BLOQUEADO_PERMANENTEMENTE);
-				} else
-					cartao.setBloqueado(Bloqueado.BLOQUEADO);
-				cartao.setMotivoBloqueio(motivoBloqueio);
-				cartaoDAO.Atualizar(cartao);
+			CartaoDAO dao = new CartaoDAO();
+			if (cartao.getStatus() == Status.DESBLOQUEADO) {
+				cartao.setStatus(Status.BLOQUEADO);
+				dao.Atualizar(cartao);
 				return true;
+			} else  {
+				return false;
 			}
-		}
-		
+		} catch (Exception e) {
+			System.out.println(e.toString());
 			return false;
+		}
+	}
+	
+	public boolean PedirCancelamento(Cartao cartao) {
+		try {
+			CartaoDAO dao = new CartaoDAO();
+			cartao.setStatus(Status.CANCELADO);
+			dao.Atualizar(cartao);
+			return true;
 		} catch (Exception e) {
 			System.out.println(e.toString());
 			return false;
@@ -135,8 +143,8 @@ public class Conta {
 			for (int i = 0; i < listaCartao.size(); i++) {
 				Cartao cartao = listaCartao.get(i);
 				Tipo tipoCartao = cartao.getTipo();
-				Bloqueado bloqueadoCartao = cartao.getBloqueado();
-				if (bloqueadoCartao.equals(Bloqueado.DESBLOQUEADO)) {
+				Status statusCartao = cartao.getStatus();
+				if (statusCartao.equals(Status.DESBLOQUEADO)) {
 					switch (tipoCartao) {
 						case DÉBITO:
 							debito = true;
@@ -150,8 +158,8 @@ public class Conta {
 					}
 				}
 				
-				else if (bloqueadoCartao.equals(Bloqueado.BLOQUEADO) && tipoCartao.equals(tipo) && senha.equals(this.senhaConta)) {
-					cartao.setBloqueado(Bloqueado.BLOQUEADO_PERMANENTEMENTE);
+				else if (statusCartao.equals(Status.BLOQUEADO) && tipoCartao.equals(tipo) && senha.equals(this.senhaConta)) {
+					cartao.setStatus(Status.CANCELADO);
 					cartaoDAO.Atualizar(cartao);
 				}
 			}

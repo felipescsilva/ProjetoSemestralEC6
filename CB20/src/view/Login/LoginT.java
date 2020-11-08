@@ -149,6 +149,9 @@ public class LoginT extends JFrame {
 					Main.menuPrincipal.show();
 					Main.menuPrincipal.btnNome.setText("Bem-Vindo " + Main.cliente.getNome());
 					hide();
+					txtBankAccount.setText("");
+					txtSenhaConta.setText("");
+					
 				} else {
 					JFrame f = new JFrame();
 					JOptionPane.showMessageDialog(f, "O Número da conta ou a senha estão incorretos.", "Erro", JOptionPane.WARNING_MESSAGE);

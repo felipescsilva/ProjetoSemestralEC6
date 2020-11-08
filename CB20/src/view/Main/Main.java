@@ -1,10 +1,15 @@
 package view.Main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Audit.Audit;
+import model.Cartao.Cartao;
 import model.Cartao.Tipo;
 import model.Cliente.Cliente;
 import model.Cliente.Profissao;
 import model.Conta.Conta;
+import model.Fatura.Fatura;
 import model.Login.Login;
 import view.Cartao.*;
 import view.Cartao.SolicitarBloqueioT;
@@ -35,7 +40,7 @@ public class Main {
 		public static CambioT cambio = new CambioT();
 		
 		public static SolicitarBloqueioT solicitarBloqueio = new SolicitarBloqueioT();
-		public static SolicitarCancelamentoT solicitarCancelamento = new SolicitarCancelamentoT();
+		public static ConfirmarSenhaT solicitarCancelamento = new ConfirmarSenhaT();
 		public static SolicitarCartaoT solicitarCartao = new SolicitarCartaoT();
 		public static SolicitarDesbloqueioT solicitarDesbloqueio = new SolicitarDesbloqueioT();
 		public static SelecionarCartaoT verCartoes = new SelecionarCartaoT();
@@ -47,6 +52,10 @@ public class Main {
 	    public static Login login = new Login();
 	    public static Conta conta = new Conta();	    
 		public static Cliente cliente = new Cliente();
+		public static List<Cartao> cartoes = new ArrayList<Cartao>();
+		public static Cartao cartao = new Cartao();
+		public static List<Fatura> faturas = new ArrayList<Fatura>();
+		public static Fatura fatura = new Fatura();
 		public static Audit auditoria = new Audit();
 		
 	    

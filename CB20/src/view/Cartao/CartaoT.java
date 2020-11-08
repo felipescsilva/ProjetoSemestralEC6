@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.Cartao.Cartao;
 import view.Main.Main;
 
 import javax.swing.JButton;
@@ -14,6 +15,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class CartaoT extends JFrame {
@@ -59,6 +61,10 @@ public class CartaoT extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Main.verCartoes.show();
+				Main.cartoes = Main.conta.getCartoes();
+				for (int i = 0; i < Main.cartoes.size(); i++) {
+					Main.verCartoes.cbCartoes.addItem(Main.cartoes.get(i).getNumeroCartao());
+				}
 				hide();
 			}
 		});

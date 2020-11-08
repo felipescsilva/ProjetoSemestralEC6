@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import view.Main.Main;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -20,11 +21,11 @@ import java.awt.event.ActionEvent;
 public class VisualizarFaturaT extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	public JTextField txtIdFatura;
+	public JTextField txtVencimento;
+	public JTextField txtJuros;
+	public JTextField txtValor;
+	private JFrame f = new JFrame();
 
 	/**
 	 * Launch the application.
@@ -57,7 +58,7 @@ public class VisualizarFaturaT extends JFrame {
 		});
 		setTitle("Fatura");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 243);
+		setBounds(100, 100, 450, 207);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -71,54 +72,65 @@ public class VisualizarFaturaT extends JFrame {
 		lblNewLabel.setBounds(10, 11, 67, 14);
 		panel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(69, 8, 345, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtIdFatura = new JTextField();
+		txtIdFatura.setEditable(false);
+		txtIdFatura.setBounds(69, 8, 345, 20);
+		panel.add(txtIdFatura);
+		txtIdFatura.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setBounds(69, 36, 345, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JLabel lblNewLabel_1 = new JLabel("Tipo");
-		lblNewLabel_1.setBounds(10, 39, 46, 14);
-		panel.add(lblNewLabel_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setBounds(69, 67, 345, 20);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
+		txtValor = new JTextField();
+		txtValor.setEditable(false);
+		txtValor.setBounds(69, 36, 345, 20);
+		panel.add(txtValor);
+		txtValor.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Valor");
-		lblNewLabel_2.setBounds(10, 70, 46, 14);
+		lblNewLabel_2.setBounds(10, 39, 46, 14);
 		panel.add(lblNewLabel_2);
 		
-		textField_4 = new JTextField();
-		textField_4.setEditable(false);
-		textField_4.setColumns(10);
-		textField_4.setBounds(69, 131, 345, 20);
-		panel.add(textField_4);
+		txtVencimento = new JTextField();
+		txtVencimento.setEditable(false);
+		txtVencimento.setColumns(10);
+		txtVencimento.setBounds(69, 98, 345, 20);
+		panel.add(txtVencimento);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("Vencimento");
-		lblNewLabel_3_1.setBounds(10, 134, 61, 14);
+		lblNewLabel_3_1.setBounds(10, 101, 61, 14);
 		panel.add(lblNewLabel_3_1);
 		
-		JButton btnNewButton_2 = new JButton("Pagar Fatura");
-		btnNewButton_2.setBounds(10, 162, 404, 23);
-		panel.add(btnNewButton_2);
+		JButton btnPagarFatura = new JButton("Pagar Fatura");
+		btnPagarFatura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				enable(false);
+				ConfirmarSenhaT confirmarSenha = new ConfirmarSenhaT();
+				confirmarSenha.show();
+				confirmarSenha.btnConfirmar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (confirmarSenha.txtSenha.getText().equals(Main.conta.getSenhaConta()) && Main.conta.getSaldo() >= Main.fatura.getValor()) {
+							JOptionPane.showMessageDialog(f, "Fatura Paga!");
+							confirmarSenha.dispose();
+							Main.conta.PedirCancelamento(Main.cartao);
+							enable(true);
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(f, "Senha incorreta ou valor insufiente, não foi possível pagar sua fatura", "Erro", JOptionPane.WARNING_MESSAGE);
+							confirmarSenha.txtSenha.setText("");
+						}
+					}
+				});
+			}
+		});
+		btnPagarFatura.setBounds(10, 129, 404, 23);
+		panel.add(btnPagarFatura);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("Juros");
-		lblNewLabel_2_1.setBounds(10, 101, 46, 14);
+		lblNewLabel_2_1.setBounds(10, 70, 46, 14);
 		panel.add(lblNewLabel_2_1);
 		
-		textField_5 = new JTextField();
-		textField_5.setEditable(false);
-		textField_5.setColumns(10);
-		textField_5.setBounds(69, 98, 345, 20);
-		panel.add(textField_5);
+		txtJuros = new JTextField();
+		txtJuros.setEditable(false);
+		txtJuros.setColumns(10);
+		txtJuros.setBounds(69, 67, 345, 20);
+		panel.add(txtJuros);
 	}
 }

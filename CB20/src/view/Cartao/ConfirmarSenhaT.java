@@ -19,11 +19,14 @@ import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class SolicitarCancelamentoT extends JFrame {
+public class ConfirmarSenhaT extends JFrame {
 
 	private JPanel contentPane;
-	private JPasswordField passwordField;
+	public JPasswordField txtSenha;
+	public JButton btnConfirmar = new JButton("Confirmar");
 
 	/**
 	 * Launch the application.
@@ -46,18 +49,18 @@ public class SolicitarCancelamentoT extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SolicitarCancelamentoT() {
+	public ConfirmarSenhaT() {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
-				Main.cartaoT.show();
+				Main.verCartao.enable(true);
 				dispose();
 			}
 		});
-		setTitle("Solicitar Cancelamento");
+		setTitle("Senha");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 350, 195);
+		setBounds(100, 100, 163, 130);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -66,35 +69,23 @@ public class SolicitarCancelamentoT extends JFrame {
 		JPanel contentPane_1 = new JPanel();
 		contentPane_1.setLayout(null);
 		contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane_1.setBounds(0, 0, 346, 153);
+		contentPane_1.setBounds(0, 0, 157, 101);
 		contentPane.add(contentPane_1);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Selecione o Cart\u00E3o..."}));
-		comboBox.setBounds(10, 36, 324, 20);
-		contentPane_1.add(comboBox);
-		
-		JLabel lblNewLabel = new JLabel("Cart\u00E3o");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		lblNewLabel.setBounds(10, 11, 324, 14);
-		contentPane_1.add(lblNewLabel);
-		
-		JLabel lblSenha = new JLabel("Senha");
+		JLabel lblSenha = new JLabel("Senha Conta");
 		lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSenha.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		lblSenha.setBounds(10, 67, 324, 14);
+		lblSenha.setBounds(0, 11, 157, 14);
 		contentPane_1.add(lblSenha);
 		
-		passwordField = new JPasswordField();
-		passwordField.setColumns(10);
-		passwordField.setBounds(115, 92, 115, 20);
-		contentPane_1.add(passwordField);
+		txtSenha = new JPasswordField();
+		txtSenha.setColumns(10);
+		txtSenha.setBounds(20, 36, 115, 20);
+		contentPane_1.add(txtSenha);
 		
-		JButton btnSolicitar = new JButton("Solicitar");
-		btnSolicitar.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnSolicitar.setBounds(115, 123, 115, 23);
-		contentPane_1.add(btnSolicitar);
+		btnConfirmar.setFont(new Font("Sitka Small", Font.BOLD, 12));
+		btnConfirmar.setBounds(20, 67, 115, 23);
+		contentPane_1.add(btnConfirmar);
 	}
 
 }

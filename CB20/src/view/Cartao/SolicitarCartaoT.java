@@ -95,7 +95,7 @@ public class SolicitarCartaoT extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (Main.conta.PedirNovoCartao(Tipo.valueOf(cbTipo.getSelectedItem().toString()), Moeda.REAL, txtSenha.getText(), 1000.00))
-					hide();
+					dispose();
 				else
 					JOptionPane.showMessageDialog(f, "Não foi possível criar um novo cartão", "Erro", JOptionPane.WARNING_MESSAGE);
 				

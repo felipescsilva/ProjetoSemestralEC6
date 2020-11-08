@@ -7,9 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.Cartao.Status;
 import view.Main.Main;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -20,11 +22,15 @@ import java.awt.event.ActionEvent;
 public class VisualizarCartaoT extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	public JTextField txtNumCartao;
+	public JTextField txtTipo;
+	public JTextField txtMoeda;
+	public JTextField txtStatus;
+	public JTextField txtValidade;
+	public JFrame f = new JFrame();
+	public JButton btnFaturas = new JButton("Ver Faturas em aberto");
+	public JButton btnBlock = new JButton("Bloqueio Temporario");
+	public JButton btnCancelar = new JButton("Cancelar Cart\u00E3o");
 
 	/**
 	 * Launch the application.
@@ -57,27 +63,27 @@ public class VisualizarCartaoT extends JFrame {
 		lblNewLabel.setBounds(10, 11, 67, 14);
 		panel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(69, 8, 345, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtNumCartao = new JTextField();
+		txtNumCartao.setEditable(false);
+		txtNumCartao.setBounds(69, 8, 345, 20);
+		panel.add(txtNumCartao);
+		txtNumCartao.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setBounds(69, 36, 345, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		txtTipo = new JTextField();
+		txtTipo.setEditable(false);
+		txtTipo.setBounds(69, 36, 345, 20);
+		panel.add(txtTipo);
+		txtTipo.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Tipo");
 		lblNewLabel_1.setBounds(10, 39, 46, 14);
 		panel.add(lblNewLabel_1);
 		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setBounds(69, 67, 345, 20);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
+		txtMoeda = new JTextField();
+		txtMoeda.setEditable(false);
+		txtMoeda.setBounds(69, 67, 345, 20);
+		panel.add(txtMoeda);
+		txtMoeda.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Moeda");
 		lblNewLabel_2.setBounds(10, 70, 46, 14);
@@ -87,38 +93,80 @@ public class VisualizarCartaoT extends JFrame {
 		lblNewLabel_3.setBounds(10, 100, 46, 14);
 		panel.add(lblNewLabel_3);
 		
-		textField_3 = new JTextField();
-		textField_3.setEditable(false);
-		textField_3.setColumns(10);
-		textField_3.setBounds(69, 98, 345, 20);
-		panel.add(textField_3);
+		txtStatus = new JTextField();
+		txtStatus.setEditable(false);
+		txtStatus.setColumns(10);
+		txtStatus.setBounds(69, 98, 345, 20);
+		panel.add(txtStatus);
 		
-		textField_4 = new JTextField();
-		textField_4.setEditable(false);
-		textField_4.setColumns(10);
-		textField_4.setBounds(69, 131, 345, 20);
-		panel.add(textField_4);
+		txtValidade = new JTextField();
+		txtValidade.setEditable(false);
+		txtValidade.setColumns(10);
+		txtValidade.setBounds(69, 131, 345, 20);
+		panel.add(txtValidade);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("V\u00E1lidade");
 		lblNewLabel_3_1.setBounds(10, 134, 46, 14);
 		panel.add(lblNewLabel_3_1);
 		
-		JButton btnNewButton = new JButton("Ver Faturas em aberto");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnFaturas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Main.faturas = Main.cartao.getFaturasNaoPagas();
+				
+				for (int i = 0; i < Main.faturas.size(); i++) {
+					Main.verFaturas.cbFaturas.addItem(Main.faturas.get(i).getIdFatura());
+				}
 				Main.verFaturas.show();
 				hide();
 			}
 		});
-		btnNewButton.setBounds(10, 162, 404, 23);
-		panel.add(btnNewButton);
+		btnFaturas.setBounds(10, 162, 404, 23);
+		panel.add(btnFaturas);
+		btnBlock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (Main.cartao.getStatus() == Status.DESBLOQUEADO) {
+					if (Main.conta.PedirBloqueioCartao(Main.cartao)) {
+						btnBlock.setText("Pedir desbloqueio");
+						txtStatus.setText("BLOQUEADO");
+					}
+				} else if (Main.cartao.getStatus() == Status.BLOQUEADO_POR_ERRO_DE_SENHA || Main.cartao.getStatus() == Status.BLOQUEADO) {
+					if (Main.conta.PedirDesbloqueioCartao(Main.cartao)) {
+						btnBlock.setText("Bloqueio Temporario");
+						txtStatus.setText("DESBLOQUEADO");
+					}
+				} else if (Main.cartao.getStatus() == Status.BLOQUEADO_POR_FATURA) {
+					JOptionPane.showMessageDialog(f, "Não foi possível desbloquear o  seu cartão. Você possui faturas que não foram pagas.", "Erro", JOptionPane.WARNING_MESSAGE);
+				}
+			}
+		});
 		
-		JButton btnNewButton_1 = new JButton("Bloqueio Temporario");
-		btnNewButton_1.setBounds(10, 196, 404, 23);
-		panel.add(btnNewButton_1);
+		btnBlock.setBounds(10, 196, 404, 23);
+		panel.add(btnBlock);
 		
-		JButton btnNewButton_2 = new JButton("Cancelar Cart\u00E3o");
-		btnNewButton_2.setBounds(10, 230, 404, 23);
-		panel.add(btnNewButton_2);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				enable(false);
+				ConfirmarSenhaT confirmarSenha = new ConfirmarSenhaT();
+				confirmarSenha.show();
+				confirmarSenha.btnConfirmar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (confirmarSenha.txtSenha.getText().equals(Main.conta.getSenhaConta())) {
+							JOptionPane.showMessageDialog(f, "Cartão cancelado com sucesso!");
+							confirmarSenha.dispose();
+							Main.conta.PedirCancelamento(Main.cartao);
+							txtStatus.setText("CANCELADO");
+							btnBlock.setEnabled(false);
+							btnCancelar.setEnabled(false);
+							enable(true);
+						} else {
+							JOptionPane.showMessageDialog(f, "Senha incorreta, não foi possível cancelar o seu cartão", "Erro", JOptionPane.WARNING_MESSAGE);
+							confirmarSenha.txtSenha.setText("");
+						}
+					}
+				});
+			}
+		});
+		btnCancelar.setBounds(10, 230, 404, 23);
+		panel.add(btnCancelar);
 	}
 }

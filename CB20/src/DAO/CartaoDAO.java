@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Cartao.Bloqueado;
+import model.Cartao.Status;
 import model.Cartao.Cartao;
 import model.Cartao.Moeda;
 import model.Cartao.Motivo;
@@ -26,7 +26,7 @@ public class CartaoDAO {
 			ps.setString(3, cartaoObjeto.getTipo().getDescricao());
 			ps.setString(4, cartaoObjeto.getMoeda().getDescricao());
 			ps.setDouble(5, cartaoObjeto.getSaldo());
-			ps.setString(6, cartaoObjeto.getBloqueado().getDescricao());
+			ps.setString(6, cartaoObjeto.getStatus().getDescricao());
 			ps.setDouble(7, cartaoObjeto.getLimiteTotal());
 			ps.setDouble(8, cartaoObjeto.getLimiteUsado());
 			ps.setString(9, cartaoObjeto.getMotivoBloqueio().getDescricao());
@@ -60,7 +60,7 @@ public class CartaoDAO {
 			ps.setString(2, cartaoObjeto.getTipo().getDescricao());
 			ps.setString(3, cartaoObjeto.getMoeda().getDescricao());
 			ps.setDouble(4, cartaoObjeto.getSaldo());
-			ps.setString(5, cartaoObjeto.getBloqueado().getDescricao());
+			ps.setString(5, cartaoObjeto.getStatus().getDescricao());
 			ps.setDouble(6, cartaoObjeto.getLimiteTotal());
 			ps.setDouble(7, cartaoObjeto.getLimiteUsado());
 			ps.setString(8, cartaoObjeto.getMotivoBloqueio().getDescricao());
@@ -122,7 +122,7 @@ public class CartaoDAO {
 			
 			while (rs.next()) {
 				Cartao cartao = new Cartao();
-				cartao.setBloqueado(Bloqueado.valueOf(rs.getString("flagBloqueado")));
+				cartao.setStatus(Status.valueOf(rs.getString("flagBloqueado")));
 				
 				cartao.setCvv(rs.getString("CVV"));
 				

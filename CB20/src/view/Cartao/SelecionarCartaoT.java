@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
@@ -18,6 +19,8 @@ import javax.swing.table.DefaultTableModel;
 
 import DAO.CartaoDAO;
 import model.Cartao.Cartao;
+import model.Cartao.Status;
+import model.Cartao.Tipo;
 import view.Main.Main;
 
 import javax.swing.JScrollPane;
@@ -38,6 +41,8 @@ public class SelecionarCartaoT extends JFrame {
 	private JTable table_1;
 	private JTable table_2;
 	private JTable table_3;
+	private JFrame f = new JFrame();
+	public JComboBox cbCartoes = new JComboBox();
 
 	/**
 	 * Launch the application.
@@ -88,25 +93,49 @@ public class SelecionarCartaoT extends JFrame {
 		JButton btnNewButton = new JButton("Ver Cart\u00E3o");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Main.verCartao.show();
-				hide();
+				if (cbCartoes.getSelectedIndex() == 0)
+					JOptionPane.showMessageDialog(f, "Selecione uma opção válida!", "Erro", JOptionPane.WARNING_MESSAGE);
+				else {
+					Main.verCartao.show();
+					int indexSelecionado = cbCartoes.getSelectedIndex();
+					Main.cartao = Main.cartoes.get(indexSelecionado - 1);
+					Main.verCartao.txtMoeda.setText(Main.cartao.getMoeda().toString());
+					Main.verCartao.txtNumCartao.setText(Main.cartao.getNumeroCartao());
+					Main.verCartao.txtStatus.setText(Main.cartao.getStatus().toString());
+					Main.verCartao.txtTipo.setText(Main.cartao.getTipo().toString());;
+					Main.verCartao.txtValidade.setText(Main.cartao.getDataValidade().toString());
+					
+					if (Main.cartao.getTipo() != Tipo.CRÉDITO)
+						Main.verCartao.btnFaturas.setEnabled(false);
+					else 
+						Main.verCartao.btnFaturas.setEnabled(true);
+					if (Main.cartao.getStatus() != Status.DESBLOQUEADO)
+						Main.verCartao.btnBlock.setText("Pedir Desbloqueio");
+					else
+						Main.verCartao.btnBlock.setText("Bloqueio Temporario");
+					if (Main.cartao.getStatus() == Status.CANCELADO) {
+						Main.verCartao.btnBlock.setEnabled(false);
+						Main.verCartao.btnCancelar.setEnabled(false);
+					}
+					else {
+						Main.verCartao.btnBlock.setEnabled(true);
+						Main.verCartao.btnCancelar.setEnabled(true);
+					}
+					
+					hide();
+				}
 			}
 		});
 		btnNewButton.setBounds(200, 66, 89, 23);
 		contentPane.add(btnNewButton);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Selecione..."}));
-		comboBox.setBounds(10, 35, 473, 20);
-		contentPane.add(comboBox);
+		cbCartoes.setModel(new DefaultComboBoxModel(new String[] {"Selecione..."}));
+		cbCartoes.setBounds(10, 35, 473, 20);
+		contentPane.add(cbCartoes);
 		
 		JLabel lblNewLabel = new JLabel("Selecione o Cart\u00E3o:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(10, 11, 473, 14);
 		contentPane.add(lblNewLabel);
-		
-		CartaoDAO cartaoDAO = new CartaoDAO();
-		String numeroConta = "";
-		List<Cartao> cartoes = cartaoDAO.Consultar("NumConta", numeroConta);
 	}
 }

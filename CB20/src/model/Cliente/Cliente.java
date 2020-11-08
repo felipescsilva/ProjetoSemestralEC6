@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import DAO.CartaoDAO;
 import DAO.ContaDAO;
-import model.Cartao.Bloqueado;
+import model.Cartao.Status;
 import model.Cartao.Cartao;
 import model.Conta.Conta;
 
@@ -89,7 +89,7 @@ public class Cliente {
 			Cartao cartao = new Cartao();
 			cartao = cartaoDAO.Consultar("NumCartao", numCartao).get(0);
 			conta = contaDAO.Consultar("NumConta", cartao.getNumeroConta()).get(0);
-			if (cartao.getBloqueado() == Bloqueado.DESBLOQUEADO) {
+			if (cartao.getStatus() == Status.DESBLOQUEADO) {
 				if (cartao.verificaValidade()) {
 					if (valor <= conta.getSaldo()) {
 						if (senhaConta.equals(conta.getSenhaConta())) {
@@ -115,7 +115,7 @@ public class Cliente {
 			Cartao cartao = new Cartao();
 			cartao = cartaoDAO.Consultar("NumCartao", numCartao).get(0);
 			conta = contaDAO.Consultar("NumConta", cartao.getNumeroConta()).get(0);
-			if (cartao.getBloqueado() == Bloqueado.DESBLOQUEADO) {
+			if (cartao.getStatus() == Status.DESBLOQUEADO) {
 				if (cartao.verificaValidade()) {
 					if (valor <= (cartao.getLimiteTotal() - cartao.getLimiteUsado())) {
 						if (senhaConta.equals(conta.getSenhaConta())) {
@@ -142,7 +142,7 @@ public class Cliente {
 			Cartao cartao = new Cartao();
 			cartao = cartaoDAO.Consultar("NumCartao", numCartao).get(0);
 			conta = contaDAO.Consultar("NumConta", cartao.getNumeroConta()).get(0);
-			if (cartao.getBloqueado() == Bloqueado.DESBLOQUEADO) {
+			if (cartao.getStatus() == Status.DESBLOQUEADO) {
 				if (cartao.verificaValidade()) {
 					if (valor <= conta.getSaldo()) {
 						if (LocalDate.of(anoValidade, mesValidade, diaValidade).equals(cartao.getDataValidade())) {
@@ -187,7 +187,7 @@ public class Cliente {
 			Cartao cartao = new Cartao();
 			cartao = cartaoDAO.Consultar("NumCartao", numCartao).get(0);
 			conta = contaDAO.Consultar("NumConta", cartao.getNumeroConta()).get(0);
-			if (cartao.getBloqueado() == Bloqueado.DESBLOQUEADO) {
+			if (cartao.getStatus() == Status.DESBLOQUEADO) {
 				if (cartao.verificaValidade()) {
 					if (valor <= cartao.getSaldo()) {
 						if (senhaConta.equals(conta.getSenhaConta())) {
