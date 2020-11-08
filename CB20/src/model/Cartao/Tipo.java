@@ -1,9 +1,9 @@
 package model.Cartao;
 
 public enum Tipo {
-	DEBITO("debito"),
-	CREDITO("credito"),
-	PRE_PAGO("pre_pago");
+	DÉBITO("Débito"),
+	CRÉDITO("Crédito"),
+	PRÉ_PAGO("Pré_Pago");
 	
 	private String descricao;
 	

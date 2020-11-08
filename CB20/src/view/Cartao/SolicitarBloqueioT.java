@@ -10,11 +10,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import model.Cartao.Motivo;
+import view.Main.Main;
 
 public class SolicitarBloqueioT extends JFrame {
 
@@ -25,25 +29,18 @@ public class SolicitarBloqueioT extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SolicitarBloqueio frame = new SolicitarBloqueio();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
 
 	/**
 	 * Create the frame.
 	 */
 	public SolicitarBloqueioT() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				Main.cartaoT.show();
+				dispose();
+			}
+		});
 		setTitle("Solicitar Bloqueio");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -53,10 +50,10 @@ public class SolicitarBloqueioT extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Selecione o Cart\u00E3o..."}));
-		comboBox.setBounds(10, 36, 324, 20);
-		contentPane.add(comboBox);
+		JComboBox cbCartao = new JComboBox();
+		cbCartao.setModel(new DefaultComboBoxModel(new String[] {"Selecione o Cart\u00E3o..."}));
+		cbCartao.setBounds(10, 36, 324, 20);
+		contentPane.add(cbCartao);
 		
 		JLabel lblNewLabel = new JLabel("Cart\u00E3o");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -70,10 +67,10 @@ public class SolicitarBloqueioT extends JFrame {
 		lblSelecioneOMotivo.setBounds(10, 67, 324, 14);
 		contentPane.add(lblSelecioneOMotivo);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Selecione o motivo...", "Erro da senha", "Roubo", "Perda", "Validade Expirou", "Outros"}));
-		comboBox_1.setBounds(10, 92, 324, 20);
-		contentPane.add(comboBox_1);
+		JComboBox cbMotivo = new JComboBox();
+		cbMotivo.setModel(new DefaultComboBoxModel(new String[] {"Selecione o motivo...", "Erro da senha", "Roubo", "Perda", "Validade Expirou", "Outros"}));
+		cbMotivo.setBounds(10, 92, 324, 20);
+		contentPane.add(cbMotivo);
 		
 		JLabel lblSenha = new JLabel("Senha");
 		lblSenha.setHorizontalAlignment(SwingConstants.CENTER);

@@ -138,13 +138,13 @@ public class Conta {
 				Bloqueado bloqueadoCartao = cartao.getBloqueado();
 				if (bloqueadoCartao.equals(Bloqueado.DESBLOQUEADO)) {
 					switch (tipoCartao) {
-						case DEBITO:
+						case DÉBITO:
 							debito = true;
 							break;
-						case CREDITO:
+						case CRÉDITO:
 							credito = true;
 							break;
-						case PRE_PAGO:
+						case PRÉ_PAGO:
 							prePago = true;
 							break;
 					}
@@ -158,21 +158,21 @@ public class Conta {
 			
 			Cartao novoCartao;
 			switch (tipo) {
-				case CREDITO:
+				case CRÉDITO:
 					if (!credito && senha.equals(this.senhaConta)) {
-						novoCartao = new Cartao(this.numeroConta, tipo, moeda, 1000.00);
+						novoCartao = new Cartao(this.numeroConta, tipo, moeda, limiteTotal);
 						cartaoDAO.Inserir(novoCartao);
 						return true;
 					}
 					break;
-				case DEBITO:
+				case DÉBITO:
 					if (!debito && senha.equals(this.senhaConta)) {
 						novoCartao = new Cartao(this.numeroConta, tipo, moeda, 0.00);
 						cartaoDAO.Inserir(novoCartao);
 						return true;
 					}
 					break;
-				case PRE_PAGO:
+				case PRÉ_PAGO:
 					if (!prePago && senha.equals(this.senhaConta)) {
 						novoCartao = new Cartao(this.numeroConta, tipo, moeda, 0.00);
 						cartaoDAO.Inserir(novoCartao);

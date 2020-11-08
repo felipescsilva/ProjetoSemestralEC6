@@ -12,7 +12,6 @@ import view.Main.Main;
 public class Login {
 	
 	boolean logado = false;
-	Conta conta;
 	private int numeroConta;
 	private int numeroAgencia;	
 	private double saldo;
@@ -26,7 +25,7 @@ public class Login {
 	public boolean signIn(String numeroConta, String senha) {
 		if(checkLogin(numeroConta, senha) == true) {
 			ClienteDAO clienteDAO = new ClienteDAO();
-			List<Cliente> listaCliente = clienteDAO.Consultar("NumConta", numeroConta);
+			List<Cliente> listaCliente = clienteDAO.Consultar("CPF", Main.conta.getCPF());
 			Main.cliente = listaCliente.get(0);			
 			return true;
 		}
@@ -42,7 +41,7 @@ public class Login {
 				return false;
 			else {
 				Main.conta = listaConta.get(0);
-				if (conta.getSenhaApp().equals(senha))
+				if (Main.conta.getSenhaApp().equals(senha))
 					return true;
 				else
 					return false;

@@ -6,9 +6,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import view.Main.Main;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
 public class CartaoT extends JFrame {
@@ -35,6 +40,13 @@ public class CartaoT extends JFrame {
 	 * Create the frame.
 	 */
 	public CartaoT() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				Main.menuPrincipal.show();
+				dispose();
+			}
+		});
 		setResizable(false);
 		setTitle("Cart\u00E3o");
 		getContentPane().setEnabled(false);
@@ -43,119 +55,27 @@ public class CartaoT extends JFrame {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Visualizar Cart\u00F5es Ativos");
+		JButton btnNewButton = new JButton("Meus Cart\u00F5es");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							VerCartoesAtivosT frame = new VerCartoesAtivosT();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
+				Main.verCartoes.show();
+				hide();
 			}
 		});
 		btnNewButton.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnNewButton.setBounds(10, 11, 524, 42);
+		btnNewButton.setBounds(10, 11, 524, 144);
 		panel.add(btnNewButton);
 		
-		JButton btnSolicitarNovoCarto = new JButton("Solicitar Novo Cart\u00E3o");
+		JButton btnSolicitarNovoCarto = new JButton("Pedir Novo Cart\u00E3o");
 		btnSolicitarNovoCarto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							SolicitarCartaoT frame = new SolicitarCartaoT();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
+				Main.solicitarCartao.show();
+				hide();
 			}
 		});
 		btnSolicitarNovoCarto.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnSolicitarNovoCarto.setBounds(10, 64, 524, 42);
+		btnSolicitarNovoCarto.setBounds(10, 164, 524, 155);
 		panel.add(btnSolicitarNovoCarto);
-		
-		JButton btnNewButton_1_1 = new JButton("Ver Faturas");
-		btnNewButton_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							VerFaturasT frame = new VerFaturasT();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		btnNewButton_1_1.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnNewButton_1_1.setBounds(10, 117, 524, 42);
-		panel.add(btnNewButton_1_1);
-		
-		JButton btnNewButton_1_2 = new JButton("Solicitar Bloqueio do Cart\u00E3o");
-		btnNewButton_1_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							SolicitarBloqueioT frame = new SolicitarBloqueioT();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		btnNewButton_1_2.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnNewButton_1_2.setBounds(10, 170, 524, 42);
-		panel.add(btnNewButton_1_2);
-		
-		JButton btnNewButton_1_2_1_1 = new JButton("Solicitar Desbloqueio do Cart\u00E3o");
-		btnNewButton_1_2_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							SolicitarDesbloqueioT frame = new SolicitarDesbloqueioT();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		btnNewButton_1_2_1_1.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnNewButton_1_2_1_1.setBounds(10, 223, 524, 42);
-		panel.add(btnNewButton_1_2_1_1);
-		
-		JButton btnNewButton_1_2_1_2 = new JButton("Solicitar Cancelamento do Cart\u00E3o");
-		btnNewButton_1_2_1_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							SolicitarCancelamentoT frame = new SolicitarCancelamentoT();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		btnNewButton_1_2_1_2.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnNewButton_1_2_1_2.setBounds(10, 276, 524, 42);
-		panel.add(btnNewButton_1_2_1_2);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 549, 359);
 	}

@@ -30,6 +30,7 @@ import java.awt.event.WindowEvent;
 public class MenuPrincipalT extends JFrame {
 
 	private JPanel contentPane;
+	public JButton btnNome = new JButton("Op\u00E7\u00F5es");
 
 	/**
 	 * Launch the application.
@@ -65,7 +66,7 @@ public class MenuPrincipalT extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JButton btnNome = new JButton("Op\u00E7\u00F5es");
+		//btnNome.setText("Seja Bem-Vindo " + Main.cliente.getNome());
 		btnNome.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {				

@@ -9,12 +9,21 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
+import model.Cartao.Moeda;
 import model.Cartao.Tipo;
+import view.Main.Main;
+
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.ActionEvent;
 
 public class SolicitarCartaoT extends JFrame {
 
@@ -42,6 +51,13 @@ public class SolicitarCartaoT extends JFrame {
 	 * Create the frame.
 	 */
 	public SolicitarCartaoT() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				Main.cartaoT.show();
+				dispose();
+			}
+		});
 		setTitle("Solicitar Cart\u00E3o");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -51,10 +67,6 @@ public class SolicitarCartaoT extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Enviar");
-		btnNewButton.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnNewButton.setBounds(55, 115, 89, 23);
-		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Tipo Cart\u00E3o");
 		lblNewLabel.setFont(new Font("Sitka Small", Font.BOLD, 12));
@@ -69,13 +81,29 @@ public class SolicitarCartaoT extends JFrame {
 		lblSenha.setBounds(10, 59, 178, 14);
 		contentPane.add(lblSenha);
 		
-		JPasswordField passwordField = new JPasswordField();
-		passwordField.setBounds(20, 84, 168, 20);
-		contentPane.add(passwordField);
+		JPasswordField txtSenha = new JPasswordField();
+		txtSenha.setBounds(20, 84, 168, 20);
+		contentPane.add(txtSenha);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Selecione o tipo...", "D\u00E9bito", "Cr\u00E9dito", "Pr\u00E9-Pago"}));
-		comboBox.setBounds(20, 28, 168, 20);
-		contentPane.add(comboBox);
+		JComboBox cbTipo = new JComboBox();
+		cbTipo.setModel(new DefaultComboBoxModel(Tipo.values()));
+		cbTipo.setBounds(20, 28, 168, 20);
+		contentPane.add(cbTipo);
+		
+		JFrame f = new JFrame();
+		JButton btnNewButton = new JButton("Enviar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (Main.conta.PedirNovoCartao(Tipo.valueOf(cbTipo.getSelectedItem().toString()), Moeda.REAL, txtSenha.getText(), 1000.00))
+					hide();
+				else
+					JOptionPane.showMessageDialog(f, "Não foi possível criar um novo cartão", "Erro", JOptionPane.WARNING_MESSAGE);
+				
+			}
+
+		});
+		btnNewButton.setFont(new Font("Sitka Small", Font.BOLD, 12));
+		btnNewButton.setBounds(55, 115, 89, 23);
+		contentPane.add(btnNewButton);
 	}
 }

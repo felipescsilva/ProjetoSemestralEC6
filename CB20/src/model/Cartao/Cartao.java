@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 import DAO.CartaoDAO;
-import DAO.ComprasDAO;
 import model.Compras.Compras;
 
 public class Cartao {
@@ -24,11 +23,11 @@ public class Cartao {
 		this.moeda = moeda;
 		this.saldo = 0;
 		switch (tipo) {
-			case DEBITO:
-			case PRE_PAGO:
+			case DÉBITO:
+			case PRÉ_PAGO:
 				this.limiteTotal = 0;
 				break;
-			case CREDITO:
+			case CRÉDITO:
 				this.limiteTotal = limiteTotal;
 		}
 		this.limiteUsado = 0;

@@ -9,8 +9,6 @@ import javax.swing.border.EmptyBorder;
 
 import model.Login.Login;
 import view.Cartao.CartaoT;
-import view.Cartao.PagarComprasT;
-import view.Cartao.RealizarCompraT;
 import view.Main.Main;
 import view.Menu.MenuPrincipalT;
 
@@ -135,23 +133,6 @@ public class LoginT extends JFrame {
 		senhaCartao.setBounds(66, 33, 86, 20);
 		panel_1.add(senhaCartao);
 		
-		JButton btnSignInCartao = new JButton("Sign In");
-		btnSignInCartao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							RealizarCompraT frame = new RealizarCompraT();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		btnSignInCartao.setBounds(66, 64, 89, 23);
-		panel_1.add(btnSignInCartao);
 		btnCriarConta.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {				
@@ -162,17 +143,17 @@ public class LoginT extends JFrame {
 		btnSignInConta.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				Main.menuPrincipal.show();
-				hide();
-				/*
+				//Main.menuPrincipal.show();
+				//hide();
 				if (Main.login.signIn(txtBankAccount.getText(), txtSenhaConta.getText())) {					
 					Main.menuPrincipal.show();
+					Main.menuPrincipal.btnNome.setText("Bem-Vindo " + Main.cliente.getNome());
 					hide();
 				} else {
 					JFrame f = new JFrame();
 					JOptionPane.showMessageDialog(f, "O Número da conta ou a senha estão incorretos.", "Erro", JOptionPane.WARNING_MESSAGE);
 				}
-				*/
+				
 			}
 		});
 	}

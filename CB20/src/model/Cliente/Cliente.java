@@ -166,10 +166,10 @@ public class Cliente {
 			CartaoDAO cartaoDAO = new CartaoDAO();
 			Cartao cartao = cartaoDAO.Consultar("NumCartao", numCartao).get(0);
 			switch (cartao.getTipo()) {
-				case DEBITO:
-				case CREDITO:
+				case DÉBITO:
+				case CRÉDITO:
 					return false;
-				case PRE_PAGO:
+				case PRÉ_PAGO:
 					cartao.setSaldo(cartao.getSaldo() + valor);
 					break;
 			}

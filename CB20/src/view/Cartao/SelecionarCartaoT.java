@@ -18,21 +18,26 @@ import javax.swing.table.DefaultTableModel;
 
 import DAO.CartaoDAO;
 import model.Cartao.Cartao;
+import view.Main.Main;
 
 import javax.swing.JScrollPane;
 import javax.swing.AbstractListModel;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.*;
+import javax.swing.SwingConstants;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class VerCartoesAtivosT extends JFrame {
+public class SelecionarCartaoT extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private JTable table_1;
 	private JTable table_2;
 	private JTable table_3;
-	private JTable table_4;
-	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -55,11 +60,18 @@ public class VerCartoesAtivosT extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VerCartoesAtivosT() {
+	public SelecionarCartaoT() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				Main.cartaoT.show();
+				dispose();
+			}
+		});
 		setResizable(false);
-		setTitle("Cart\u00F5es Ativos");
+		setTitle("Selecionar Cart\u00E3o");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 557, 127);
+		setBounds(100, 100, 500, 133);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -73,27 +85,25 @@ public class VerCartoesAtivosT extends JFrame {
 		table_3.setBounds(10, 11, 1, 1);
 		contentPane.add(table_3);
 		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 524, 359);
-		contentPane.add(scrollPane);
-		
-		table_4 = new JTable();
-		scrollPane.setViewportView(table_4);
-		table_4.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		table_4.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"N\u00FAmero Cart\u00E3o", "Data Validade", "Titular", "Situa\u00E7\u00E3o", "Tipo"
+		JButton btnNewButton = new JButton("Ver Cart\u00E3o");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Main.verCartao.show();
+				hide();
 			}
-		));
-		table_4.getColumnModel().getColumn(0).setPreferredWidth(152);
-		table_4.getColumnModel().getColumn(1).setPreferredWidth(94);
-		table_4.getColumnModel().getColumn(2).setPreferredWidth(129);
-		table_4.getColumnModel().getColumn(3).setPreferredWidth(129);
+		});
+		btnNewButton.setBounds(200, 66, 89, 23);
+		contentPane.add(btnNewButton);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Selecione..."}));
+		comboBox.setBounds(10, 35, 473, 20);
+		contentPane.add(comboBox);
+		
+		JLabel lblNewLabel = new JLabel("Selecione o Cart\u00E3o:");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(10, 11, 473, 14);
+		contentPane.add(lblNewLabel);
 		
 		CartaoDAO cartaoDAO = new CartaoDAO();
 		String numeroConta = "";
