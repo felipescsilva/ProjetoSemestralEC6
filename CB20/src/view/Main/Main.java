@@ -16,7 +16,7 @@ import view.Cartao.SolicitarBloqueioT;
 import view.Login.CriarContaT;
 import view.Login.LoginT;
 import view.Menu.MenuPrincipalT;
-import view.Opcoes.OpcoesT;
+import view.Opcoes.OpcoesAntigasT;
 import view.Operacao.CambioT;
 import view.Operacao.DepositoT;
 import view.Operacao.EmprestimoT;
@@ -30,7 +30,7 @@ public class Main {
 	    public static MenuPrincipalT menuPrincipal = new MenuPrincipalT();
 	    public static CriarContaT novaConta = new CriarContaT();
 	    public static CriarContaT criarConta = new CriarContaT();
-		public static OpcoesT opcoes = new OpcoesT();
+		public static OpcoesAntigasT opcoes = new OpcoesAntigasT();
 		public static SaldoT saldo = new SaldoT();
 		public static CartaoT cartaoT = new CartaoT();
 		public static TransferenciaT transferencia = new TransferenciaT();

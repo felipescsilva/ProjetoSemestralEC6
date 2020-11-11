@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import view.Cartao.CartaoT;
 import view.Main.Main;
-import view.Opcoes.OpcoesT;
+import view.Opcoes.OpcoesAntigasT;
 import view.Operacao.CambioT;
 import view.Operacao.DepositoT;
 import view.Operacao.EmprestimoT;

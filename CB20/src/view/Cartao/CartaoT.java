@@ -11,6 +11,8 @@ import model.Cartao.Cartao;
 import view.Main.Main;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -62,6 +64,8 @@ public class CartaoT extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Main.verCartoes.show();
 				Main.cartoes = Main.conta.getCartoes();
+				Main.verCartoes.cbCartoes.removeAllItems();
+				Main.verCartoes.cbCartoes.addItem("Selecione um cartão...");
 				for (int i = 0; i < Main.cartoes.size(); i++) {
 					Main.verCartoes.cbCartoes.addItem(Main.cartoes.get(i).getNumeroCartao());
 				}
