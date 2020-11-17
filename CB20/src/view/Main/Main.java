@@ -7,17 +7,24 @@ import Audit.Audit;
 import model.Cartao.Cartao;
 import model.Cartao.Tipo;
 import model.Cliente.Cliente;
+import model.Cliente.Formacao;
 import model.Cliente.Profissao;
 import model.Conta.Conta;
 import model.Fatura.Fatura;
 import model.Login.Login;
+import model.Transferencia.Transferencia;
 import view.Cartao.*;
 import view.Cartao.SolicitarBloqueioT;
 import view.Login.CriarContaT;
 import view.Login.LoginT;
 import view.Menu.MenuPrincipalT;
+import view.Opcoes.AlterarDadosT;
+import view.Opcoes.AlterarSenhaT;
 import view.Opcoes.OpcoesAntigasT;
+import view.Opcoes.OpcoesT;
+import view.Opcoes.TelaSenha;
 import view.Operacao.CambioT;
+import view.Operacao.ConfirmarDadosT;
 import view.Operacao.DepositoT;
 import view.Operacao.EmprestimoT;
 import view.Operacao.PagamentoT;
@@ -30,7 +37,7 @@ public class Main {
 	    public static MenuPrincipalT menuPrincipal = new MenuPrincipalT();
 	    public static CriarContaT novaConta = new CriarContaT();
 	    public static CriarContaT criarConta = new CriarContaT();
-		public static OpcoesAntigasT opcoes = new OpcoesAntigasT();
+		public static OpcoesAntigasT opcoesAntigas = new OpcoesAntigasT();
 		public static SaldoT saldo = new SaldoT();
 		public static CartaoT cartaoT = new CartaoT();
 		public static TransferenciaT transferencia = new TransferenciaT();
@@ -50,19 +57,29 @@ public class Main {
 	    
 	    
 	    public static Login login = new Login();
-	    public static Conta conta = new Conta();	    
+	    public static Conta conta = new Conta();	  
 		public static Cliente cliente = new Cliente();
 		public static List<Cartao> cartoes = new ArrayList<Cartao>();
 		public static Cartao cartao = new Cartao();
 		public static List<Fatura> faturas = new ArrayList<Fatura>();
 		public static Fatura fatura = new Fatura();
 		public static Audit auditoria = new Audit();
+		public static ConfirmarDadosT confirmarDadosT = new ConfirmarDadosT();
+		public static Conta contaTransferencia = new Conta();
+		public static Cliente clienteTransferencia = new Cliente();
+		public static Transferencia transferir = new Transferencia();
 		
+		public static OpcoesT opcoes = new OpcoesT();
+		public static AlterarSenhaT alterarSenha = new AlterarSenhaT();
+		public static TelaSenha telaSelecionada;
+		public static AlterarDadosT alterarDadosT = new AlterarDadosT();
 	    
 		@SuppressWarnings("deprecation")
 		public static void main(String[] argv) {
 			
-			System.out.print(Profissao.valueOf("Administração"));
+			System.out.println(Profissao.valueOf("Administração"));
+			System.out.println(Formacao.valueOf("Fundamental_Incompleto"));
+			//System.out.println(Formacao.valueOf("FUNDAMENTAL_INCOMPLETO"));
 			telaLogin.show();
 		}
 }

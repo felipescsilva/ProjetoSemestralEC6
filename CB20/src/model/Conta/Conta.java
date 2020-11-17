@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Random;
 
 import DAO.CartaoDAO;
+import DAO.ClienteDAO;
 import DAO.ContaDAO;
 import model.Cartao.*;
+import model.Cliente.Cliente;
 
 public class Conta {
 	private String numeroConta;
@@ -220,5 +222,15 @@ public class Conta {
 		} while(jaExiste);
 		
 		this.numeroConta = num;
+	}
+	
+	public List<Cliente> getProprietarioConta() {
+		ClienteDAO dao = new ClienteDAO();
+		List<Cliente> listaCliente = new ArrayList<Cliente>();
+		
+		
+		listaCliente = dao.Consultar("CPF", this.getCPF());
+		
+		return listaCliente;
 	}
 }
