@@ -1,17 +1,18 @@
 package model.Cambio;
 
-public enum Moeda {
-	Real("real"),
-	Dolar("dolar"),
-	Euro("euro");
+	public enum Moeda	{Dolar, Real;
 	
-	private String descricao;
-	
-	Moeda(String descricao) {
-		this.descricao = descricao;
+		@Override
+		public String toString()
+		{
+			if(this == Moeda.Real)
+			{
+				return "Real";
+			}
+			else if(this == Moeda.Dolar)
+			{
+				return "Dolar";
+			}
+			return "";
+		}
 	}
-	
-	public String getDescricao() {
-		return descricao;
-	}
-}

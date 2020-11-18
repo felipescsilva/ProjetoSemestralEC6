@@ -3,6 +3,7 @@ package model.Cambio;
 import java.util.ArrayList;
 import java.util.List;
 
+import DAO.CambioDAO;
 import DAO.ContaDAO;
 import model.Cartao.Cartao;
 import model.Conta.Conta;
@@ -13,15 +14,12 @@ import java.time.LocalDate;
 public class Cambio {
 	int idCambio;
 	Conta conta;
-	String cpf;
 	float valor;
 	Moeda moeda;
 	String descricao;
 	LocalDate dataSolicitacao;
 	LocalDate validade;
-	
-	
-	
+	String cpf;
 	
 	public String getCpf() {
 		return cpf;
@@ -29,9 +27,7 @@ public class Cambio {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public void setDataSolicitacao(LocalDate dataSolicitacao) {
-		this.dataSolicitacao = dataSolicitacao;
-	}
+	
 	public int getIdCampo() {
 		return idCambio;
 	}
@@ -55,7 +51,6 @@ public class Cambio {
 	public float getValor() {
 		return valor;
 	}
-	/*
 	public void setValor(float valor, Moeda moeda) {
 		if(this.getMoeda() != moeda)
 		{
@@ -63,12 +58,10 @@ public class Cambio {
 		}
 		this.valor = valor;
 	}
-	*/
 	public void setValor(float valor)
 	{
 		this.valor = valor;
 	}
-	/*
 	public void subtrairValor(float valorEmReal)
 	{
 		if(this.getMoeda() == Moeda.Dolar)
@@ -81,7 +74,6 @@ public class Cambio {
 			this.setValor(this.getValor() - valorEmReal);
 		}
 	}
-	*/
 	public Moeda getMoeda() {
 		return moeda;
 	}
@@ -97,6 +89,9 @@ public class Cambio {
 	public LocalDate getDataSolicitacao() {
 		return dataSolicitacao;
 	}
+	public void setDataSolicitacao(LocalDate dataSolicitacao) {
+		this.dataSolicitacao = dataSolicitacao;
+	}
 	
 	public LocalDate getDataValidade() {
 		return validade;
@@ -105,22 +100,46 @@ public class Cambio {
 		this.validade = validade;
 	}
 	
-	public boolean novaOrdem(Conta conta, int valor, Moeda moeda, LocalDate dataSolicitacao, LocalDate dataValidade)
+	public boolean novaOrdem(Conta conta, float valor, Moeda moeda, LocalDate dataSolicitacao, LocalDate dataValidade)
 	{
 		this.conta = conta;
 		this.valor = valor;
 		this.moeda = moeda;
 		this.dataSolicitacao = dataSolicitacao;
-		this.validade = dataValidade;		
+		this.validade = dataValidade;	
+		this.descricao = "Comprar " + valor + " " + moeda.toString();
+		CambioDAO cambio = new CambioDAO();
+		cambio.Inserir(this);
 		return true;
 	}
 	
-	/*
+	public boolean novaOrdem(Conta conta, float valor, String moeda, LocalDate dataSolicitacao, LocalDate dataValidade)
+	{
+		Moeda novaMoeda = null;
+		if(moeda == "Real")
+		{
+			novaMoeda = Moeda.Real;
+		}
+		else if(moeda == "Dolar")
+		{
+			novaMoeda = Moeda.Dolar;
+		}
+		this.conta = conta;
+		this.valor = valor;
+		this.moeda = novaMoeda;
+		this.dataSolicitacao = dataSolicitacao;
+		this.validade = dataValidade;
+		this.descricao = "Comprar " + valor + " " + moeda.toString();
+		CambioDAO cambio = new CambioDAO();
+		cambio.Inserir(this);
+		return true;
+	}
+	
 	public boolean baterOrdens()
 	{
 		
 		CambioDAO cambioDAO = new CambioDAO();
-		List<Cambio> ordens = cambioDAO.Consultar("*");
+		List<Cambio> ordens = cambioDAO.Consultar();
 		Cambio auxOrdemA = null;
 		Cambio auxOrdemB = null;
 		
@@ -175,8 +194,7 @@ public class Cambio {
 		
 		return true;
 	}
-	*/
-	/*
+	
 	private boolean atualizarBD(Cambio ordemA, Cambio ordemB, float menorOrdem)
 	{
 		ContaDAO daoConta = new ContaDAO();
@@ -216,7 +234,6 @@ public class Cambio {
 		
 		return true;
 	}
-	*/
 	
 	private float menorOrdem(Cambio ordemA, Cambio ordemB)
 	{

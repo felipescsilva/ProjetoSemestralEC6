@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import DAO.CambioDAO;
+import model.Cambio.Cambio;
+import model.Cambio.Cotacao;
 import view.Main.Main;
 
 import javax.swing.JLabel;
@@ -19,6 +22,14 @@ import javax.swing.JList;
 import javax.swing.JPasswordField;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.LocalDate;
+import java.util.List;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class CambioT extends JFrame {
 
@@ -53,6 +64,7 @@ public class CambioT extends JFrame {
 				Main.menuPrincipal.show();
 				dispose();
 			}
+		
 		});
 		setTitle("C\u00E2mbio");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -68,6 +80,22 @@ public class CambioT extends JFrame {
 		contentPane.add(lblMoeda);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				if(comboBox.getSelectedItem().toString().equals("Real"))
+				{
+					txtCotao.setText(String.valueOf(Cotacao.getReal()));
+				}
+				else if(comboBox.getSelectedItem().toString().equals("Dólar"))
+				{
+					txtCotao.setText(String.valueOf(Cotacao.getDolar()));
+				}
+				else 
+				{
+					txtCotao.setText("");
+				}
+			}
+		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Real", "D\u00F3lar"}));
 		comboBox.setBounds(94, 7, 75, 20);
 		contentPane.add(comboBox);
@@ -95,6 +123,15 @@ public class CambioT extends JFrame {
 		contentPane.add(lblSenha);
 		
 		JButton btnComprar = new JButton("Comprar");
+		btnComprar.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent arg0) {
+				Cambio cambio = new Cambio();
+				float valor = Float.parseFloat(txtValor.getText());
+				cambio.novaOrdem(Main.conta, valor, passwordField.getText(), null, null);
+				cambio.baterOrdens();
+			}
+		});
 		btnComprar.setBounds(52, 190, 89, 23);
 		contentPane.add(btnComprar);
 		
@@ -109,9 +146,18 @@ public class CambioT extends JFrame {
 		lblOrdensDeCompra.setBounds(339, 11, 137, 14);
 		contentPane.add(lblOrdensDeCompra);
 		
-		JList list = new JList();
-		list.setBounds(289, 42, 245, 328);
-		contentPane.add(list);
+		JList listaOrdens = new JList();
+		listaOrdens.setToolTipText("");
+		listaOrdens.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				listaOrdens.clearSelection();
+				CambioDAO cambio = new CambioDAO();
+				listaOrdens.setListData(cambio.Consultar().toArray());				
+			}
+		});
+		listaOrdens.setBounds(289, 42, 245, 328);
+		contentPane.add(listaOrdens);
 		
 		passwordField = new JPasswordField();
 		passwordField.setText("111111");

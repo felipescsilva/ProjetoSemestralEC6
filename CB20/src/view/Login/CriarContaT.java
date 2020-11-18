@@ -246,7 +246,6 @@ public class CriarContaT extends JFrame {
 					}
 				}
 				
-				
 				if (txtSenhaApp.getText().length() != 8)
 				{
 					mensagemDeErro += "A senha do aplicativo deve possuir 8 caracteres.\n";
@@ -267,7 +266,7 @@ public class CriarContaT extends JFrame {
 					mensagemDeErro += "A confirmação da senha da conta não pode ser diferente da senha da conta.\n";
 					dadosCorretos = false;
 				}
-				//Profissao.valueOf("Administração");
+				Profissao.valueOf("Administração");
 				
 				try {
 					Audit auditoria = new Audit();

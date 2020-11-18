@@ -15,7 +15,7 @@ import javax.swing.JTextPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-import model.Cartao.Moeda;
+import model.Cambio.Moeda;
 import model.Cartao.Tipo;
 import view.Main.Main;
 
@@ -94,7 +94,7 @@ public class SolicitarCartaoT extends JFrame {
 		JButton btnNewButton = new JButton("Enviar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (Main.conta.PedirNovoCartao(Tipo.valueOf(cbTipo.getSelectedItem().toString()), Moeda.REAL, txtSenha.getText(), 1000.00))
+				if (Main.conta.PedirNovoCartao(Tipo.valueOf(cbTipo.getSelectedItem().toString()), Moeda.Real, txtSenha.getText(), 1000.00))
 					dispose();
 				else
 					JOptionPane.showMessageDialog(f, "Não foi possível criar um novo cartão", "Erro", JOptionPane.WARNING_MESSAGE);

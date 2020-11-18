@@ -8,6 +8,7 @@ import java.util.Random;
 import DAO.CartaoDAO;
 import DAO.ContaDAO;
 import DAO.FaturaDAO;
+import model.Cambio.Moeda;
 import model.Compras.Compras;
 import model.Fatura.Fatura;
 import model.Fatura.Situacao;

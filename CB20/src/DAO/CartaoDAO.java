@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Cartao.Status;
+import model.Cambio.Moeda;
 import model.Cartao.Cartao;
-import model.Cartao.Moeda;
 import model.Cartao.Motivo;
 import model.Cartao.Tipo;
 
@@ -24,7 +24,7 @@ public class CartaoDAO {
 			ps.setString(1, cartaoObjeto.getNumeroCartao());
 			ps.setString(2, cartaoObjeto.getNumeroConta());
 			ps.setString(3, cartaoObjeto.getTipo().getDescricao());
-			ps.setString(4, cartaoObjeto.getMoeda().getDescricao());
+			ps.setString(4, cartaoObjeto.getMoeda().toString());
 			ps.setDouble(5, cartaoObjeto.getSaldo());
 			ps.setString(6, cartaoObjeto.getStatus().getDescricao());
 			ps.setDouble(7, cartaoObjeto.getLimiteTotal());
@@ -58,7 +58,7 @@ public class CartaoDAO {
 			ps = con.getConexao().prepareStatement(SQL);
 			ps.setString(1, cartaoObjeto.getNumeroCartao());
 			ps.setString(2, cartaoObjeto.getTipo().getDescricao());
-			ps.setString(3, cartaoObjeto.getMoeda().getDescricao());
+			ps.setString(3, cartaoObjeto.getMoeda().toString());
 			ps.setDouble(4, cartaoObjeto.getSaldo());
 			ps.setString(5, cartaoObjeto.getStatus().getDescricao());
 			ps.setDouble(6, cartaoObjeto.getLimiteTotal());
