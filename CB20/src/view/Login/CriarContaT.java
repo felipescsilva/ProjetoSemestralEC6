@@ -36,6 +36,9 @@ import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class CriarContaT extends JFrame {
 
@@ -48,6 +51,7 @@ public class CriarContaT extends JFrame {
 	private JPasswordField txtConfirmarSenhaApp;
 	private JPasswordField txtSenhaConta;
 	private JPasswordField txtConfirmarSenhaConta;
+	private JButton btnCriarConta;
 	private ClienteDAO clienteDAO = new ClienteDAO();
 	private ContaDAO contaDAO = new ContaDAO();
 
@@ -80,14 +84,16 @@ public class CriarContaT extends JFrame {
 		});
 		setTitle("Nova Conta");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 560, 420);
+		setBounds(100, 100, 432, 420);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(110, 11, 392, 359);
+		panel.setBackground(new Color(0, 153, 255));
+		panel.setBounds(10, 11, 396, 359);
 		contentPane.add(panel);
 		
 		JLabel lblNomeCompleto = new JLabel("Nome Completo");
@@ -188,6 +194,15 @@ public class CriarContaT extends JFrame {
 		txtSenhaConta.setColumns(10);
 		
 		txtConfirmarSenhaConta = new JPasswordField();
+		txtConfirmarSenhaConta.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyChar() == KeyEvent.VK_ENTER)
+				{
+					btnCriarConta.doClick();
+				}
+			}
+		});
 		txtConfirmarSenhaConta.setBounds(152, 289, 102, 20);
 		panel.add(txtConfirmarSenhaConta);
 		txtConfirmarSenhaConta.setColumns(10);
@@ -203,7 +218,7 @@ public class CriarContaT extends JFrame {
 		cbFormacao.setBounds(152, 134, 230, 18);
 		panel.add(cbFormacao);
 		
-		JButton btnCriarConta = new JButton("Criar Conta");
+		btnCriarConta = new JButton("Criar Conta");
 		btnCriarConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String mensagemDeErro = "Preencha os dados corretamente.\n";

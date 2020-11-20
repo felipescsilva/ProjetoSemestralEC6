@@ -1,6 +1,5 @@
 package model.Cambio;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import DAO.CambioDAO;

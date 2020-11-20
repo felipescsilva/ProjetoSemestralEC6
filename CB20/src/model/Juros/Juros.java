@@ -5,20 +5,21 @@ import model.Cliente.Profissao;
 
 public class Juros {
 	
-	int valorIniCartao = 15;
-	int valorIniEmprestimo = 13;
-	float multa = (float) 0.2;
+	static int valorIniCartao = 15;
+	static int valorIniEmprestimo = 13;
+	static float multa = (float) 0.2;
 
-	public float getJurosEmprestimo(int idade, Formacao formacao, Profissao profissao, int renda, int parcelas)
+	public static float getJurosEmprestimo(int idade, Formacao formacao, Profissao profissao, double renda, int parcelas)
 	{
 		int pesoIdade = getPesoIdade(idade);
 		int pesoFormacao = getPesoFormacao(formacao);
 		int pesoProfissao = getPesoProfissao(profissao);
 		int pesoRenda = getPesoRenda(renda);
-		return (pesoIdade + pesoFormacao + pesoProfissao + pesoRenda + valorIniEmprestimo + (parcelas / 5)) / 1250;
+		
+		return (float)(pesoIdade + pesoFormacao + pesoProfissao + pesoRenda + valorIniEmprestimo + (parcelas / 5)) / 1250;
 	}
 	
-	public float getJurosCartao(int idade, Formacao formacao, Profissao profissao, int renda)
+	public static float getJurosCartao(int idade, Formacao formacao, Profissao profissao, double renda)
 	{
 		int pesoIdade = getPesoIdade(idade);
 		int pesoFormacao = getPesoFormacao(formacao);
@@ -27,22 +28,22 @@ public class Juros {
 		return (pesoIdade + pesoFormacao + pesoProfissao + pesoRenda + valorIniCartao) / 1000;
 	}
 	
-	public float getJurosEmprestimoAtraso(int idade, Formacao formacao, Profissao profissao, int renda, int parcelas)
+	public static float getJurosEmprestimoAtraso(int idade, Formacao formacao, Profissao profissao, int renda, int parcelas)
 	{
 		return getJurosEmprestimo(idade, formacao, profissao, renda, parcelas) * 6;
 	}
 	
-	public float getJurosCartaoAtraso(int idade, Formacao formacao, Profissao profissao, int renda)
+	public static float getJurosCartaoAtraso(int idade, Formacao formacao, Profissao profissao, int renda)
 	{
 		return getJurosCartao(idade, formacao, profissao, renda) * 6;
 	}
 	
-	public float getMulta()
+	public static float getMulta()
 	{
 		return multa;
 	}
 	
-	int getPesoIdade(int idade)
+	private static int getPesoIdade(int idade)
 	{
 		if(idade >= 18 && idade <= 24)
 		{
@@ -74,7 +75,7 @@ public class Juros {
 		}
 	}
 	
-	int getPesoFormacao(Formacao formacao)
+	private static int getPesoFormacao(Formacao formacao)
 	{
 		if(formacao.getDescricao() == 1)
 		{
@@ -110,7 +111,7 @@ public class Juros {
 		}
 	}
 	
-	int getPesoProfissao(Profissao profissao)
+	private static int getPesoProfissao(Profissao profissao)
 	{
 		if(profissao.getDescricao() == 1)
 		{
@@ -146,7 +147,7 @@ public class Juros {
 		}
 	}
 	
-	int getPesoRenda(int renda)
+	private static int getPesoRenda(double renda)
 	{
 		if(renda < 1000)
 		{

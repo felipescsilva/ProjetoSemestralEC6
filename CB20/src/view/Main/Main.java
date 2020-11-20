@@ -9,14 +9,17 @@ import model.Cartao.Tipo;
 import model.Cliente.Cliente;
 import model.Cliente.Profissao;
 import model.Conta.Conta;
+import model.Emprestimo.Emprestimo;
 import model.Fatura.Fatura;
 import model.Login.Login;
+import model.Transferencia.Transferencia;
 import view.Cartao.*;
 import view.Cartao.SolicitarBloqueioT;
 import view.Login.CriarContaT;
 import view.Login.LoginT;
 import view.Menu.MenuPrincipalT;
 import view.Opcoes.OpcoesAntigasT;
+import view.Opcoes.TelaSenha;
 import view.Operacao.CambioT;
 import view.Operacao.DepositoT;
 import view.Operacao.EmprestimoT;
@@ -36,8 +39,11 @@ public class Main {
 		public static TransferenciaT transferencia = new TransferenciaT();
 		public static PagamentoT pagamento = new PagamentoT();
 		public static DepositoT deposito = new DepositoT();
-		public static EmprestimoT emprestimo = new EmprestimoT();
+		public static EmprestimoT telaEmprestimo = new EmprestimoT();
 		public static CambioT cambio = new CambioT();
+		public static TelaSenha telaSelecionada;
+		public static Conta contaTransferencia = new Conta();
+		public static Transferencia transferir = new Transferencia();
 		
 		public static SolicitarBloqueioT solicitarBloqueio = new SolicitarBloqueioT();
 		public static ConfirmarSenhaT solicitarCancelamento = new ConfirmarSenhaT();
@@ -57,6 +63,7 @@ public class Main {
 		public static List<Fatura> faturas = new ArrayList<Fatura>();
 		public static Fatura fatura = new Fatura();
 		public static Audit auditoria = new Audit();
+		public static Emprestimo emprestimo = new Emprestimo();
 		
 	    
 		@SuppressWarnings("deprecation")

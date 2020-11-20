@@ -26,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Color;
 
 public class MenuPrincipalT extends JFrame {
 
@@ -63,30 +64,73 @@ public class MenuPrincipalT extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 560, 420);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		//btnNome.setText("Seja Bem-Vindo " + Main.cliente.getNome());
-		btnNome.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent e) {				
-				Main.opcoes.show();
-				hide();
-			}
-		});
-		btnNome.setBounds(15, 25, 130, 40);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 153, 255));
+		panel.setBounds(10, 11, 524, 359);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		btnNome.setBounds(10, 11, 130, 40);
+		panel.add(btnNome);
+		
+		JButton btnCmbio = new JButton("C\u00E2mbio");
+		btnCmbio.setBounds(10, 71, 130, 40);
+		panel.add(btnCmbio);
 		
 		JButton btnSaldo = new JButton("Saldo");
-		btnSaldo.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent arg0) {				
-				Main.saldo.show();
+		btnSaldo.setBounds(10, 131, 130, 100);
+		panel.add(btnSaldo);
+		
+		JButton btnCarto = new JButton("Cart\u00E3o");
+		btnCarto.setBounds(10, 248, 130, 100);
+		panel.add(btnCarto);
+		
+		JButton btnPagamento = new JButton("Pagamento");
+		btnPagamento.setBounds(198, 188, 130, 160);
+		panel.add(btnPagamento);
+		
+		JButton btnTransferncia = new JButton("Transfer\u00EAncia");
+		btnTransferncia.setBounds(198, 11, 130, 160);
+		panel.add(btnTransferncia);
+		
+		JButton btnDeposito = new JButton("Deposito");
+		btnDeposito.setBounds(384, 11, 130, 160);
+		panel.add(btnDeposito);
+		
+		JButton btnEmprstimo = new JButton("Empr\u00E9stimo");
+		btnEmprstimo.setBounds(384, 188, 130, 160);
+		panel.add(btnEmprstimo);
+		btnEmprstimo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {				
+				Main.telaEmprestimo.show();
 				hide();
 			}
 		});
-		btnSaldo.setBounds(15, 145, 130, 100);
-		
-		JButton btnCarto = new JButton("Cart\u00E3o");
+		btnDeposito.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {				
+				Main.deposito.show();
+				hide();
+			}
+		});
+		btnTransferncia.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {				
+				Main.transferencia.show();
+				hide();
+			}
+		});
+		btnPagamento.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {				
+				Main.pagamento.show();
+				hide();
+			}
+		});
 		btnCarto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				EventQueue.invokeLater(new Runnable() {
@@ -101,48 +145,13 @@ public class MenuPrincipalT extends JFrame {
 				});
 			}
 		});
-		btnCarto.setBounds(15, 265, 130, 100);
-		
-		JButton btnTransferncia = new JButton("Transfer\u00EAncia");
-		btnTransferncia.addActionListener(new ActionListener() {
+		btnSaldo.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent e) {				
-				Main.transferencia.show();
+			public void actionPerformed(ActionEvent arg0) {				
+				Main.saldo.show();
 				hide();
 			}
 		});
-		btnTransferncia.setBounds(203, 25, 130, 160);
-		
-		JButton btnPagamento = new JButton("Pagamento");
-		btnPagamento.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent e) {				
-				Main.pagamento.show();
-				hide();
-			}
-		});
-		btnPagamento.setBounds(203, 195, 130, 160);
-		
-		JButton btnDeposito = new JButton("Deposito");
-		btnDeposito.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent e) {				
-				Main.deposito.show();
-				hide();
-			}
-		});
-		btnDeposito.setBounds(379, 25, 130, 160);
-		
-		JButton btnEmprstimo = new JButton("Empr\u00E9stimo");
-		btnEmprstimo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {				
-				Main.emprestimo.show();
-				hide();
-			}
-		});
-		btnEmprstimo.setBounds(379, 195, 130, 160);
-		
-		JButton btnCmbio = new JButton("C\u00E2mbio");
 		btnCmbio.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {				
@@ -150,15 +159,14 @@ public class MenuPrincipalT extends JFrame {
 				hide();
 			}
 		});
-		btnCmbio.setBounds(15, 85, 130, 40);
-		contentPane.setLayout(null);
-		contentPane.add(btnCarto);
-		contentPane.add(btnNome);
-		contentPane.add(btnSaldo);
-		contentPane.add(btnCmbio);
-		contentPane.add(btnTransferncia);
-		contentPane.add(btnPagamento);
-		contentPane.add(btnDeposito);
-		contentPane.add(btnEmprstimo);
+		
+		//btnNome.setText("Seja Bem-Vindo " + Main.cliente.getNome());
+		btnNome.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {				
+				Main.opcoes.show();
+				hide();
+			}
+		});
 	}
 }

@@ -1,5 +1,5 @@
 
-CREATE proc [dbo].sp_updateCliente(    
+ALTER proc [dbo].sp_updateCliente(    
      
 	 @Name nvarchar(200),  
 	 @cpf nchar(28),  
@@ -39,7 +39,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------
 
-CREATE proc sp_updateEmprestimos(  
+ALTER proc sp_updateEmprestimos(  
   
  @id int, 
  @dataSolicitacao datetime,  
@@ -76,7 +76,7 @@ begin
 end
 -----------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------
-create proc [dbo].[sp_updateCartao](    
+ALTER proc [dbo].[sp_updateCartao](    
      
  @NumCartao nchar(28),          
  @tipo nvarchar(40),    
@@ -101,7 +101,7 @@ begin
  set nocount on    
  update tblCartao     
   set Tipo=upper(@tipo), Moeda=upper(@Moeda), Saldo=@Saldo, flagBloqueado=upper(@flag), LimiteTotal=@limTotal, LimiteUsado=@limUsado, MotivoBloqueio=upper(@MotBloqueio), 
-  CVV=rtrim(@cvv), DataValidade=@dataValidade  
+  cvv=rtrim(@cvv), dataValidade=@dataValidade  
   where NumCartao = @NumCartao
  --verifica se ocorreu algum erro    
  if @@ERROR <> 0     

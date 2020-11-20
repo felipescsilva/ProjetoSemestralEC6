@@ -8,7 +8,7 @@ public class Limites {
 	int valorIniCartao = 600;
 	int valorIniEmprestimo = 5000;
 	
-	public int getLimiteEmprestimo(int idade, Formacao formacao, Profissao profissao, int renda)
+	public int getLimiteEmprestimo(int idade, Formacao formacao, Profissao profissao, double renda)
 	{
 		int pesoIdade = getPesoIdade(idade);
 		int pesoFormacao = getPesoFormacao(formacao);
@@ -17,7 +17,7 @@ public class Limites {
 		return ((pesoIdade * -5) + pesoFormacao + pesoProfissao + pesoRenda) * 3 + valorIniEmprestimo;
 	}
 	
-	public int getLimiteCartao(int idade, Formacao formacao, Profissao profissao, int renda)
+	public int getLimiteCartao(int idade, Formacao formacao, Profissao profissao, double renda)
 	{
 		int pesoIdade = getPesoIdade(idade);
 		int pesoFormacao = getPesoFormacao(formacao);
@@ -131,7 +131,7 @@ public class Limites {
 		}
 	}
 	
-	int getPesoRenda(int renda)
+	int getPesoRenda(double renda)
 	{
 		if(renda < 1000)
 		{

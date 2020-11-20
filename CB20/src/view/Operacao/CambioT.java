@@ -30,6 +30,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class CambioT extends JFrame {
 
@@ -37,6 +41,7 @@ public class CambioT extends JFrame {
 	private JTextField txtCotao;
 	private JTextField txtValor;
 	private JPasswordField passwordField;
+	private JComboBox comboBoxMoeda;
 
 	/**
 	 * Launch the application.
@@ -58,6 +63,24 @@ public class CambioT extends JFrame {
 	 * Create the frame.
 	 */
 	public CambioT() {
+		addComponentListener(new ComponentAdapter() {
+			
+			@Override
+			public void componentShown(ComponentEvent e) {
+				if(comboBoxMoeda.getSelectedItem().toString().equals("Real"))
+				{
+					txtCotao.setText(String.valueOf(Cotacao.getReal()));
+				}
+				else if(comboBoxMoeda.getSelectedItem().toString().equals("Dólar"))
+				{
+					txtCotao.setText(String.valueOf(Cotacao.getDolar()));
+				}
+				else 
+				{
+					txtCotao.setText("");
+				}
+			}
+		});
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
@@ -79,14 +102,15 @@ public class CambioT extends JFrame {
 		lblMoeda.setBounds(10, 11, 46, 14);
 		contentPane.add(lblMoeda);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.addItemListener(new ItemListener() {
+		comboBoxMoeda = new JComboBox();
+		
+		comboBoxMoeda.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				if(comboBox.getSelectedItem().toString().equals("Real"))
+				if(comboBoxMoeda.getSelectedItem().toString().equals("Real"))
 				{
 					txtCotao.setText(String.valueOf(Cotacao.getReal()));
 				}
-				else if(comboBox.getSelectedItem().toString().equals("Dólar"))
+				else if(comboBoxMoeda.getSelectedItem().toString().equals("Dólar"))
 				{
 					txtCotao.setText(String.valueOf(Cotacao.getDolar()));
 				}
@@ -96,9 +120,9 @@ public class CambioT extends JFrame {
 				}
 			}
 		});
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Real", "D\u00F3lar"}));
-		comboBox.setBounds(94, 7, 75, 20);
-		contentPane.add(comboBox);
+		comboBoxMoeda.setModel(new DefaultComboBoxModel(new String[] {"Real", "D\u00F3lar"}));
+		comboBoxMoeda.setBounds(94, 7, 75, 20);
+		contentPane.add(comboBoxMoeda);
 		
 		JLabel lblCotao = new JLabel("Cota\u00E7\u00E3o");
 		lblCotao.setFont(new Font("Sitka Small", Font.BOLD, 12));
@@ -106,6 +130,7 @@ public class CambioT extends JFrame {
 		contentPane.add(lblCotao);
 		
 		txtCotao = new JTextField();
+		
 		txtCotao.setEditable(false);
 		txtCotao.setText("Cota\u00E7\u00E3o");
 		txtCotao.setBounds(94, 39, 86, 20);
@@ -136,6 +161,19 @@ public class CambioT extends JFrame {
 		contentPane.add(btnComprar);
 		
 		txtValor = new JTextField();
+		txtValor.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if((arg0.getKeyChar() >= '0' && arg0.getKeyChar() <= '9') || arg0.getKeyChar() == 8 || arg0.getKeyChar() == 127)
+				{
+					txtValor.setEditable(true);
+				}
+				else 
+				{
+					txtValor.setEditable(false);
+				}
+			}
+		});
 		txtValor.setText("Valor");
 		txtValor.setBounds(83, 136, 86, 20);
 		contentPane.add(txtValor);
@@ -147,6 +185,14 @@ public class CambioT extends JFrame {
 		contentPane.add(lblOrdensDeCompra);
 		
 		JList listaOrdens = new JList();
+		listaOrdens.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				listaOrdens.clearSelection();
+				CambioDAO cambio = new CambioDAO();
+				listaOrdens.setListData(cambio.Consultar().toArray());
+			}
+		});
 		listaOrdens.setToolTipText("");
 		listaOrdens.addFocusListener(new FocusAdapter() {
 			@Override

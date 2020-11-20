@@ -29,6 +29,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.security.Key;
 
 public class LoginT extends JFrame {
 
@@ -40,6 +43,7 @@ public class LoginT extends JFrame {
 	private JPanel panel;
 	private JTextField txtCarto;
 	private JPasswordField senhaCartao;
+	private JButton btnSignInConta;
 
 	/**
 	 * Launch the application.
@@ -65,13 +69,14 @@ public class LoginT extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 252, 326);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBounds(10, 11, 219, 266);
+		panel.setBackground(new Color(0, 153, 255));
+		panel.setBounds(10, 11, 216, 265);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -86,6 +91,15 @@ public class LoginT extends JFrame {
 		txtBankAccount.setColumns(10);
 		
 		txtSenhaConta = new JPasswordField();
+		txtSenhaConta.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if(arg0.getKeyChar() == KeyEvent.VK_ENTER)
+				{
+					btnSignInConta.doClick();
+				}
+			}
+		});
 		txtSenhaConta.setBounds(70, 70, 86, 20);
 		panel.add(txtSenhaConta);
 		
@@ -94,7 +108,7 @@ public class LoginT extends JFrame {
 		panel.add(lblPassword);
 		lblPassword.setFont(new Font("Sitka Small", Font.BOLD, 12));
 		
-		JButton btnSignInConta = new JButton("Sign In");
+		btnSignInConta = new JButton("Sign In");
 		btnSignInConta.setBounds(70, 101, 73, 23);
 		panel.add(btnSignInConta);
 		

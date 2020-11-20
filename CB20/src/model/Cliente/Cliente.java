@@ -1,6 +1,7 @@
 package model.Cliente;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 import DAO.CartaoDAO;
 import DAO.ContaDAO;
@@ -79,6 +80,12 @@ public class Cliente {
 	}
 	public void setRenda(Double renda) {
 		this.renda = renda;
+	}
+	
+	public int getIdade()
+	{
+		Period period = Period.between(DataNascimento, LocalDate.now());		
+		return period.getYears();
 	}
 	
 	public boolean pagarCartaoDebito(String numCartao, String senhaConta, double valor) {
