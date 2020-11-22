@@ -99,11 +99,13 @@ public class SelecionarCartaoT extends JFrame {
 					Main.verCartao.show();
 					int indexSelecionado = cbCartoes.getSelectedIndex();
 					Main.cartao = Main.cartoes.get(indexSelecionado - 1);
-					Main.verCartao.txtMoeda.setText(Main.cartao.getMoeda().toString());
+					
+					
 					Main.verCartao.txtNumCartao.setText(Main.cartao.getNumeroCartao());
 					Main.verCartao.txtStatus.setText(Main.cartao.getStatus().toString());
 					Main.verCartao.txtTipo.setText(Main.cartao.getTipo().toString());;
 					Main.verCartao.txtValidade.setText(Main.cartao.getDataValidade().toString());
+					Main.verCartao.txtMoeda.setText(Main.cartao.getMoeda().toString());
 					
 					if (Main.cartao.getTipo() != Tipo.CRÉDITO)
 						Main.verCartao.btnFaturas.setEnabled(false);

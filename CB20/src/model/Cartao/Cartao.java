@@ -82,6 +82,16 @@ public class Cartao {
 	public void setMoeda(Moeda moeda) {
 		this.moeda = moeda;
 	}
+	public void setMoeda(String moeda) {		
+		if(moeda.toUpperCase().equals("REAL"))
+		{
+			this.moeda = Moeda.Real;
+		}
+		else if(moeda.toUpperCase().equals("DOLAR") || moeda.equals("DÓLAR"))
+		{
+			this.moeda = Moeda.Dolar;
+		}		
+	}
 	public double getSaldo() {
 		return saldo;
 	}

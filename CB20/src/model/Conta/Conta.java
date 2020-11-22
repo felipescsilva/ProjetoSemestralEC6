@@ -191,8 +191,10 @@ public class Conta {
 			}		
 		}
 		catch (Exception e) {
+			
 			return false;
 		}
+		
 		return false;
 	}
 	

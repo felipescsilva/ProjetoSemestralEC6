@@ -32,6 +32,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.security.Key;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class LoginT extends JFrame {
 
@@ -65,6 +67,12 @@ public class LoginT extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginT() {
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				Main.instanciarTudo();
+			}
+		});
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 252, 326);
@@ -86,6 +94,15 @@ public class LoginT extends JFrame {
 		lblBankAccount.setFont(new Font("Sitka Small", Font.BOLD, 12));
 		
 		txtBankAccount = new JTextField();
+		txtBankAccount.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(txtBankAccount.getText().length() >= 4)
+				{
+					txtSenhaConta.requestFocusInWindow();
+				}
+			}
+		});
 		txtBankAccount.setBounds(70, 39, 86, 20);
 		panel.add(txtBankAccount);
 		txtBankAccount.setColumns(10);
@@ -161,7 +178,17 @@ public class LoginT extends JFrame {
 				//hide();
 				if (Main.login.signIn(txtBankAccount.getText(), txtSenhaConta.getText())) {					
 					Main.menuPrincipal.show();
-					Main.menuPrincipal.btnNome.setText("Bem-Vindo " + Main.cliente.getNome());
+					
+					int finalPrimeiroNome = Main.cliente.getNome().indexOf(" ");
+					if(finalPrimeiroNome == -1)
+					{
+						Main.menuPrincipal.btnNome.setText("Olá " + Main.cliente.getNome());
+					}
+					else 
+					{
+						Main.menuPrincipal.btnNome.setText("Olá " + Main.cliente.getNome().substring(0, finalPrimeiroNome));
+					}
+					
 					hide();
 					txtBankAccount.setText("");
 					txtSenhaConta.setText("");

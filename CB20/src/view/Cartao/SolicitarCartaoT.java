@@ -94,8 +94,21 @@ public class SolicitarCartaoT extends JFrame {
 		JButton btnNewButton = new JButton("Enviar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (Main.conta.PedirNovoCartao(Tipo.valueOf(cbTipo.getSelectedItem().toString()), Moeda.Real, txtSenha.getText(), 1000.00))
+				Moeda moeda;				
+				if(cbTipo.getSelectedItem().toString().equals("PRÉ_PAGO"))
+				{
+					moeda = Moeda.Dolar;
+				}
+				else
+				{
+					moeda = Moeda.Real;
+				}
+				
+				if (Main.conta.PedirNovoCartao(Tipo.valueOf(cbTipo.getSelectedItem().toString()), moeda, txtSenha.getText(), 1000.00))
+				{
 					dispose();
+					JOptionPane.showMessageDialog(f, "Cartão criado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+				}					
 				else
 					JOptionPane.showMessageDialog(f, "Não foi possível criar um novo cartão", "Erro", JOptionPane.WARNING_MESSAGE);
 				

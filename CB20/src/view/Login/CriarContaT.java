@@ -314,7 +314,8 @@ public class CriarContaT extends JFrame {
 						clienteDAO.Inserir(cliente);
 						contaDAO.Inserir(conta);
 						auditoria.getInstancia().gerarRelatorio("mensagem");
-						JOptionPane.showMessageDialog(f, "Sua conta foi criada com sucesso!\nO número da sua conta é" + conta.getNumeroConta());
+						JOptionPane.showMessageDialog(f, "Sua conta foi criada com sucesso!\nO número da sua conta é " + conta.getNumeroConta());
+						dispose();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(f, mensagemDeErro, "Erro", JOptionPane.WARNING_MESSAGE);

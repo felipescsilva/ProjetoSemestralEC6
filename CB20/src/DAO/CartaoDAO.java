@@ -132,7 +132,7 @@ public class CartaoDAO {
 				
 				cartao.setLimiteUsado(rs.getDouble("LimiteUsado"));
 				
-				cartao.setMoeda(Moeda.valueOf(rs.getString("Moeda")));
+				cartao.setMoeda(rs.getString("Moeda"));
 				
 				cartao.setMotivoBloqueio(Motivo.valueOf(rs.getString("MotivoBloqueio")));
 				

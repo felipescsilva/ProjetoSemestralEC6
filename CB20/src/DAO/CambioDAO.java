@@ -19,7 +19,7 @@ public class CambioDAO {
 			String dataValidade = cambioObjeto.getDataValidade().getDayOfMonth() + "/" + cambioObjeto.getDataValidade().getMonthValue() + "/" + cambioObjeto.getDataValidade().getYear();
 			String SQL = "exec dbo.sp_InsertCambio ?, ?, ?, ?, ?, ?";
 			ps = con.getConexao().prepareStatement(SQL);
-			ps.setString(1, cambioObjeto.getCpf());
+			ps.setString(1, cambioObjeto.getConta().getNumeroConta());
 			ps.setDouble(2, cambioObjeto.getValor());
 			ps.setString(3, cambioObjeto.getMoeda().toString());
 			ps.setString(4, cambioObjeto.getDescricao());
@@ -158,11 +158,11 @@ public class CambioDAO {
 			while (rs.next()) {
 				Cambio cambio = new Cambio();
 				
-				cambio.setCpf(rs.getString("CPF"));
+				cambio.setConta(rs.getString("NumConta"));
 				cambio.setDataSolicitacao(LocalDate.parse(rs.getDate("DataSolicitacao").toString()));
 				cambio.setDescricao(rs.getString("Descricao"));
 				cambio.setIdCampo(rs.getInt("idCambio"));
-				cambio.setMoeda(Moeda.valueOf(rs.getString("Moeda")));
+				cambio.setMoeda(rs.getString("Moeda"));
 				cambio.setValidade(LocalDate.parse(rs.getDate("DataValidade").toString()));
 				cambio.setValor(rs.getFloat("Valor"));
 				

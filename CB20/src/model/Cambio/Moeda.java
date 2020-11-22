@@ -5,13 +5,13 @@ package model.Cambio;
 		@Override
 		public String toString()
 		{
-			if(this == Moeda.Real)
+			if(this.equals(Moeda.Real))
 			{
 				return "Real";
 			}
-			else if(this == Moeda.Dolar)
+			else if(this.equals(Moeda.Dolar))
 			{
-				return "Dolar";
+				return "Dólar";
 			}
 			return "";
 		}

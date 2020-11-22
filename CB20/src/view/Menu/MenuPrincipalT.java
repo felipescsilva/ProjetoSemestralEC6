@@ -12,7 +12,7 @@ import view.Main.Main;
 import view.Opcoes.OpcoesAntigasT;
 import view.Operacao.CambioT;
 import view.Operacao.DepositoT;
-import view.Operacao.EmprestimoT;
+import view.Operacao.SolicitarEmprestimoT;
 import view.Operacao.PagamentoT;
 import view.Operacao.SaldoT;
 import view.Operacao.TransferenciaT;
@@ -106,7 +106,7 @@ public class MenuPrincipalT extends JFrame {
 		panel.add(btnEmprstimo);
 		btnEmprstimo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				Main.telaEmprestimo.show();
+				Main.emprestimosMenu.show();
 				hide();
 			}
 		});
