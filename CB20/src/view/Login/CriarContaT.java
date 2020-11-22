@@ -241,11 +241,13 @@ public class CriarContaT extends JFrame {
 					dadosCorretos = false;
 				}
 				else {
-					if (Double.parseDouble(txtRenda.getText()) < 0) {
+					String rendaString = txtRenda.getText();
+					rendaString = rendaString.replace(",", ".");
+					if (Double.parseDouble(rendaString) < 0) {
 						mensagemDeErro += "A renda não pode ser negativa.\n";
 						dadosCorretos = false;
 					} else {
-						renda = Double.parseDouble(txtRenda.getText());
+						renda = Double.parseDouble(rendaString);
 					}
 				}
 				LocalDate data = LocalDate.now();

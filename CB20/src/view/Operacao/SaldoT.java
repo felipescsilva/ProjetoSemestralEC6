@@ -16,10 +16,12 @@ import java.awt.Font;
 import javax.swing.JList;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JTextField;
 
 public class SaldoT extends JFrame {
 
 	private JPanel contentPane;
+	public JTextField txtSaldo;
 
 	/**
 	 * Launch the application.
@@ -50,26 +52,20 @@ public class SaldoT extends JFrame {
 		});
 		setTitle("Saldo");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 560, 420);
+		setBounds(100, 100, 167, 80);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblPerodo = new JLabel("Per\u00EDodo");
-		lblPerodo.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		lblPerodo.setBounds(10, 11, 56, 14);
-		contentPane.add(lblPerodo);
+		txtSaldo = new JTextField();
+		txtSaldo.setEditable(false);
+		txtSaldo.setBounds(45, 11, 97, 20);
+		contentPane.add(txtSaldo);
+		txtSaldo.setColumns(10);
 		
-		JComboBox cbPeriodo = new JComboBox();
-		cbPeriodo.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		cbPeriodo.setModel(new DefaultComboBoxModel(new String[] {"30 dias", "60 dias", "90 dias"}));
-		cbPeriodo.setToolTipText("");
-		cbPeriodo.setBounds(107, 8, 74, 20);
-		contentPane.add(cbPeriodo);
-		
-		JList list = new JList();
-		list.setBounds(10, 36, 524, 334);
-		contentPane.add(list);
+		JLabel lblNewLabel = new JLabel("Saldo");
+		lblNewLabel.setBounds(10, 14, 36, 14);
+		contentPane.add(lblNewLabel);
 	}
 }

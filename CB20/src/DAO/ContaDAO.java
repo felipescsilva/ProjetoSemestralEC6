@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Conta.Conta;
+import model.Deposito.Deposito;
 
 public class ContaDAO {
 	ConexaoDAO con;
@@ -131,5 +132,21 @@ public class ContaDAO {
 		}
 		
 		return lista;
+	}
+	
+	public boolean realizarPagamento(String codPagamento) {
+		DepositoDAO dao = new DepositoDAO();
+		List<Deposito> lista = dao.Consultar("linhaDigitavel", codPagamento);
+		if (lista.size() == 0)
+			return false;
+		else {
+			try {
+				
+				return true;
+			} catch (Exception e) {
+				System.out.println(e.toString());
+				return false;
+			}
+		}
 	}
 }

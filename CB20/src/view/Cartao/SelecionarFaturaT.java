@@ -63,7 +63,7 @@ public class SelecionarFaturaT extends JFrame {
 				if (cbFaturas.getSelectedIndex() == 0)
 					JOptionPane.showMessageDialog(f, "Selecione uma opção válida!", "Erro", JOptionPane.WARNING_MESSAGE);
 				else {
-					Main.verCartao.show();
+					Main.verFatura.show();
 					int indexSelecionado = cbFaturas.getSelectedIndex();
 					Main.fatura = Main.faturas.get(indexSelecionado - 1);
 					Main.verFatura.txtIdFatura.setText(Integer.toString(Main.fatura.getIdFatura()));
