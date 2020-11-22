@@ -8,7 +8,7 @@ public class Fatura {
 	private LocalDate DataVencimento;
 	private double valor;
 	private Situacao situacao;
-	private double taxaJuros;
+	private double taxaJuros;	
 	public Fatura() {
 		super();
 	}
@@ -21,7 +21,7 @@ public class Fatura {
 		this.valor = valor;
 		this.situacao = situacao;
 		this.taxaJuros = taxaJuros;
-	}
+	}	
 
 	public int getIdFatura() {
 		return idFatura;
@@ -58,6 +58,6 @@ public class Fatura {
 	}
 	public void setTaxaJuros(double taxaJuros) {
 		this.taxaJuros = taxaJuros;
-	}
+	}	
 	
 }

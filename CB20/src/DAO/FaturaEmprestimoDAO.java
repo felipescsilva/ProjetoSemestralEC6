@@ -7,22 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Fatura.Fatura;
+import model.Fatura.FaturaEmprestimo;
 import model.Fatura.Situacao;
 
-public class FaturaDAO {
+public class FaturaEmprestimoDAO {
 	ConexaoDAO con;
-	public boolean Inserir(Fatura faturaObjeto) {
+	public boolean Inserir(FaturaEmprestimo faturaObjeto) {
 		PreparedStatement ps = null;
 		try {
 			
 			String dataVencimento = faturaObjeto.getDataVencimento().getDayOfMonth() + "/" + faturaObjeto.getDataVencimento().getMonthValue() + "/" + faturaObjeto.getDataVencimento().getYear();
 			con = new ConexaoDAO();
-			String SQL = "exec dbo.sp_InsertFatura ?, ?, ?, ?, ?";
+			String SQL = "exec dbo.sp_InsertFaturasEmprestimo ?, ?, ?, ?, ?";
 			ps = con.getConexao().prepareStatement(SQL);
-			ps.setString(1, faturaObjeto.getNumCartao());
+			ps.setInt(1, faturaObjeto.getIdEmprestimo());
 			ps.setString(2, dataVencimento);
 			ps.setDouble(3, faturaObjeto.getValor());
-			ps.setString(4, faturaObjeto.getSituacao().toString());			
+			ps.setString(4, faturaObjeto.getDescricao());			
 			ps.setDouble(5, faturaObjeto.getTaxaJuros());
 			
 			
@@ -43,18 +44,19 @@ public class FaturaDAO {
 		return false;
 	}
 	
-	public boolean Atualizar(Fatura faturaObjeto) {
+	public boolean Atualizar(FaturaEmprestimo faturaObjeto) {
 		PreparedStatement ps = null;
 		try {
 			String dataVencimento = faturaObjeto.getDataVencimento().getDayOfMonth() + "/" + faturaObjeto.getDataVencimento().getMonthValue() + "/" + faturaObjeto.getDataVencimento().getYear();
 			con = new ConexaoDAO();
-			String SQL = "exec dbo.sp_UpdateFatura ?, ?, ?, ?, ?";
+			String SQL = "exec dbo.sp_UpdateFaturasEmprestimo ?, ?, ?, ?, ?, ?";
 			ps = con.getConexao().prepareStatement(SQL);
-			ps.setString(1, faturaObjeto.getNumCartao());
-			ps.setString(2, dataVencimento);
-			ps.setDouble(3, faturaObjeto.getValor());
-			ps.setString(4, faturaObjeto.getSituacao().toString());			
-			ps.setDouble(5, faturaObjeto.getTaxaJuros());
+			ps.setInt(1, faturaObjeto.getIdFatEmp());
+			ps.setInt(2, faturaObjeto.getIdEmprestimo());
+			ps.setString(3, dataVencimento);
+			ps.setDouble(4, faturaObjeto.getValor());			
+			ps.setString(5, faturaObjeto.getDescricao());
+			ps.setDouble(6, faturaObjeto.getTaxaJuros());
 			
 			if (ps.executeUpdate() > 0)
 				return true;
@@ -73,13 +75,13 @@ public class FaturaDAO {
 		return false;
 	}
 	
-	public boolean Remover(String idFatura) {
+	public boolean Remover(String idFatEmp) {
 		PreparedStatement ps = null;
 		try {
 		con = new ConexaoDAO();
-		String SQL = "delete from dbo.tblfatura where idFatura = ?";
+		String SQL = "delete from dbo.tblFaturasEmprestimo where idFatEmp = ?";
 		ps = con.getConexao().prepareStatement(SQL);
-		ps.setString(1, idFatura);
+		ps.setString(1, idFatEmp);
 		
 		if (ps.executeUpdate() > 0)
 			return true;
@@ -97,28 +99,28 @@ public class FaturaDAO {
 		return false;
 	}
 	
-	public List<Fatura> Consultar(String campo, String valor) throws Exception {
-		List<Fatura> lista = new ArrayList<Fatura>();
+	public List<FaturaEmprestimo> Consultar(String campo, String valor) throws Exception {
+		List<FaturaEmprestimo> lista = new ArrayList<FaturaEmprestimo>();
 		ResultSet rs = null;
 		PreparedStatement ps = null;
 		try {
 			con = new ConexaoDAO();
-			String SQL = "exec dbo.sp_consulta tblFatura, ?, ?";
+			String SQL = "exec dbo.sp_consulta tblFaturasEmprestimo, ?, ?";
 			ps = con.getConexao().prepareStatement(SQL);
 			ps.setString(1, campo);
 			ps.setString(2, valor);
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				Fatura fatura = new Fatura();
+				FaturaEmprestimo fatura = new FaturaEmprestimo();
 	
 				
 				fatura.setDataVencimento(LocalDate.parse(rs.getDate("DataVencimento").toString()));
-				fatura.setIdFatura(rs.getInt("idFatura"));
-				fatura.setNumCartao(rs.getString("NumCartao"));
-				fatura.setSituacao(Situacao.valueOf(rs.getString("Situacao")));
-				fatura.setTaxaJuros(rs.getDouble("TaxaJuros"));
-				fatura.setValor(rs.getDouble("valor"));				
+				fatura.setIdFatEmp(rs.getInt("idFatEmp"));
+				fatura.setIdEmprestimo(rs.getInt("idEmprestimo"));				
+				fatura.setDescricao(rs.getString("Descricao"));
+				fatura.setTaxaJuros((float)rs.getDouble("TaxaJuros"));
+				fatura.setValor((float)rs.getDouble("valor"));				
 				
 				lista.add(fatura);
 			}

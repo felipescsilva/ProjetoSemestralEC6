@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Audit.Audit;
+import DAO.BancoDAO;
+import model.Banco.Banco;
 import model.Cartao.Cartao;
 import model.Cartao.Tipo;
 import model.Cliente.Cliente;
@@ -18,13 +20,9 @@ import view.Cartao.SolicitarBloqueioT;
 import view.Login.CriarContaT;
 import view.Login.LoginT;
 import view.Menu.MenuPrincipalT;
-import view.Opcoes.AlterarDadosT;
-import view.Opcoes.AlterarSenhaT;
 import view.Opcoes.OpcoesAntigasT;
-import view.Opcoes.OpcoesT;
 import view.Opcoes.TelaSenha;
 import view.Operacao.CambioT;
-import view.Operacao.ConfirmarDadosT;
 import view.Operacao.DepositoT;
 import view.Operacao.EmprestimosAtivosT;
 import view.Operacao.EmprestimosMenuT;
@@ -39,7 +37,7 @@ public class Main {
 	    public static MenuPrincipalT menuPrincipal;
 	    public static CriarContaT novaConta;
 	    public static CriarContaT criarConta;
-		public static OpcoesT opcoes;
+		public static OpcoesAntigasT opcoes;
 		public static SaldoT saldo;
 		public static CartaoT cartaoT;
 		public static TransferenciaT transferencia;
@@ -53,8 +51,6 @@ public class Main {
 		public static Transferencia transferir;
 		public static EmprestimosMenuT emprestimosMenu;
 		public static EmprestimosAtivosT emprestimosAtivos;
-		public static AlterarDadosT alterarDados;
-		public static AlterarSenhaT alterarSenha;
 		
 		public static SolicitarBloqueioT solicitarBloqueio;
 		public static ConfirmarSenhaT solicitarCancelamento;
@@ -64,7 +60,6 @@ public class Main {
 		public static SelecionarFaturaT verFaturas;
 		public static VisualizarCartaoT verCartao;
 		public static VisualizarFaturaT verFatura;	    
-		public static ConfirmarDadosT confirmarDados;
 	    
 	    public static Login login;
 	    public static Conta conta;	    
@@ -75,10 +70,24 @@ public class Main {
 		public static Fatura fatura;
 		public static Audit auditoria;
 		public static Emprestimo emprestimo;
-		public static Cliente clienteTransferencia;
+		private static Banco banco = new Banco();
+		public static BancoDAO bancoDAO = new BancoDAO();
+		
+		
 	    
 		@SuppressWarnings("deprecation")
 		public static void main(String[] argv) {
+			if(bancoDAO.Consultar().size() < 1)
+			{
+				banco.setCustosFixos(0);
+				banco.setCustosVariaveis(0);
+				banco.setFaturamento(0);
+				banco.setImpostos(0);
+				banco.setPatrimonioProprio(0);
+				banco.setPatrimonioTerceiros(0);
+				bancoDAO.Inserir(banco);
+			}
+			
 			instanciarTudo();
 			telaLogin.show();
 		}
@@ -89,7 +98,7 @@ public class Main {
 		    menuPrincipal = new MenuPrincipalT();
 		    novaConta = new CriarContaT();
 		    criarConta = new CriarContaT();
-			opcoes = new OpcoesT();
+			opcoes = new OpcoesAntigasT();
 			saldo = new SaldoT();
 			cartaoT = new CartaoT();
 			transferencia = new TransferenciaT();
@@ -111,10 +120,7 @@ public class Main {
 			verCartoes = new SelecionarCartaoT();
 			verFaturas = new SelecionarFaturaT();
 			verCartao = new VisualizarCartaoT();
-			verFatura = new VisualizarFaturaT();	   
-			alterarDados = new AlterarDadosT();
-			alterarSenha = new AlterarSenhaT();
-			confirmarDados = new ConfirmarDadosT();
+			verFatura = new VisualizarFaturaT();	    
 		    
 		    login = new Login();
 		    conta = new Conta();	    
@@ -125,6 +131,5 @@ public class Main {
 			fatura = new Fatura();
 			auditoria = new Audit();
 			emprestimo = new Emprestimo();
-			clienteTransferencia = new Cliente();
 		}
 }

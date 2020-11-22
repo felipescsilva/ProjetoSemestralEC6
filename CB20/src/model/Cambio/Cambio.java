@@ -2,9 +2,11 @@ package model.Cambio;
 
 import java.util.List;
 
+import DAO.BancoDAO;
 import DAO.CambioDAO;
 import DAO.CartaoDAO;
 import DAO.ContaDAO;
+import model.Banco.Banco;
 import model.Cartao.Cartao;
 import model.Conta.Conta;
 
@@ -20,6 +22,10 @@ public class Cambio {
 	LocalDate dataSolicitacao;
 	LocalDate validade;
 	String cpf;
+	ContaDAO daoConta = new ContaDAO();
+	CambioDAO cambioDAO = new CambioDAO();
+	CartaoDAO cartaoDAO = new CartaoDAO();
+	BancoDAO bancoDAO = new BancoDAO();
 	
 	public String getCpf() {
 		return cpf;
@@ -100,10 +106,10 @@ public class Cambio {
 		this.descricao = descricao;
 	}
 	public void setDescricao(double valor, Moeda moeda) {
-		this.descricao = "Comprar " + valor + " Moeda: " + moeda.toString();
+		this.descricao =  "Moeda: " + moeda.toString() + " Comprar: " + valor;
 	}
 	public void setDescricao() {
-		this.descricao = "Comprar " + this.getValor() + " Moeda: " + this.getMoeda().toString();
+		this.descricao = "Moeda: " + this.getMoeda().toString() +  " Comprar: " + this.getValor();
 	}
 	public LocalDate getDataSolicitacao() {
 		return dataSolicitacao;
@@ -156,6 +162,7 @@ public class Cambio {
 	
 	public boolean baterOrdens()
 	{		
+		boolean bateu = false;
 		CambioDAO cambioDAO = new CambioDAO();
 		List<Cambio> ordens = cambioDAO.Consultar();
 		Cambio auxOrdemA = new Cambio();		
@@ -198,25 +205,26 @@ public class Cambio {
 						
 						if(ordemA.getMoeda() == Moeda.Real)
 						{
-							return atualizarBD(ordemA, ordemB, menorOrdem);							
+							bateu = atualizarBD(ordemA, ordemB, menorOrdem);							
 						}
 						else 
 						{
-							return atualizarBD(ordemB, ordemA, menorOrdem);
+							bateu = atualizarBD(ordemB, ordemA, menorOrdem);
 						}									
 					}							
 				}
 			}
 		}	
-		return false;
+		return bateu;
 	}
 	
 	private boolean atualizarBD(Cambio ordemA, Cambio ordemB, double menorOrdem)
-	{
-		ContaDAO daoConta = new ContaDAO();
-		CambioDAO cambioDAO = new CambioDAO();
-		CartaoDAO cartaoDAO = new CartaoDAO();
-		ordemA.getConta().setSaldo(ordemA.getConta().getSaldo() + menorOrdem);		
+	{		
+		Banco banco = new Banco();
+		
+		banco = bancoDAO.Consultar().get(0);
+		
+		ordemA.getConta().setSaldo(ordemA.getConta().getSaldo() + menorOrdem);			
 		ordemB.getConta().setSaldo(ordemB.getConta().getSaldo() - (menorOrdem * Cotacao.getTaxa()));	
 		//(menorOrdem * Cotacao.getTaxa())
 		//Adicionar ao patrimonio do banco
@@ -260,6 +268,8 @@ public class Cambio {
 			}
 		}
 		
+		banco.setFaturamento(banco.getFaturamento() + (menorOrdem * ((Cotacao.getTaxa() - 1) * 2)));
+		bancoDAO.Atualizar(banco);
 		daoConta.Atualizar(ordemA.getConta());
 		daoConta.Atualizar(ordemB.getConta());
 		

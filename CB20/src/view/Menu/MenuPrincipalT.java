@@ -74,11 +74,11 @@ public class MenuPrincipalT extends JFrame {
 		panel.setBounds(10, 11, 524, 359);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		btnNome.setBounds(10, 11, 130, 100);
+		btnNome.setBounds(10, 11, 130, 40);
 		panel.add(btnNome);
 		
 		JButton btnCmbio = new JButton("C\u00E2mbio");
-		btnCmbio.setBounds(198, 188, 130, 160);
+		btnCmbio.setBounds(10, 71, 130, 40);
 		panel.add(btnCmbio);
 		
 		JButton btnSaldo = new JButton("Saldo");
@@ -88,6 +88,10 @@ public class MenuPrincipalT extends JFrame {
 		JButton btnCarto = new JButton("Cart\u00E3o");
 		btnCarto.setBounds(10, 248, 130, 100);
 		panel.add(btnCarto);
+		
+		JButton btnPagamento = new JButton("Pagamento");
+		btnPagamento.setBounds(198, 188, 130, 160);
+		panel.add(btnPagamento);
 		
 		JButton btnTransferncia = new JButton("Transfer\u00EAncia");
 		btnTransferncia.setBounds(198, 11, 130, 160);
@@ -120,6 +124,13 @@ public class MenuPrincipalT extends JFrame {
 				hide();
 			}
 		});
+		btnPagamento.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {				
+				Main.pagamento.show();
+				hide();
+			}
+		});
 		btnCarto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				EventQueue.invokeLater(new Runnable() {
@@ -138,8 +149,6 @@ public class MenuPrincipalT extends JFrame {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {				
 				Main.saldo.show();
-				Main.saldo.txtSaldo.setText(String.valueOf(Main.conta.getSaldo()));
-				
 				hide();
 			}
 		});

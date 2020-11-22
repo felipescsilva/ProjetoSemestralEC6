@@ -186,7 +186,7 @@ public class LoginT extends JFrame {
 					}
 					else 
 					{
-						Main.menuPrincipal.btnNome.setText("Olá " + Main.cliente.getNome().substring(0, finalPrimeiroNome));
+						Main.menuPrincipal.setTitle("Olá " + Main.cliente.getNome().substring(0, finalPrimeiroNome));
 					}
 					
 					hide();

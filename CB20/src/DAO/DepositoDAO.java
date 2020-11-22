@@ -15,13 +15,12 @@ public class DepositoDAO {
 		try {
 			con = new ConexaoDAO();
 			String data = depositoObjeto.getDataTransacao().getDayOfMonth() + "/" + depositoObjeto.getDataTransacao().getMonthValue() + "/" + depositoObjeto.getDataTransacao().getYear();
-			String SQL = "exec dbo.sp_InsertDepositos ?, ?, ?, ?, ?";
+			String SQL = "exec dbo.sp_InsertDepositos ?, ?, ?, ?";
 			ps = con.getConexao().prepareStatement(SQL);
 			ps.setString(1, depositoObjeto.getCpf());
 			ps.setString(2, depositoObjeto.getNumConta());
 			ps.setString(3, data);
-			ps.setString(4, depositoObjeto.getLinhaDigitavel());
-			ps.setDouble(5, depositoObjeto.getValor());
+			ps.setDouble(4, depositoObjeto.getValor());
 			
 			if (ps.executeUpdate() > 0)
 				return true;

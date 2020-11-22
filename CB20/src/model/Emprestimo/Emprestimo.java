@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DAO.EmprestimoDAO;
+import DAO.FaturaDAO;
+import DAO.FaturaEmprestimoDAO;
+import model.Fatura.Fatura;
+import model.Fatura.FaturaEmprestimo;
+import model.Fatura.Situacao;
 import model.Juros.Juros;
 import view.Main.Main;
 
@@ -19,7 +24,8 @@ public class Emprestimo {
 	float valorTotal;
 	int quantidadeParcelas;
 	float valorParcelas;
-	String situacao;
+	Situacao situacao = Situacao.PENDENTE;
+	float iof;
 	
 	public int getIdEmprestimo() {
 		return idEmprestimo;
@@ -78,11 +84,26 @@ public class Emprestimo {
 	public void setValorParcelas(float valorParcelas) {
 		this.valorParcelas = valorParcelas;
 	}
-	public String getSituacao() {
+	public Situacao getSituacao() {
 		return situacao;
 	}
-	public void setSituacao(String situacao) {
+	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
+	}
+	
+	public void setSituacao(String situacao) {
+		if(situacao.equals("pendente"))
+		{
+			this.situacao = Situacao.PENDENTE;
+		}
+		else if(situacao.equals("pago"))
+		{
+			this.situacao = Situacao.PAGO;
+		}
+		else if(situacao.equals("venceu"))
+		{
+			this.situacao = Situacao.VENCEU;
+		}
 	}
 	
 	public double getValorTotal(double valor, int prazo, float taxaMes) {		
@@ -91,7 +112,8 @@ public class Emprestimo {
 	
 	public double getValorParcela(double valor, int prazo, float taxaMes)
 	{		
-		return getValorTotal(valor, prazo, taxaMes) / prazo;
+		this.valorParcelas = (float) (getValorTotal(valor, prazo, taxaMes) / prazo);
+		return valorParcelas;
 	}
 	
 	public float getTaxaMes(int prazo)
@@ -99,6 +121,11 @@ public class Emprestimo {
 		taxaJuros = Juros.getJurosEmprestimo(Main.cliente.getIdade(), Main.cliente.getFormacao(), Main.cliente.getProfissao(), 
 				Main.cliente.getRenda(), prazo);
 		return taxaJuros;
+	}
+	
+	public float getTaxaJurosAtraso()
+	{
+		return getTaxaJuros() * 6;
 	}
 	
 	public LocalDate getPrimeiraParcela()
@@ -116,7 +143,16 @@ public class Emprestimo {
 		return iof;
 	}
 	
-	public boolean novoEmprestimo(float taxaJuros, int quantidadeParcelas, float valorTotal, String situacao)
+	public float getIOF()
+	{		
+		return iof;
+	}
+	
+	public void setIOF(float iof)
+	{
+		this.iof = iof;
+	}
+	public boolean novoEmprestimo(float taxaJuros, int quantidadeParcelas, float valorTotal, String descricao, float iof)
 	{
 		EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
@@ -133,10 +169,35 @@ public class Emprestimo {
 		setValorTotal(valorTotal);
 		setQuantidadeParcelas(quantidadeParcelas);
 		setValorParcelas((float)getValorTotal() / quantidadeParcelas);
-		setSituacao(situacao);	
-		System.out.println("Chegou");
-		emprestimoDAO.Inserir(this);
-		return true;	
+		setIOF(iof);
+		setSituacao(situacao);		
+		emprestimoDAO.Inserir(this);			
+		this.idEmprestimo = emprestimoDAO.Consultar("NumConta", Main.conta.getNumeroConta()).get(0).getIdEmprestimo();
+		return criarFaturas(this);			
+	}
+	
+	public boolean criarFaturas(Emprestimo emprestimo)
+	{
+		FaturaEmprestimoDAO faturaDAO = new FaturaEmprestimoDAO();
+		FaturaEmprestimo fatura = new FaturaEmprestimo();
+		String conta = Main.conta.getNumeroConta();
+		fatura.setDescricao(emprestimo.getSituacao().getDescricao());
+		fatura.setValor(emprestimo.getValorParcelas());		
+		fatura.setIdEmprestimo(emprestimo.getIdEmprestimo());
+		fatura.setTaxaJuros(emprestimo.getTaxaJuros());
+		fatura.setIdFatEmp(1111);
 		
+		for(int i = 0; i < emprestimo.getQuantidadeParcelas(); i++)
+		{
+			fatura.setDataVencimento(LocalDate.now().plusMonths(1 + i));
+			faturaDAO.Inserir(fatura);
+		}
+		
+		return true;
+	}
+	
+	public boolean pagarFatura()
+	{
+		return true;
 	}
 }

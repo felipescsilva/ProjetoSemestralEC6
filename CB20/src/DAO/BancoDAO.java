@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Banco.Banco;
+import model.Cambio.Cambio;
 import model.Emprestimo.Emprestimo;
 
 public class BancoDAO {
@@ -140,4 +141,45 @@ public class BancoDAO {
 		return bancos;
 	}
 	
+	public List<Banco> Consultar() {
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		List<Banco> bancos = new ArrayList<Banco>();
+		try {
+			
+			con = new ConexaoDAO();
+			String SQL = "select * from tblBanco";
+			ps = con.getConexao().prepareStatement(SQL);
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				Banco banco = new Banco();
+				
+				banco.setIdBanco(rs.getInt("idBanco"));
+				banco.setPatrimonioProprio(rs.getDouble("PatrimonioProprio"));
+				banco.setPatrimonioTerceiros(rs.getDouble("PatrimonioTerceiros"));
+				banco.setFaturamento(rs.getDouble("Faturamento"));
+				banco.setCustosFixos(rs.getDouble("CustosFixos"));
+				banco.setCustosVariaveis(rs.getDouble("CustosVariaveis"));
+				banco.setImpostos(rs.getDouble("Impostos"));
+				
+				
+				bancos.add(banco);
+			}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 try{
+				 if (rs != null)
+					 rs.close();
+				 if(ps != null)
+					 ps.close();
+				 con.FecharConexao();
+			 }catch(Exception e){
+				 e.printStackTrace();
+			 }
+		}
+		return bancos;
+	}
 }

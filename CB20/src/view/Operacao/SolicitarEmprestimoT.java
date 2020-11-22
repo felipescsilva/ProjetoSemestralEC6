@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.Cambio.Cambio;
+import model.Fatura.Situacao;
 import model.Juros.Juros;
 import model.Juros.Limites;
 import view.Main.Main;
@@ -256,7 +257,8 @@ public class SolicitarEmprestimoT extends JFrame {
 				JFrame f = new JFrame();
 				if(passwordField.getText().equals(Main.conta.getSenhaConta()))
 				{
-					if(Main.emprestimo.novoEmprestimo(Float.valueOf(txtTaxa.getText().replace("%", "")), Integer.valueOf(txtPrazo.getText()), Float.valueOf(txtValorTotal.getText()), "Regular"))
+					if(Main.emprestimo.novoEmprestimo(Float.valueOf(txtTaxa.getText().replace("%", "")), Integer.valueOf(txtPrazo.getText()), 
+							Float.valueOf(txtValorTotal.getText()), Situacao.PENDENTE.getDescricao(), Float.valueOf(txtIof.getText().replace("%", ""))))
 					{
 						
 						JOptionPane.showMessageDialog(f, "Empréstimo solicitado com sucesso!" , "Atenção", JOptionPane.INFORMATION_MESSAGE);
