@@ -18,9 +18,13 @@ import view.Cartao.SolicitarBloqueioT;
 import view.Login.CriarContaT;
 import view.Login.LoginT;
 import view.Menu.MenuPrincipalT;
+import view.Opcoes.AlterarDadosT;
+import view.Opcoes.AlterarSenhaT;
 import view.Opcoes.OpcoesAntigasT;
+import view.Opcoes.OpcoesT;
 import view.Opcoes.TelaSenha;
 import view.Operacao.CambioT;
+import view.Operacao.ConfirmarDadosT;
 import view.Operacao.DepositoT;
 import view.Operacao.EmprestimosAtivosT;
 import view.Operacao.EmprestimosMenuT;
@@ -35,7 +39,7 @@ public class Main {
 	    public static MenuPrincipalT menuPrincipal;
 	    public static CriarContaT novaConta;
 	    public static CriarContaT criarConta;
-		public static OpcoesAntigasT opcoes;
+		public static OpcoesT opcoes;
 		public static SaldoT saldo;
 		public static CartaoT cartaoT;
 		public static TransferenciaT transferencia;
@@ -49,6 +53,8 @@ public class Main {
 		public static Transferencia transferir;
 		public static EmprestimosMenuT emprestimosMenu;
 		public static EmprestimosAtivosT emprestimosAtivos;
+		public static AlterarDadosT alterarDados;
+		public static AlterarSenhaT alterarSenha;
 		
 		public static SolicitarBloqueioT solicitarBloqueio;
 		public static ConfirmarSenhaT solicitarCancelamento;
@@ -58,6 +64,7 @@ public class Main {
 		public static SelecionarFaturaT verFaturas;
 		public static VisualizarCartaoT verCartao;
 		public static VisualizarFaturaT verFatura;	    
+		public static ConfirmarDadosT confirmarDados;
 	    
 	    public static Login login;
 	    public static Conta conta;	    
@@ -68,7 +75,7 @@ public class Main {
 		public static Fatura fatura;
 		public static Audit auditoria;
 		public static Emprestimo emprestimo;
-		
+		public static Cliente clienteTransferencia;
 	    
 		@SuppressWarnings("deprecation")
 		public static void main(String[] argv) {
@@ -82,7 +89,7 @@ public class Main {
 		    menuPrincipal = new MenuPrincipalT();
 		    novaConta = new CriarContaT();
 		    criarConta = new CriarContaT();
-			opcoes = new OpcoesAntigasT();
+			opcoes = new OpcoesT();
 			saldo = new SaldoT();
 			cartaoT = new CartaoT();
 			transferencia = new TransferenciaT();
@@ -104,7 +111,10 @@ public class Main {
 			verCartoes = new SelecionarCartaoT();
 			verFaturas = new SelecionarFaturaT();
 			verCartao = new VisualizarCartaoT();
-			verFatura = new VisualizarFaturaT();	    
+			verFatura = new VisualizarFaturaT();	   
+			alterarDados = new AlterarDadosT();
+			alterarSenha = new AlterarSenhaT();
+			confirmarDados = new ConfirmarDadosT();
 		    
 		    login = new Login();
 		    conta = new Conta();	    
@@ -115,5 +125,6 @@ public class Main {
 			fatura = new Fatura();
 			auditoria = new Audit();
 			emprestimo = new Emprestimo();
+			clienteTransferencia = new Cliente();
 		}
 }
