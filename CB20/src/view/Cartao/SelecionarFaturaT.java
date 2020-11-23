@@ -52,28 +52,20 @@ public class SelecionarFaturaT extends JFrame {
 		setTitle("Faturas");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 150);
+		setBounds(100, 100, 478, 160);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(30, 144, 255));
-		panel.setBounds(7, 7, 427, 103);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
 		JButton btnNewButton = new JButton("Ver Fatura");
-		btnNewButton.setBounds(10, 69, 405, 23);
-		panel.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (cbFaturas.getSelectedIndex() == 0)
 					JOptionPane.showMessageDialog(f, "Selecione uma opção válida!", "Erro", JOptionPane.WARNING_MESSAGE);
 				else {
-					Main.verCartao.show();
+					Main.verFatura.show();
 					int indexSelecionado = cbFaturas.getSelectedIndex();
 					Main.fatura = Main.faturas.get(indexSelecionado - 1);
 					Main.verFatura.txtIdFatura.setText(Integer.toString(Main.fatura.getIdFatura()));
@@ -86,15 +78,22 @@ public class SelecionarFaturaT extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Sitka Small", Font.BOLD, 12));
+		btnNewButton.setBounds(21, 84, 424, 23);
+		contentPane.add(btnNewButton);
 		
 		JLabel lblSelecioneAFatura = new JLabel("Selecione o m\u00EAs de refer\u00EAncia da fatura:");
-		lblSelecioneAFatura.setBounds(0, 11, 429, 14);
-		panel.add(lblSelecioneAFatura);
 		lblSelecioneAFatura.setHorizontalAlignment(SwingConstants.CENTER);
-		cbFaturas.setBounds(10, 36, 405, 20);
-		panel.add(cbFaturas);
+		lblSelecioneAFatura.setBounds(21, 28, 429, 14);
+		contentPane.add(lblSelecioneAFatura);
 		
 		cbFaturas.setModel(new DefaultComboBoxModel(new String[] {"Selecione..."}));
+		cbFaturas.setBounds(24, 53, 424, 20);
+		contentPane.add(cbFaturas);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(30, 144, 255));
+		panel.setBounds(10, 11, 451, 107);
+		contentPane.add(panel);
 	}
 
 }

@@ -7,12 +7,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import DAO.ContaDAO;
+import DAO.FaturaDAO;
+import model.Fatura.Situacao;
 import view.Main.Main;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -110,9 +115,20 @@ public class VisualizarFaturaT extends JFrame {
 				confirmarSenha.btnConfirmar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (confirmarSenha.txtSenha.getText().equals(Main.conta.getSenhaConta()) && Main.conta.getSaldo() >= Main.fatura.getValor()) {
+							Main.fatura.setSituacao(Situacao.PAGO);
+							Main.conta.setSaldo(Main.conta.getSaldo() - Main.fatura.getValor());
+							FaturaDAO faturadao = new FaturaDAO();
+							faturadao.Atualizar(Main.fatura);
+							ContaDAO contadao = new ContaDAO();
+							contadao.Atualizar(Main.conta);
 							JOptionPane.showMessageDialog(f, "Fatura Paga!");
+							Main.faturas = Main.cartao.getFaturasNaoPagas();
+							Main.verFaturas.cbFaturas.removeAllItems();
+							Main.verFaturas.cbFaturas.addItem("Selecione...");
+							for (int i = 0; i < Main.faturas.size(); i++) {
+								Main.verFaturas.cbFaturas.addItem(Main.faturas.get(i).getIdFatura());
+							}
 							confirmarSenha.dispose();
-							Main.conta.PedirCancelamento(Main.cartao);
 							enable(true);
 							dispose();
 						} else {

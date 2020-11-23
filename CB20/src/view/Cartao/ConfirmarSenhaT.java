@@ -55,7 +55,7 @@ public class ConfirmarSenhaT extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
-				Main.verCartao.enable(true);
+				Main.verFatura.enable(true);
 				dispose();
 			}
 		});

@@ -48,13 +48,14 @@ public class FaturaDAO {
 		try {
 			String dataVencimento = faturaObjeto.getDataVencimento().getDayOfMonth() + "/" + faturaObjeto.getDataVencimento().getMonthValue() + "/" + faturaObjeto.getDataVencimento().getYear();
 			con = new ConexaoDAO();
-			String SQL = "exec dbo.sp_UpdateFatura ?, ?, ?, ?, ?";
+			String SQL = "exec dbo.sp_UpdateFatura ?, ?, ?, ?, ?, ?";
 			ps = con.getConexao().prepareStatement(SQL);
-			ps.setString(1, faturaObjeto.getNumCartao());
+			ps.setInt(1, faturaObjeto.getIdFatura());
 			ps.setString(2, dataVencimento);
 			ps.setDouble(3, faturaObjeto.getValor());
-			ps.setString(4, faturaObjeto.getSituacao().toString());			
-			ps.setDouble(5, faturaObjeto.getTaxaJuros());
+			ps.setString(4, faturaObjeto.getSituacao().toString());		
+			ps.setString(5, "null");
+			ps.setDouble(6, faturaObjeto.getTaxaJuros());
 			
 			if (ps.executeUpdate() > 0)
 				return true;
