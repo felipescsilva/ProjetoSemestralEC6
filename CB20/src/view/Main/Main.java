@@ -2,7 +2,6 @@ package view.Main;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import Audit.Audit;
 import DAO.BancoDAO;
 import model.Banco.Banco;
@@ -21,7 +20,6 @@ import view.Login.LoginT;
 import view.Menu.MenuPrincipalT;
 import view.Opcoes.AlterarDadosT;
 import view.Opcoes.AlterarSenhaT;
-import view.Opcoes.OpcoesAntigasT;
 import view.Opcoes.OpcoesT;
 import view.Opcoes.TelaSenha;
 import view.Operacao.CambioT;
@@ -30,7 +28,6 @@ import view.Operacao.DepositoT;
 import view.Operacao.EmprestimosAtivosT;
 import view.Operacao.EmprestimosMenuT;
 import view.Operacao.SolicitarEmprestimoT;
-import view.Operacao.PagamentoT;
 import view.Operacao.SaldoT;
 import view.Operacao.TransferenciaT;
 
@@ -44,7 +41,7 @@ public class Main {
 		public static SaldoT saldo;
 		public static CartaoT cartaoT;
 		public static TransferenciaT transferencia;
-		public static PagamentoT pagamento;
+		
 		public static DepositoT deposito;
 		
 		public static SolicitarEmprestimoT telaEmprestimo;
@@ -106,8 +103,7 @@ public class Main {
 			opcoes = new OpcoesT();
 			saldo = new SaldoT();
 			cartaoT = new CartaoT();
-			transferencia = new TransferenciaT();
-			pagamento = new PagamentoT();
+			transferencia = new TransferenciaT();			
 			deposito = new DepositoT();
 			
 			telaEmprestimo = new SolicitarEmprestimoT();

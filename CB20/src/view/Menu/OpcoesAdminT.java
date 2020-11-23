@@ -17,6 +17,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class OpcoesAdminT extends JFrame {
 
@@ -54,10 +55,19 @@ public class OpcoesAdminT extends JFrame {
 		getContentPane().setEnabled(false);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 0, 0));
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(0, 153, 255));
+		panel_1.setBounds(10, 11, 544, 330);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
+		
 		JButton btnNewButton = new JButton("Op\u00E7\u00F5es do Administrador");
+		btnNewButton.setBounds(10, 11, 524, 144);
+		panel_1.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Main.verCartoes.show();
@@ -69,10 +79,10 @@ public class OpcoesAdminT extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnNewButton.setBounds(10, 11, 524, 144);
-		panel.add(btnNewButton);
 		
 		JButton btnSolicitarNovoCarto = new JButton("Menu Principal");
+		btnSolicitarNovoCarto.setBounds(10, 164, 524, 155);
+		panel_1.add(btnSolicitarNovoCarto);
 		btnSolicitarNovoCarto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.solicitarCartao.show();
@@ -80,9 +90,7 @@ public class OpcoesAdminT extends JFrame {
 			}
 		});
 		btnSolicitarNovoCarto.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnSolicitarNovoCarto.setBounds(10, 164, 524, 155);
-		panel.add(btnSolicitarNovoCarto);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 549, 359);
+		setBounds(100, 100, 571, 381);
 	}
 }

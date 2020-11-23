@@ -53,7 +53,7 @@ public class AlterarSenhaT extends JFrame {
 		
 		setTitle("Alterar Senha");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 255, 178);
+		setBounds(100, 100, 252, 174);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

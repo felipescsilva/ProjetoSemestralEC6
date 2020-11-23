@@ -43,7 +43,7 @@ public class EmprestimosMenuT extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
-				Main.telaLogin.show();
+				Main.menuPrincipal.show();
 				dispose();
 			}
 		});

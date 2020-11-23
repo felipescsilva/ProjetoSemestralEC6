@@ -63,7 +63,7 @@ public class AlterarDadosT extends JFrame {
 		
 		panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0));
-		panel.setBounds(0, 0, 373, 219);
+		panel.setBounds(0, 0, 372, 219);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		

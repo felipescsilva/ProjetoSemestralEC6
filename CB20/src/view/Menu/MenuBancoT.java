@@ -14,6 +14,7 @@ import java.awt.Font;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JList;
+import java.awt.Color;
 
 public class MenuBancoT extends JFrame {
 
@@ -44,15 +45,22 @@ public class MenuBancoT extends JFrame {
 	public MenuBancoT() {
 		setTitle("Clientes");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 560, 420);
+		setBounds(100, 100, 583, 444);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(0, 153, 255));
+		panel_1.setBounds(10, 11, 545, 382);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 347, 85);
-		contentPane.add(panel);
+		panel_1.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNome = new JLabel("Nome");
@@ -96,22 +104,22 @@ public class MenuBancoT extends JFrame {
 		btnBuscar.setBounds(241, 51, 89, 23);
 		panel.add(btnBuscar);
 		
-		JList list = new JList();
-		list.setBounds(10, 107, 524, 263);
-		contentPane.add(list);
-		
 		JLabel lblValor = new JLabel("Valor");
-		lblValor.setFont(new Font("Sitka Small", Font.BOLD, 12));
 		lblValor.setBounds(392, 15, 46, 14);
-		contentPane.add(lblValor);
+		panel_1.add(lblValor);
+		lblValor.setFont(new Font("Sitka Small", Font.BOLD, 12));
 		
 		textField = new JTextField();
 		textField.setBounds(448, 11, 86, 20);
-		contentPane.add(textField);
+		panel_1.add(textField);
 		textField.setColumns(10);
 		
 		JButton btnDepositar = new JButton("Depositar");
 		btnDepositar.setBounds(445, 50, 89, 23);
-		contentPane.add(btnDepositar);
+		panel_1.add(btnDepositar);
+		
+		JList list = new JList();
+		list.setBounds(10, 107, 524, 263);
+		panel_1.add(list);
 	}
 }

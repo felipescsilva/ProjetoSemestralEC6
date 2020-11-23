@@ -76,7 +76,7 @@ public class LoginT extends JFrame {
 		});
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 246, 323);
+		setBounds(100, 100, 242, 317);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

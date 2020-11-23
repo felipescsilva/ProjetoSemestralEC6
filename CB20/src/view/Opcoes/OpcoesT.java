@@ -116,6 +116,6 @@ public class OpcoesT extends JFrame {
 		});
 		btnNewButton.setFont(new Font("Sitka Small", Font.BOLD, 12));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 535, 342);
+		setBounds(100, 100, 540, 342);
 	}
 }

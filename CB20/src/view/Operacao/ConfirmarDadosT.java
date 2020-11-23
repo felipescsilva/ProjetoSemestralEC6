@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class ConfirmarDadosT extends JFrame {
 
@@ -64,61 +65,70 @@ public class ConfirmarDadosT extends JFrame {
 		});
 		setTitle("Confirmar Dados");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 288, 228);
+		setBounds(100, 100, 304, 265);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		txtValor = new JTextField();
-		txtValor.setBounds(82, 101, 172, 20);
-		contentPane.add(txtValor);
-		txtValor.setColumns(10);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 153, 255));
+		panel.setBounds(10, 11, 267, 205);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel_4 = new JLabel("Senha Conta");
+		lblNewLabel_4.setBounds(10, 138, 62, 14);
+		panel.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel = new JLabel("Valor");
+		lblNewLabel.setBounds(10, 107, 46, 14);
+		panel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_3 = new JLabel("Nome T\u00EDtular");
+		lblNewLabel_3.setBounds(10, 76, 70, 14);
+		panel.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_2 = new JLabel("CPF");
+		lblNewLabel_2.setBounds(10, 45, 46, 14);
+		panel.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_1 = new JLabel("Conta");
+		lblNewLabel_1.setBounds(10, 14, 46, 14);
+		panel.add(lblNewLabel_1);
 		
 		txtConta = new JTextField();
+		txtConta.setBounds(82, 11, 172, 20);
+		panel.add(txtConta);
 		txtConta.setEditable(false);
-		txtConta.setBounds(82, 8, 172, 20);
-		contentPane.add(txtConta);
 		txtConta.setColumns(10);
 		
 		txtCPF = new JTextField();
+		txtCPF.setBounds(82, 42, 172, 20);
+		panel.add(txtCPF);
 		txtCPF.setEditable(false);
-		txtCPF.setBounds(82, 39, 172, 20);
-		contentPane.add(txtCPF);
 		txtCPF.setColumns(10);
 		
 		txtNome = new JTextField();
+		txtNome.setBounds(82, 73, 172, 20);
+		panel.add(txtNome);
 		txtNome.setEditable(false);
-		txtNome.setBounds(82, 70, 172, 20);
-		contentPane.add(txtNome);
 		txtNome.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Conta");
-		lblNewLabel_1.setBounds(10, 11, 46, 14);
-		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel = new JLabel("Valor");
-		lblNewLabel.setBounds(10, 104, 46, 14);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_2 = new JLabel("CPF");
-		lblNewLabel_2.setBounds(10, 42, 46, 14);
-		contentPane.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Nome T\u00EDtular");
-		lblNewLabel_3.setBounds(10, 73, 70, 14);
-		contentPane.add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_4 = new JLabel("Senha Conta");
-		lblNewLabel_4.setBounds(10, 135, 62, 14);
-		contentPane.add(lblNewLabel_4);
+		txtValor = new JTextField();
+		txtValor.setBounds(82, 104, 172, 20);
+		panel.add(txtValor);
+		txtValor.setColumns(10);
 		
 		txtSenha = new JPasswordField();
+		txtSenha.setBounds(82, 135, 172, 20);
+		panel.add(txtSenha);
 		txtSenha.setColumns(10);
-		txtSenha.setBounds(82, 132, 172, 20);
-		contentPane.add(txtSenha);
 		
 		JButton btnNewButton = new JButton("Confirmar Transfer\u00EAncia");
+		btnNewButton.setBounds(10, 163, 244, 23);
+		panel.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String valorString = txtValor.getText();
@@ -150,7 +160,5 @@ public class ConfirmarDadosT extends JFrame {
 					JOptionPane.showMessageDialog(f, mensagemErro, "Erro", JOptionPane.WARNING_MESSAGE);
 			}
 		});
-		btnNewButton.setBounds(10, 160, 244, 23);
-		contentPane.add(btnNewButton);
 	}
 }
