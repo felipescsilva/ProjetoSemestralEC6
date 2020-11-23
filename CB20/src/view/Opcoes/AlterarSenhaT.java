@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class AlterarSenhaT extends JFrame {
 
@@ -30,6 +31,8 @@ public class AlterarSenhaT extends JFrame {
 	public JLabel lblNovaSenha;
 	public JLabel lblConfirmarSenha;
 	private JFrame f = new JFrame();
+	private JPanel panel;
+	private JPanel panel_1;
 	
 
 	/**
@@ -39,6 +42,7 @@ public class AlterarSenhaT extends JFrame {
 	 * Create the frame.
 	 */
 	public AlterarSenhaT() {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
@@ -49,40 +53,48 @@ public class AlterarSenhaT extends JFrame {
 		
 		setTitle("Alterar Senha");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 264, 173);
+		setBounds(100, 100, 255, 178);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		panel = new JPanel();
+		panel.setBackground(new Color(30, 144, 255));
+		panel.setBounds(10, 11, 225, 123);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		lblSenhaAtual = new JLabel("Senha Aplicativo Atual");
+		lblSenhaAtual.setBounds(10, 11, 127, 14);
+		panel.add(lblSenhaAtual);
+		
 		txtSenhaAtual = new JPasswordField();
-		txtSenhaAtual.setBounds(149, 11, 86, 20);
-		contentPane.add(txtSenhaAtual);
+		txtSenhaAtual.setBounds(129, 8, 86, 20);
+		panel.add(txtSenhaAtual);
 		txtSenhaAtual.setColumns(10);
 		
 		txtNovaSenha = new JPasswordField();
-		txtNovaSenha.setBounds(149, 42, 86, 20);
-		contentPane.add(txtNovaSenha);
+		txtNovaSenha.setBounds(129, 36, 86, 20);
+		panel.add(txtNovaSenha);
 		txtNovaSenha.setColumns(10);
 		
+		lblNovaSenha = new JLabel("Nova Senha Aplicativo");
+		lblNovaSenha.setBounds(10, 39, 127, 14);
+		panel.add(lblNovaSenha);
+		
 		txtConfirmarSenha = new JPasswordField();
-		txtConfirmarSenha.setBounds(149, 73, 86, 20);
-		contentPane.add(txtConfirmarSenha);
+		txtConfirmarSenha.setBounds(129, 63, 86, 20);
+		panel.add(txtConfirmarSenha);
 		txtConfirmarSenha.setColumns(10);
 		
-		lblSenhaAtual = new JLabel("Senha Aplicativo Atual");
-		lblSenhaAtual.setBounds(10, 14, 127, 14);
-		contentPane.add(lblSenhaAtual);
-		
-		lblNovaSenha = new JLabel("Nova Senha Aplicativo");
-		lblNovaSenha.setBounds(10, 45, 127, 14);
-		contentPane.add(lblNovaSenha);
-		
 		lblConfirmarSenha = new JLabel("Confirmar Senha");
-		lblConfirmarSenha.setBounds(10, 76, 112, 14);
-		contentPane.add(lblConfirmarSenha);
+		lblConfirmarSenha.setBounds(10, 66, 112, 14);
+		panel.add(lblConfirmarSenha);
 		
 		JButton btnNewButton = new JButton("Confirmar Altera\u00E7\u00E3o");
+		btnNewButton.setBounds(10, 94, 205, 22);
+		panel.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (Main.telaSelecionada == TelaSenha.APP) {
@@ -135,7 +147,10 @@ public class AlterarSenhaT extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(10, 101, 225, 23);
-		contentPane.add(btnNewButton);
+		
+		panel_1 = new JPanel();
+		panel_1.setBackground(new Color(0, 0, 0));
+		panel_1.setBounds(0, 0, 248, 145);
+		contentPane.add(panel_1);
 	}
 }

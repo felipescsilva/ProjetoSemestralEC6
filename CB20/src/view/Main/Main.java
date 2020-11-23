@@ -16,13 +16,16 @@ import model.Fatura.Fatura;
 import model.Login.Login;
 import model.Transferencia.Transferencia;
 import view.Cartao.*;
-import view.Cartao.SolicitarBloqueioT;
 import view.Login.CriarContaT;
 import view.Login.LoginT;
 import view.Menu.MenuPrincipalT;
+import view.Opcoes.AlterarDadosT;
+import view.Opcoes.AlterarSenhaT;
 import view.Opcoes.OpcoesAntigasT;
+import view.Opcoes.OpcoesT;
 import view.Opcoes.TelaSenha;
 import view.Operacao.CambioT;
+import view.Operacao.ConfirmarDadosT;
 import view.Operacao.DepositoT;
 import view.Operacao.EmprestimosAtivosT;
 import view.Operacao.EmprestimosMenuT;
@@ -37,7 +40,7 @@ public class Main {
 	    public static MenuPrincipalT menuPrincipal;
 	    public static CriarContaT novaConta;
 	    public static CriarContaT criarConta;
-		public static OpcoesAntigasT opcoes;
+		public static OpcoesT opcoes;
 		public static SaldoT saldo;
 		public static CartaoT cartaoT;
 		public static TransferenciaT transferencia;
@@ -52,14 +55,15 @@ public class Main {
 		public static EmprestimosMenuT emprestimosMenu;
 		public static EmprestimosAtivosT emprestimosAtivos;
 		
-		public static SolicitarBloqueioT solicitarBloqueio;
 		public static ConfirmarSenhaT solicitarCancelamento;
 		public static SolicitarCartaoT solicitarCartao;
-		public static SolicitarDesbloqueioT solicitarDesbloqueio;
 		public static SelecionarCartaoT verCartoes;
 		public static SelecionarFaturaT verFaturas;
 		public static VisualizarCartaoT verCartao;
-		public static VisualizarFaturaT verFatura;	    
+		public static VisualizarFaturaT verFatura;
+		public static AlterarSenhaT alterarSenha;
+		public static AlterarDadosT alterarDados;
+		public static ConfirmarDadosT confirmarDados;
 	    
 	    public static Login login;
 	    public static Conta conta;	    
@@ -72,6 +76,7 @@ public class Main {
 		public static Emprestimo emprestimo;
 		private static Banco banco = new Banco();
 		public static BancoDAO bancoDAO = new BancoDAO();
+		public static Cliente clienteTransferencia;
 		
 		
 	    
@@ -98,7 +103,7 @@ public class Main {
 		    menuPrincipal = new MenuPrincipalT();
 		    novaConta = new CriarContaT();
 		    criarConta = new CriarContaT();
-			opcoes = new OpcoesAntigasT();
+			opcoes = new OpcoesT();
 			saldo = new SaldoT();
 			cartaoT = new CartaoT();
 			transferencia = new TransferenciaT();
@@ -113,14 +118,15 @@ public class Main {
 			emprestimosMenu = new EmprestimosMenuT();
 			emprestimosAtivos = new EmprestimosAtivosT();
 			
-			solicitarBloqueio = new SolicitarBloqueioT();
 			solicitarCancelamento = new ConfirmarSenhaT();
 			solicitarCartao = new SolicitarCartaoT();
-			solicitarDesbloqueio = new SolicitarDesbloqueioT();
 			verCartoes = new SelecionarCartaoT();
 			verFaturas = new SelecionarFaturaT();
 			verCartao = new VisualizarCartaoT();
-			verFatura = new VisualizarFaturaT();	    
+			verFatura = new VisualizarFaturaT();
+			alterarSenha = new AlterarSenhaT();
+			alterarDados = new AlterarDadosT();
+			confirmarDados = new ConfirmarDadosT();
 		    
 		    login = new Login();
 		    conta = new Conta();	    
@@ -131,5 +137,6 @@ public class Main {
 			fatura = new Fatura();
 			auditoria = new Audit();
 			emprestimo = new Emprestimo();
+			clienteTransferencia = new Cliente();
 		}
 }

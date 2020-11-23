@@ -16,31 +16,24 @@ import java.awt.Font;
 import javax.swing.JList;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JTextField;
+import java.awt.Color;
 
 public class SaldoT extends JFrame {
 
 	private JPanel contentPane;
+	public JTextField txtSaldo;
+	private JPanel panel;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SaldoT frame = new SaldoT();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
 	public SaldoT() {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
@@ -50,26 +43,27 @@ public class SaldoT extends JFrame {
 		});
 		setTitle("Saldo");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 560, 420);
+		setBounds(100, 100, 218, 91);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblPerodo = new JLabel("Per\u00EDodo");
-		lblPerodo.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		lblPerodo.setBounds(10, 11, 56, 14);
-		contentPane.add(lblPerodo);
+		panel = new JPanel();
+		panel.setBackground(new Color(30, 144, 255));
+		panel.setBounds(10, 11, 191, 36);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
-		JComboBox cbPeriodo = new JComboBox();
-		cbPeriodo.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		cbPeriodo.setModel(new DefaultComboBoxModel(new String[] {"30 dias", "60 dias", "90 dias"}));
-		cbPeriodo.setToolTipText("");
-		cbPeriodo.setBounds(107, 8, 74, 20);
-		contentPane.add(cbPeriodo);
+		JLabel lblNewLabel = new JLabel("Saldo");
+		lblNewLabel.setBounds(10, 11, 64, 14);
+		panel.add(lblNewLabel);
 		
-		JList list = new JList();
-		list.setBounds(10, 36, 524, 334);
-		contentPane.add(list);
+		txtSaldo = new JTextField();
+		txtSaldo.setBounds(84, 8, 97, 20);
+		panel.add(txtSaldo);
+		txtSaldo.setEditable(false);
+		txtSaldo.setColumns(10);
 	}
 }

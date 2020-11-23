@@ -23,6 +23,7 @@ import model.Cliente.Profissao;
 import view.Main.Main;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class AlterarDadosT extends JFrame {
 
@@ -33,6 +34,8 @@ public class AlterarDadosT extends JFrame {
 	public JComboBox cbFormacao;
 	public JComboBox cbProfissao;
 	private JFrame f = new JFrame();
+	private JPanel panel;
+	private JPanel panel_1;
 
 	/**
 	 * Launch the application.
@@ -42,6 +45,7 @@ public class AlterarDadosT extends JFrame {
 	 * Create the frame.
 	 */
 	public AlterarDadosT() {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
@@ -51,48 +55,72 @@ public class AlterarDadosT extends JFrame {
 		});
 		setTitle("Alterar Dados");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 287, 237);
+		setBounds(100, 100, 378, 251);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Nome");
-		lblNewLabel.setBounds(10, 11, 46, 14);
-		contentPane.add(lblNewLabel);
+		panel = new JPanel();
+		panel.setBackground(new Color(0, 0, 0));
+		panel.setBounds(0, 0, 373, 219);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
-		txtNome = new JTextField();
-		txtNome.setBounds(104, 8, 150, 20);
-		contentPane.add(txtNome);
-		txtNome.setColumns(10);
+		panel_1 = new JPanel();
+		panel_1.setBackground(new Color(30, 144, 255));
+		panel_1.setBounds(10, 11, 350, 197);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
 		
-		txtData = new JTextField();
-		txtData.setBounds(104, 39, 150, 20);
-		contentPane.add(txtData);
-		txtData.setColumns(10);
-		
-		JLabel lblNewLabel_1 = new JLabel("Data Nascimento");
-		lblNewLabel_1.setBounds(10, 42, 118, 14);
-		contentPane.add(lblNewLabel_1);
-		
-		txtRenda = new JTextField();
-		txtRenda.setBounds(104, 132, 150, 20);
-		contentPane.add(txtRenda);
-		txtRenda.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("Forma\u00E7\u00E3o");
-		lblNewLabel_2.setBounds(10, 73, 76, 14);
-		contentPane.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Profiss\u00E3o");
-		lblNewLabel_3.setBounds(10, 104, 46, 14);
-		contentPane.add(lblNewLabel_3);
+		JButton btnNewButton = new JButton("Alterar");
+		btnNewButton.setBounds(10, 163, 333, 23);
+		panel_1.add(btnNewButton);
 		
 		JLabel lblNewLabel_4 = new JLabel("Renda");
 		lblNewLabel_4.setBounds(10, 135, 46, 14);
-		contentPane.add(lblNewLabel_4);
+		panel_1.add(lblNewLabel_4);
 		
-		JButton btnNewButton = new JButton("Alterar");
+		txtRenda = new JTextField();
+		txtRenda.setBounds(127, 132, 216, 20);
+		panel_1.add(txtRenda);
+		txtRenda.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Nome");
+		lblNewLabel.setBounds(10, 11, 46, 14);
+		panel_1.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Data Nascimento");
+		lblNewLabel_1.setBounds(10, 42, 118, 14);
+		panel_1.add(lblNewLabel_1);
+		
+		txtNome = new JTextField();
+		txtNome.setBounds(127, 8, 216, 20);
+		panel_1.add(txtNome);
+		txtNome.setColumns(10);
+		
+		JLabel lblNewLabel_3 = new JLabel("Profiss\u00E3o");
+		lblNewLabel_3.setBounds(10, 107, 46, 14);
+		panel_1.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_2 = new JLabel("Forma\u00E7\u00E3o");
+		lblNewLabel_2.setBounds(10, 76, 76, 14);
+		panel_1.add(lblNewLabel_2);
+		
+		cbProfissao = new JComboBox();
+		cbProfissao.setBounds(127, 101, 216, 20);
+		panel_1.add(cbProfissao);
+		cbProfissao.setModel(new DefaultComboBoxModel(Profissao.values()));
+		
+		cbFormacao = new JComboBox();
+		cbFormacao.setBounds(127, 70, 216, 20);
+		panel_1.add(cbFormacao);
+		cbFormacao.setModel(new DefaultComboBoxModel(Formacao.values()));
+		
+		txtData = new JTextField();
+		txtData.setBounds(127, 39, 216, 20);
+		panel_1.add(txtData);
+		txtData.setColumns(10);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean dadosCorretos = true;
@@ -144,17 +172,5 @@ public class AlterarDadosT extends JFrame {
 					JOptionPane.showMessageDialog(f, mensagemDeErro, "Erro", JOptionPane.WARNING_MESSAGE);
 			}
 		});
-		btnNewButton.setBounds(10, 163, 244, 23);
-		contentPane.add(btnNewButton);
-		
-		cbFormacao = new JComboBox();
-		cbFormacao.setModel(new DefaultComboBoxModel(Formacao.values()));
-		cbFormacao.setBounds(104, 70, 150, 20);
-		contentPane.add(cbFormacao);
-		
-		cbProfissao = new JComboBox();
-		cbProfissao.setModel(new DefaultComboBoxModel(Profissao.values()));
-		cbProfissao.setBounds(104, 101, 150, 20);
-		contentPane.add(cbProfissao);
 	}
 }

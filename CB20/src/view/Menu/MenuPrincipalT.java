@@ -36,23 +36,11 @@ public class MenuPrincipalT extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MenuPrincipalT frame = new MenuPrincipalT();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */
 	public MenuPrincipalT() {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
@@ -62,7 +50,7 @@ public class MenuPrincipalT extends JFrame {
 		});
 		setTitle("Menu");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 560, 420);
+		setBounds(100, 100, 550, 409);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -74,11 +62,11 @@ public class MenuPrincipalT extends JFrame {
 		panel.setBounds(10, 11, 524, 359);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		btnNome.setBounds(10, 11, 130, 40);
+		btnNome.setBounds(10, 11, 130, 104);
 		panel.add(btnNome);
 		
 		JButton btnCmbio = new JButton("C\u00E2mbio");
-		btnCmbio.setBounds(10, 71, 130, 40);
+		btnCmbio.setBounds(196, 189, 130, 157);
 		panel.add(btnCmbio);
 		
 		JButton btnSaldo = new JButton("Saldo");
@@ -88,10 +76,6 @@ public class MenuPrincipalT extends JFrame {
 		JButton btnCarto = new JButton("Cart\u00E3o");
 		btnCarto.setBounds(10, 248, 130, 100);
 		panel.add(btnCarto);
-		
-		JButton btnPagamento = new JButton("Pagamento");
-		btnPagamento.setBounds(198, 188, 130, 160);
-		panel.add(btnPagamento);
 		
 		JButton btnTransferncia = new JButton("Transfer\u00EAncia");
 		btnTransferncia.setBounds(198, 11, 130, 160);
@@ -121,13 +105,6 @@ public class MenuPrincipalT extends JFrame {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {				
 				Main.transferencia.show();
-				hide();
-			}
-		});
-		btnPagamento.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent e) {				
-				Main.pagamento.show();
 				hide();
 			}
 		});

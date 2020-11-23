@@ -17,6 +17,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class OpcoesT extends JFrame {
 
@@ -57,37 +58,64 @@ public class OpcoesT extends JFrame {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Alterar Dados");
-		btnNewButton.addActionListener(new ActionListener() {
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(0, 0, 0));
+		panel_1.setBounds(0, 0, 543, 312);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(30, 144, 255));
+		panel_2.setBounds(10, 11, 512, 290);
+		panel_1.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JButton btnAlterarSenhaDa = new JButton("Alterar Senha da Conta");
+		btnAlterarSenhaDa.setBounds(10, 191, 493, 88);
+		panel_2.add(btnAlterarSenhaDa);
+		btnAlterarSenhaDa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Main.verCartoes.show();
-				Main.cartoes = Main.conta.getCartoes();
-				for (int i = 0; i < Main.cartoes.size(); i++) {
-					Main.verCartoes.cbCartoes.addItem(Main.cartoes.get(i).getNumeroCartao());
-				}
+				Main.alterarSenha = new AlterarSenhaT();
+				Main.alterarSenha.show();
+				
+				Main.telaSelecionada = TelaSenha.CONTA;
+				Main.alterarSenha.lblSenhaAtual.setText("Senha atual conta");
+				Main.alterarSenha.lblNovaSenha.setText("Nova senha conta");
+				
 				hide();
 			}
 		});
-		btnNewButton.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnNewButton.setBounds(10, 11, 524, 90);
-		panel.add(btnNewButton);
+		btnAlterarSenhaDa.setFont(new Font("Sitka Small", Font.BOLD, 12));
 		
 		JButton btnSolicitarNovoCarto = new JButton("Alterar Senha do Aplicativo");
+		btnSolicitarNovoCarto.setBounds(10, 102, 493, 78);
+		panel_2.add(btnSolicitarNovoCarto);
 		btnSolicitarNovoCarto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.solicitarCartao.show();
+				Main.alterarSenha = new AlterarSenhaT();
+				Main.alterarSenha.show();
+				
+				Main.telaSelecionada = TelaSenha.APP;
+				Main.alterarSenha.lblSenhaAtual.setText("Senha atual aplicativo");
+				Main.alterarSenha.lblNovaSenha.setText("Nova senha aplicativo");
+				
 				hide();
 			}
 		});
 		btnSolicitarNovoCarto.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnSolicitarNovoCarto.setBounds(10, 112, 524, 90);
-		panel.add(btnSolicitarNovoCarto);
 		
-		JButton btnAlterarSenhaDa = new JButton("Alterar Senha da Conta");
-		btnAlterarSenhaDa.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnAlterarSenhaDa.setBounds(10, 213, 524, 90);
-		panel.add(btnAlterarSenhaDa);
+		JButton btnNewButton = new JButton("Alterar Dados");
+		btnNewButton.setBounds(10, 20, 493, 71);
+		panel_2.add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Main.alterarDados = new AlterarDadosT();
+				Main.alterarDados.show();
+				hide();
+			}
+		});
+		btnNewButton.setFont(new Font("Sitka Small", Font.BOLD, 12));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 549, 341);
+		setBounds(100, 100, 535, 342);
 	}
 }

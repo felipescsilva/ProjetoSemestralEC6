@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class SolicitarCartaoT extends JFrame {
 
@@ -58,40 +59,53 @@ public class SolicitarCartaoT extends JFrame {
 				dispose();
 			}
 		});
+		
 		setTitle("Solicitar Cart\u00E3o");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 214, 188);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		
-		JLabel lblNewLabel = new JLabel("Tipo Cart\u00E3o");
-		lblNewLabel.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		lblNewLabel.setToolTipText("");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 11, 178, 14);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSenha.setBounds(10, 59, 178, 14);
-		contentPane.add(lblSenha);
 		
 		JPasswordField txtSenha = new JPasswordField();
 		txtSenha.setBounds(20, 84, 168, 20);
 		contentPane.add(txtSenha);
 		
-		JComboBox cbTipo = new JComboBox();
-		cbTipo.setModel(new DefaultComboBoxModel(Tipo.values()));
-		cbTipo.setBounds(20, 28, 168, 20);
-		contentPane.add(cbTipo);
-		
 		JFrame f = new JFrame();
 		JButton btnNewButton = new JButton("Enviar");
+		
+		btnNewButton.setFont(new Font("Sitka Small", Font.BOLD, 12));
+		btnNewButton.setBounds(20, 115, 168, 23);
+		contentPane.add(btnNewButton);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(30, 144, 255));
+		panel.setBounds(10, 11, 188, 137);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JComboBox cbTipo = new JComboBox();
+		cbTipo.setBounds(10, 31, 168, 20);
+		panel.add(cbTipo);
+		cbTipo.setModel(new DefaultComboBoxModel(Tipo.values()));
+		
+		JLabel lblSenha = new JLabel("Senha");
+		lblSenha.setBounds(0, 55, 188, 14);
+		panel.add(lblSenha);
+		lblSenha.setFont(new Font("Sitka Small", Font.BOLD, 12));
+		lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		JLabel lblNewLabel = new JLabel("Tipo Cart\u00E3o");
+		lblNewLabel.setBounds(10, 11, 168, 14);
+		panel.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("Sitka Small", Font.BOLD, 12));
+		lblNewLabel.setToolTipText("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Moeda moeda;				
@@ -115,8 +129,5 @@ public class SolicitarCartaoT extends JFrame {
 			}
 
 		});
-		btnNewButton.setFont(new Font("Sitka Small", Font.BOLD, 12));
-		btnNewButton.setBounds(55, 115, 89, 23);
-		contentPane.add(btnNewButton);
 	}
 }

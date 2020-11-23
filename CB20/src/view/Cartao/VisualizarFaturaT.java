@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class VisualizarFaturaT extends JFrame {
 
@@ -61,11 +62,13 @@ public class VisualizarFaturaT extends JFrame {
 		setBounds(100, 100, 450, 207);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setBounds(5, 5, 424, 158);
+		panel.setBackground(new Color(30, 144, 255));
+		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("N\u00BA Fatura");
@@ -132,5 +135,10 @@ public class VisualizarFaturaT extends JFrame {
 		txtJuros.setColumns(10);
 		txtJuros.setBounds(69, 67, 345, 20);
 		panel.add(txtJuros);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(0, 0, 0));
+		panel_1.setBounds(0, 0, 434, 168);
+		contentPane.add(panel_1);
 	}
 }

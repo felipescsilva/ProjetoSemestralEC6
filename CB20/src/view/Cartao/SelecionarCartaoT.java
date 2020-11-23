@@ -33,16 +33,17 @@ import javax.swing.SwingConstants;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class SelecionarCartaoT extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private JTable table_1;
-	private JTable table_2;
 	private JTable table_3;
 	private JFrame f = new JFrame();
 	public JComboBox cbCartoes = new JComboBox();
+	private JPanel panel;
 
 	/**
 	 * Launch the application.
@@ -76,21 +77,35 @@ public class SelecionarCartaoT extends JFrame {
 		setResizable(false);
 		setTitle("Selecionar Cart\u00E3o");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 500, 133);
+		setBounds(100, 100, 500, 146);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		table_2 = new JTable();
-		table_2.setBounds(10, 11, 1, 1);
-		contentPane.add(table_2);
 		
 		table_3 = new JTable();
 		table_3.setBounds(10, 11, 1, 1);
 		contentPane.add(table_3);
 		
+		panel = new JPanel();
+		panel.setBackground(new Color(30, 144, 255));
+		panel.setBounds(10, 11, 473, 95);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
 		JButton btnNewButton = new JButton("Ver Cart\u00E3o");
+		btnNewButton.setBounds(10, 61, 453, 23);
+		panel.add(btnNewButton);
+		
+		JLabel lblNewLabel = new JLabel("Selecione o Cart\u00E3o:");
+		lblNewLabel.setBounds(-12, 11, 495, 14);
+		panel.add(lblNewLabel);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		cbCartoes.setBounds(10, 36, 453, 20);
+		panel.add(cbCartoes);
+		
+		cbCartoes.setModel(new DefaultComboBoxModel(new String[] {"Selecione..."}));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (cbCartoes.getSelectedIndex() == 0)
@@ -128,16 +143,5 @@ public class SelecionarCartaoT extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(200, 66, 89, 23);
-		contentPane.add(btnNewButton);
-		
-		cbCartoes.setModel(new DefaultComboBoxModel(new String[] {"Selecione..."}));
-		cbCartoes.setBounds(10, 35, 473, 20);
-		contentPane.add(cbCartoes);
-		
-		JLabel lblNewLabel = new JLabel("Selecione o Cart\u00E3o:");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 11, 473, 14);
-		contentPane.add(lblNewLabel);
 	}
 }

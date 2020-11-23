@@ -58,23 +58,12 @@ public class CriarContaT extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CriarContaT frame = new CriarContaT();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
 	public CriarContaT() {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
@@ -84,7 +73,7 @@ public class CriarContaT extends JFrame {
 		});
 		setTitle("Nova Conta");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 432, 420);
+		setBounds(100, 100, 423, 409);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -241,11 +230,13 @@ public class CriarContaT extends JFrame {
 					dadosCorretos = false;
 				}
 				else {
-					if (Double.parseDouble(txtRenda.getText()) < 0) {
+					String rendaString = txtRenda.getText();
+					rendaString = rendaString.replace(",", ".");
+					if (Double.parseDouble(rendaString) < 0) {
 						mensagemDeErro += "A renda não pode ser negativa.\n";
 						dadosCorretos = false;
 					} else {
-						renda = Double.parseDouble(txtRenda.getText());
+						renda = Double.parseDouble(rendaString);
 					}
 				}
 				LocalDate data = LocalDate.now();

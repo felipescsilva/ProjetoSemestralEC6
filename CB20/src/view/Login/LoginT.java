@@ -67,6 +67,7 @@ public class LoginT extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginT() {
+		setResizable(false);
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentShown(ComponentEvent arg0) {
@@ -75,7 +76,7 @@ public class LoginT extends JFrame {
 		});
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 252, 326);
+		setBounds(100, 100, 246, 323);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
