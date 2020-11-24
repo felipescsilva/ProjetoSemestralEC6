@@ -2,8 +2,11 @@ package model.Cliente;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 import DAO.CartaoDAO;
+import DAO.ClienteDAO;
 import DAO.ContaDAO;
 import model.Cartao.Status;
 import model.Cartao.Cartao;
@@ -213,6 +216,20 @@ public class Cliente {
 		
 		
 		return true;
+	}
+	
+	public List<Conta> getContaVinculada() {
+		ContaDAO dao = new ContaDAO();
+		List<Conta> listaConta = new ArrayList<Conta>();
+		
+		try {
+			listaConta = dao.Consultar("CPF", this.getCPF());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listaConta;
 	}
 	
 	//Verifica se o CPF informado é o do cliente

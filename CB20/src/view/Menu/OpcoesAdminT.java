@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.Cartao.Cartao;
+import view.Login.LoginT;
 import view.Main.Main;
 
 import javax.swing.JButton;
@@ -46,7 +47,8 @@ public class OpcoesAdminT extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
-				Main.menuPrincipal.show();
+				Main.telaLogin = new LoginT();
+				Main.telaLogin.show();
 				dispose();
 			}
 		});
@@ -70,11 +72,7 @@ public class OpcoesAdminT extends JFrame {
 		panel_1.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Main.verCartoes.show();
-				Main.cartoes = Main.conta.getCartoes();
-				for (int i = 0; i < Main.cartoes.size(); i++) {
-					Main.verCartoes.cbCartoes.addItem(Main.cartoes.get(i).getNumeroCartao());
-				}
+				Main.menuAdmin.show();
 				hide();
 			}
 		});
@@ -85,7 +83,7 @@ public class OpcoesAdminT extends JFrame {
 		panel_1.add(btnSolicitarNovoCarto);
 		btnSolicitarNovoCarto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.solicitarCartao.show();
+				Main.menuPrincipal.show();
 				hide();
 			}
 		});

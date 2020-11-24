@@ -39,7 +39,10 @@ public class MenuPrincipalT extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
-				Main.telaLogin.show();
+				if (Main.conta.getNumeroConta().equals("5469"))
+					Main.opcoesAdmin.show();
+				else
+					Main.telaLogin.show();
 				dispose();
 			}
 		});

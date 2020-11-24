@@ -177,8 +177,12 @@ public class LoginT extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//Main.menuPrincipal.show();
 				//hide();
-				if (Main.login.signIn(txtBankAccount.getText(), txtSenhaConta.getText())) {					
-					Main.menuPrincipal.show();
+				if (Main.login.signIn(txtBankAccount.getText(), txtSenhaConta.getText())) {
+					if (!Main.conta.getNumeroConta().equals("5469")) {
+						Main.menuPrincipal.show();
+					} else {
+						Main.opcoesAdmin.show();
+					}
 					
 					int finalPrimeiroNome = Main.cliente.getNome().indexOf(" ");
 					if(finalPrimeiroNome == -1)

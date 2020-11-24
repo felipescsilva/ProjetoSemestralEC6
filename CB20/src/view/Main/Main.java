@@ -17,7 +17,13 @@ import model.Transferencia.Transferencia;
 import view.Cartao.*;
 import view.Login.CriarContaT;
 import view.Login.LoginT;
+import view.Menu.ConsultarT;
+import view.Menu.MenuAdminT;
 import view.Menu.MenuPrincipalT;
+import view.Menu.OpcoesAdminT;
+import view.Menu.PesquisarContaT;
+import view.Menu.PesquisarCpfT;
+import view.Menu.TelaAdmin;
 import view.Opcoes.AlterarDadosT;
 import view.Opcoes.AlterarSenhaT;
 import view.Opcoes.OpcoesT;
@@ -41,12 +47,15 @@ public class Main {
 		public static SaldoT saldo;
 		public static CartaoT cartaoT;
 		public static TransferenciaT transferencia;
+		public static OpcoesAdminT opcoesAdmin;
+		public static MenuAdminT menuAdmin;
 		
 		public static DepositoT deposito;
 		
 		public static SolicitarEmprestimoT telaEmprestimo;
 		public static CambioT cambio;
 		public static TelaSenha telaSelecionada;
+		public static TelaAdmin telaAdminSelecionada;
 		public static Conta contaTransferencia;
 		public static Transferencia transferir;
 		public static EmprestimosMenuT emprestimosMenu;
@@ -61,6 +70,9 @@ public class Main {
 		public static AlterarSenhaT alterarSenha;
 		public static AlterarDadosT alterarDados;
 		public static ConfirmarDadosT confirmarDados;
+		public static PesquisarCpfT pesquisarCpf;
+		public static PesquisarContaT pesquisarConta;
+		public static ConsultarT consultar;
 	    
 	    public static Login login;
 	    public static Conta conta;	    
@@ -105,6 +117,8 @@ public class Main {
 			cartaoT = new CartaoT();
 			transferencia = new TransferenciaT();			
 			deposito = new DepositoT();
+			opcoesAdmin = new OpcoesAdminT();
+			menuAdmin = new MenuAdminT();
 			
 			telaEmprestimo = new SolicitarEmprestimoT();
 			cambio = new CambioT();
@@ -123,6 +137,9 @@ public class Main {
 			alterarSenha = new AlterarSenhaT();
 			alterarDados = new AlterarDadosT();
 			confirmarDados = new ConfirmarDadosT();
+			consultar = new ConsultarT();
+			pesquisarCpf = new PesquisarCpfT();
+			pesquisarConta = new PesquisarContaT();
 		    
 		    login = new Login();
 		    conta = new Conta();	    
